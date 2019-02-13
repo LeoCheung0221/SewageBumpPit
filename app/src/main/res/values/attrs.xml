@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="DescoverView">
+        <attr name="dv_name" format="string"/>
+        <attr name="dv_icon" format="reference"/>
+    </declare-styleable>
+
+    <declare-styleable name="ResourceItem">
+        <attr name="ri_name" format="string"/>
+        <attr name="ri_info" format="string"/>
+        <attr name="ri_icon" format="reference"/>
+    </declare-styleable>
+
+    <declare-styleable name="ResourceView">
+        <attr name="rv_name" format="string"/>
+        <attr name="rv_icon" format="reference"/>
+    </declare-styleable>
+
+    <declare-styleable name="CardItem">
+        <attr name="showInfo" format="boolean"/>
+        <attr name="showHint" format="boolean"/>
+        <attr name="showContent" format="boolean"/>
+        <attr name="showArrow" format="boolean"/>
+        <attr name="name" format="string"/>
+        <attr name="info" format="string"/>
+        <attr name="content" format="string"/>
+        <attr name="hint" format="string"/>
+        <attr name="icon" format="reference"/>
+    </declare-styleable>
+
+    <declare-styleable name="SignView">
+        <attr name="radius" format="dimension"/>
+        <attr name="dotRadius" format="dimension"/>
+        <attr name="dashWidth" format="dimension"/>
+        <attr name="textSize" format="dimension"/>
+    </declare-styleable>
+
+    <!-- Declare custom theme attributes that allow changing which styles are
+         used for button bars depending on the API level.
+         ?android:attr/buttonBarStyle is new as of API 11 so this is
+         necessary to support previous API levels. -->
+    <declare-styleable name="ButtonBarContainerTheme">
+        <attr name="metaButtonBarStyle" format="reference"/>
+        <attr name="metaButtonBarButtonStyle" format="reference"/>
+    </declare-styleable>
+</resources>

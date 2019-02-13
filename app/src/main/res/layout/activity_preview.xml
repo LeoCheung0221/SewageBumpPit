@@ -1,0 +1,175 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@mipmap/sea"
+    android:fitsSystemWindows="true">
+
+    <RelativeLayout
+        android:id="@+id/login_layout"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="50dp"
+        android:layout_marginRight="50dp"
+        android:gravity="center">
+
+        <!--登录界面图像-->
+        <TextView
+            android:id="@+id/user_icon"
+            android:layout_width="match_parent"
+            android:layout_height="150dp"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:layout_marginBottom="20dp"
+            android:layout_marginTop="40dp"
+            android:gravity="center"
+            android:padding="5dp"
+            android:text="@string/string_app_title"
+            android:textColor="@color/blue_btn_bg_pressed_color"
+            android:textSize="18sp"
+            android:visibility="visible" />
+
+        <!--泵站信息管理-->
+        <FrameLayout
+            android:id="@+id/manager_layout"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/user_icon"
+            android:layout_marginTop="5dp"
+            android:gravity="center">
+
+            <!--泵站信息管理-->
+            <TextView
+                android:id="@+id/tv_bump_info_manage"
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:layout_margin="10dp"
+                android:layout_marginRight="5dp"
+                android:background="@drawable/edittext_selector"
+                android:gravity="center"
+                android:minHeight="40dp"
+                android:singleLine="true"
+                android:text="@string/string_value_bump_info_manage"
+                android:textColor="#FEFEFE" />
+
+            <!--用户图标-->
+            <ImageView
+                android:layout_width="22dp"
+                android:layout_height="21dp"
+                android:layout_gravity="left|center_vertical"
+                android:layout_marginLeft="20dp"
+                android:background="@mipmap/user"
+                android:visibility="visible" />
+
+        </FrameLayout>
+
+        <!--视频监控点-->
+        <FrameLayout
+            android:id="@+id/video_layout"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/manager_layout"
+            android:layout_marginTop="0dp"
+            android:gravity="center">
+
+            <!--视频监控点-->
+            <TextView
+                android:id="@+id/tv_video_point"
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:layout_margin="10dp"
+                android:layout_marginRight="5dp"
+                android:background="@drawable/edittext_selector"
+                android:gravity="center"
+                android:minHeight="40dp"
+                android:singleLine="true"
+                android:text="@string/string_value_video_point"
+                android:textColor="#FEFEFE" />
+
+            <ImageView
+                android:layout_width="22dp"
+                android:layout_height="21dp"
+                android:layout_gravity="left|center_vertical"
+                android:layout_marginLeft="20dp"
+                android:background="@mipmap/passwd" />
+
+        </FrameLayout>
+
+        <!--重点水位/雨量-->
+        <FrameLayout
+            android:id="@+id/rainfall_layout"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/video_layout"
+            android:layout_marginTop="0dp"
+            android:gravity="center">
+
+            <!--视频监控点-->
+            <TextView
+                android:id="@+id/tv_water_level_rainfall"
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:layout_margin="10dp"
+                android:layout_marginRight="5dp"
+                android:background="@drawable/edittext_selector"
+                android:gravity="center"
+                android:minHeight="40dp"
+                android:singleLine="true"
+                android:text="@string/string_value_water_level_rainfall"
+                android:textColor="#FEFEFE" />
+
+            <ImageView
+                android:layout_width="22dp"
+                android:layout_height="21dp"
+                android:layout_gravity="left|center_vertical"
+                android:layout_marginLeft="20dp"
+                android:background="@mipmap/passwd" />
+
+        </FrameLayout>
+
+        <!--图片/水浸报告-->
+        <FrameLayout
+            android:id="@+id/report_layout"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/rainfall_layout"
+            android:layout_marginTop="0dp"
+            android:gravity="center">
+
+            <!--视频监控点-->
+            <TextView
+                android:id="@+id/tv_img_water_report"
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:layout_margin="10dp"
+                android:layout_marginRight="5dp"
+                android:background="@drawable/edittext_selector"
+                android:gravity="center"
+                android:minHeight="40dp"
+                android:singleLine="true"
+                android:text="@string/string_value_img_water_report"
+                android:textColor="#FEFEFE" />
+
+            <ImageView
+                android:layout_width="22dp"
+                android:layout_height="21dp"
+                android:layout_gravity="left|center_vertical"
+                android:layout_marginLeft="20dp"
+                android:background="@mipmap/passwd" />
+
+        </FrameLayout>
+
+    </RelativeLayout>
+
+    <ImageView
+        android:id="@+id/iv_go_setting"
+        android:layout_width="36dp"
+        android:layout_height="36dp"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="20dp"
+        android:layout_marginStart="20dp"
+        android:background="@mipmap/ic_setting"
+        android:contentDescription="@string/app_name" />
+
+</RelativeLayout>

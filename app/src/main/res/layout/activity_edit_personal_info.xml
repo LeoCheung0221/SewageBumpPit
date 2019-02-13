@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v4.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:scrollbars="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <android.support.v7.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/small_spacing"
+            app:cardCornerRadius="@dimen/card_corner_radius"
+            app:cardElevation="@dimen/card_elevation">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <RelativeLayout
+                    android:id="@+id/ll_avater"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/bg_item"
+                    android:clickable="true"
+                    android:gravity="center_vertical"
+                    android:orientation="vertical"
+                    android:padding="@dimen/card_spacing">
+
+                    <ImageView
+                        android:id="@+id/iv_icon"
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:layout_centerVertical="true"
+                        app:srcCompat="@drawable/ic_head" />
+
+                    <ImageView
+                        android:id="@+id/iv_arrow"
+                        android:layout_width="18dp"
+                        android:layout_height="18dp"
+                        android:layout_alignParentEnd="true"
+                        android:layout_centerVertical="true"
+                        app:srcCompat="@drawable/ic_arrow_right" />
+
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_margin="@dimen/small_spacing"
+                        android:layout_toRightOf="@id/iv_icon"
+                        android:text="@string/head"
+                        android:textColor="@color/text_color"
+                        android:textSize="@dimen/medium_text" />
+
+                    <de.hdodenhof.circleimageview.CircleImageView
+                        android:id="@+id/civ_head"
+                        android:layout_width="@dimen/icon_size_small"
+                        android:layout_height="@dimen/icon_size_small"
+                        android:layout_centerVertical="true"
+                        android:layout_toLeftOf="@id/iv_arrow"
+                        android:src="@drawable/head_default" />
+
+                </RelativeLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="0.5dp"
+                    android:layout_marginLeft="40dp"
+                    android:background="@color/div" />
+
+                <com.yzspp.sewage.view.CardItem
+                    android:id="@+id/ci_nick"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:hint="XXXX"
+                    app:icon="@drawable/ic_mine"
+                    app:name="@string/nick"
+                    app:showHint="true" />
+
+
+                <com.yzspp.sewage.view.CardItem
+                    android:id="@+id/ci_sex"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:hint="男"
+                    app:icon="@drawable/ic_sex"
+                    app:name="@string/sex"
+                    app:showHint="true" />
+
+                <com.yzspp.sewage.view.CardItem
+                    android:id="@+id/ci_birthday"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:hint="1997-10-20"
+                    app:icon="@drawable/ic_birthday"
+                    app:name="@string/birthday"
+                    app:showHint="true" />
+
+                <com.yzspp.sewage.view.CardItem
+                    android:id="@+id/ci_account"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:hint="15715769421"
+                    app:icon="@drawable/ic_phone"
+                    app:name="@string/tel"
+                    app:showHint="true" />
+
+                <com.yzspp.sewage.view.CardItem
+                    android:id="@+id/ci_pwd"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:hint="* * * * * *"
+                    app:icon="@drawable/ic_password"
+                    app:name="@string/password"
+                    app:showHint="true" />
+
+            </LinearLayout>
+
+
+        </android.support.v7.widget.CardView>
+
+
+    </LinearLayout>
+
+</android.support.v4.widget.NestedScrollView>
