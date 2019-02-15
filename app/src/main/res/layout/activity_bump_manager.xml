@@ -57,7 +57,7 @@
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:background="@drawable/bg_item"
-                            custom:dv_icon="@mipmap/upload"
+                            custom:dv_icon="@mipmap/ic_map"
                             custom:dv_name="@string/string_value_bump_time_monitor" />
 
                         <com.yzspp.sewage.view.DiscoverView
@@ -66,7 +66,7 @@
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:background="@drawable/bg_item"
-                            custom:dv_icon="@mipmap/dot"
+                            custom:dv_icon="@mipmap/ic_bump"
                             custom:dv_name="@string/string_value_bump_day_info" />
 
                         <LinearLayout
@@ -104,7 +104,7 @@
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:background="@drawable/bg_item"
-                            custom:dv_icon="@mipmap/upload"
+                            custom:dv_icon="@mipmap/ic_map"
                             custom:dv_name="@string/string_value_time_analysis_report" />
 
                         <com.yzspp.sewage.view.DiscoverView
@@ -113,7 +113,7 @@
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:background="@drawable/bg_item"
-                            custom:dv_icon="@mipmap/upload"
+                            custom:dv_icon="@mipmap/ic_map"
                             custom:dv_name="@string/string_value_history_analysis_report" />
 
                         <LinearLayout

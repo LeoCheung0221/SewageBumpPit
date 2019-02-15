@@ -13,7 +13,7 @@
         android:id="@+id/iv_icon"
         android:layout_width="48dp"
         android:layout_height="48dp"
-        tools:src="@mipmap/dot"/>
+        tools:src="@mipmap/ic_bump"/>
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

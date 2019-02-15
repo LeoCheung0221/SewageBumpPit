@@ -57,7 +57,7 @@
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:background="@drawable/bg_item"
-                            custom:dv_icon="@mipmap/dot"
+                            custom:dv_icon="@mipmap/ic_bump"
                             custom:dv_name="@string/string_value_rainfall_map" />
 
                         <LinearLayout
@@ -98,7 +98,7 @@
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:background="@drawable/bg_item"
-                            custom:dv_icon="@mipmap/upload"
+                            custom:dv_icon="@mipmap/ic_map"
                             custom:dv_name="@string/string_value_rainfall_24_hour" />
 
                         <com.yzspp.sewage.view.DiscoverView
@@ -107,7 +107,7 @@
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:background="@drawable/bg_item"
-                            custom:dv_icon="@mipmap/upload"
+                            custom:dv_icon="@mipmap/ic_map"
                             custom:dv_name="@string/string_value_rainfall_month" />
 
                         <com.yzspp.sewage.view.DiscoverView
@@ -116,7 +116,7 @@
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:background="@drawable/bg_item"
-                            custom:dv_icon="@mipmap/upload"
+                            custom:dv_icon="@mipmap/ic_map"
                             custom:dv_name="@string/string_value_rainfall_year" />
 
                         <LinearLayout
@@ -147,7 +147,7 @@
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:background="@drawable/bg_item"
-                            custom:dv_icon="@mipmap/dot"
+                            custom:dv_icon="@mipmap/ic_bump"
                             custom:dv_name="@string/string_value_rainfall_search_data" />
 
                         <LinearLayout

@@ -204,7 +204,7 @@ public class ReportSituationActivity extends BaseActivity {
 
         //设置编码类型为utf-8
         UploadSituationTask task=new UploadSituationTask(
-                ReportSituationActivity.this,"http://47.92.48.100:8099/urban/upload", info,fileImage);
+                ReportSituationActivity.this,"http://47.92.48.100:8099/urban/ic_map", info,fileImage);
         task.upload();
     }
 

@@ -42,7 +42,7 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:background="@drawable/bg_item"
-                        custom:icon="@mipmap/upload"
+                        custom:icon="@mipmap/ic_map"
                         custom:name="@string/upload" />
 
                     <com.yzspp.sewage.view.DiscoverView
@@ -69,7 +69,7 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:background="@drawable/bg_item"
-                        custom:icon="@mipmap/dot"
+                        custom:icon="@mipmap/ic_bump"
                         custom:name="@string/pot" />
                 </LinearLayout>
 

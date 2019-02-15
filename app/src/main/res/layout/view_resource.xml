@@ -14,7 +14,7 @@
         android:id="@+id/iv_icon"
         android:layout_width="42dp"
         android:layout_height="42dp"
-        tools:src="@mipmap/dot"/>
+        tools:src="@mipmap/ic_bump"/>
     <TextView
         android:id="@+id/tv_name"
         android:layout_marginTop="@dimen/sub_small_spacing"

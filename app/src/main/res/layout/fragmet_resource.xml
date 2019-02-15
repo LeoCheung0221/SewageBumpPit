@@ -11,7 +11,7 @@
         android:id="@+id/ri_dot"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        custom:ri_icon="@mipmap/dot"
+        custom:ri_icon="@mipmap/ic_bump"
         custom:ri_info="@string/dot_detail_info"
         custom:ri_name="@string/dot_detail" />
 
