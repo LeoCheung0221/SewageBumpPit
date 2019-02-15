@@ -87,8 +87,8 @@
     <string name="string_value_water_level_rainfall">重点水位/雨量</string>
     <string name="string_value_img_water_report">图片/水浸报告</string>
 
-    <string name="string_value_bump_time_monitor">泵站实时监测</string>
-    <string name="string_value_bump_day_info">每日泵站信息</string>
+    <string name="string_value_bump_time_monitor">泵站地图</string>
+    <string name="string_value_bump_day_info">泵站信息</string>
     <string name="string_value_time_analysis_report">实时统计报表</string>
     <string name="string_value_history_analysis_report">历史统计报表</string>
 
