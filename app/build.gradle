@@ -58,9 +58,14 @@ dependencies {
     implementation 'io.reactivex:rxjava:1.2.3'
     implementation 'com.github.Idtk:SmallChart:v0.1.1'
     implementation 'eu.the4thfloor.volley:com.android.volley:2015.05.28'
-    implementation 'com.amap.api:3dmap:latest.integration'
-    implementation 'com.amap.api:search:latest.integration'
-    implementation 'com.amap.api:location:latest.integration'
+
+//    implementation 'com.amap.api:3dmap:latest.integration'
+//    implementation 'com.amap.api:search:latest.integration'
+//    implementation 'com.amap.api:location:latest.integration'
+    implementation files('libs/Amap_2DMap_V4.2.0_20170209.jar')
+    implementation files('libs/AMap_Location_V3.3.0_20170118.jar')
+    implementation files('libs/AMap3DMap_6.2.0_AMapNavi_6.1.0_20180427.jar')
+
     implementation 'com.squareup.picasso:picasso:2.3.2'
     implementation 'com.nineoldandroids:library:2.4.0'
     implementation 'com.daimajia.slider:library:1.1.5@aar'

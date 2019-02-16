@@ -94,8 +94,7 @@ public class BumpManagerActivity extends BaseActivity {
         dvupload.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                ReportSituationActivity.start(BumpManagerActivity.this);
-                WetPointActivity.start(BumpManagerActivity.this);
+                MapRepairActivity.start(BumpManagerActivity.this);
             }
         });
 

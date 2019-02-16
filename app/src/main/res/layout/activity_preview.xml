@@ -59,7 +59,7 @@
                 android:layout_height="21dp"
                 android:layout_gravity="left|center_vertical"
                 android:layout_marginLeft="20dp"
-                android:background="@mipmap/user"
+                android:background="@mipmap/ic_bump_info"
                 android:visibility="visible" />
 
         </FrameLayout>

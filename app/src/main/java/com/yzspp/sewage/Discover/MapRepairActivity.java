@@ -1,12 +1,16 @@
 package com.yzspp.sewage.Discover;
 
 
+import android.Manifest;
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.os.Build;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
+import android.support.v4.app.ActivityCompat;
 import android.support.v7.widget.CardView;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -15,56 +19,96 @@ import android.widget.RadioGroup;
 import android.widget.RadioGroup.OnCheckedChangeListener;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.amap.api.location.AMapLocation;
 import com.amap.api.location.AMapLocationClient;
 import com.amap.api.location.AMapLocationClientOption;
-import com.amap.api.location.AMapLocationClientOption.AMapLocationMode;
 import com.amap.api.location.AMapLocationListener;
-import com.amap.api.maps.AMap;
-import com.amap.api.maps.LocationSource;
-import com.amap.api.maps.MapView;
-import com.amap.api.maps.model.BitmapDescriptorFactory;
-import com.amap.api.maps.model.LatLng;
-import com.amap.api.maps.model.Marker;
-import com.amap.api.maps.model.MarkerOptions;
+import com.amap.api.maps2d.AMap;
+import com.amap.api.maps2d.CameraUpdateFactory;
+import com.amap.api.maps2d.LocationSource;
+import com.amap.api.maps2d.UiSettings;
+import com.amap.api.maps2d.model.BitmapDescriptor;
+import com.amap.api.maps2d.model.BitmapDescriptorFactory;
+import com.amap.api.maps2d.model.LatLng;
+import com.amap.api.maps2d.model.LatLngBounds;
+import com.amap.api.maps2d.model.Marker;
+import com.amap.api.maps2d.model.MarkerOptions;
+import com.amap.api.maps2d.model.MyLocationStyle;
+import com.amap.api.maps2d.overlay.DrivingRouteOverlay;
+import com.amap.api.navi.model.NaviLatLng;
+import com.amap.api.services.core.LatLonPoint;
+import com.amap.api.services.core.PoiItem;
+import com.amap.api.services.core.SuggestionCity;
+import com.amap.api.services.poisearch.PoiResult;
+import com.amap.api.services.poisearch.PoiSearch;
+import com.amap.api.services.route.BusRouteResult;
+import com.amap.api.services.route.DrivePath;
+import com.amap.api.services.route.DriveRouteResult;
+import com.amap.api.services.route.RideRouteResult;
+import com.amap.api.services.route.RouteSearch;
+import com.amap.api.services.route.WalkRouteResult;
 import com.yzspp.sewage.R;
+import com.yzspp.sewage.Tools.HelperFromPermission;
 import com.yzspp.sewage.Work.CheckDetailsActivity;
+import com.yzspp.sewage.bean.NearbyBumpBean;
 import com.yzspp.sewage.bean.UploadInfo;
 import com.yzspp.sewage.net.RequestHelper;
-import com.yzspp.sewage.net.RequestListener;
+import com.yzspp.sewage.view.My2dMapView;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
+import frame.permission.CheckPermissionsActivity;
 import frame.tool.MyToast;
+import okhttp3.Call;
+import okhttp3.Response;
 
 
-public class MapRepairActivity extends AppCompatActivity implements LocationSource,
-        AMapLocationListener, OnCheckedChangeListener, View.OnClickListener,
-        AMap.OnMarkerClickListener {
+public class MapRepairActivity extends CheckPermissionsActivity implements LocationSource,
+        AMapLocationListener, PoiSearch.OnPoiSearchListener, View.OnClickListener,
+        AMap.OnMarkerClickListener, RouteSearch.OnRouteSearchListener {
+
     //高德地图
-    private AMap aMap;
-    private MapView mapView;
-    private OnLocationChangedListener mListener;
-    private AMapLocationClient mLocationClient;
-    private AMapLocationClientOption mLocationOption;
+    private My2dMapView mapView;
+    private AMapLocationClient mNavLocationClient;
+    private AMap aNavMap;
+
+    private LocationSource.OnLocationChangedListener mNavListener;
+    private boolean isFirstNavLoc = true;
+
+    //    private static final String SEARCH_KEYWORD = "停车场";
+    private static final String SEARCH_KEYWORD = "";
+    private static final String POI_SEARCH_TYPE = "";
+
+    private PoiSearch.Query query;
+    private int currentPage = 0;
+    private PoiSearch poiSearch;
+    private PoiResult poiResult;
+
+    private Marker lastCheckedMarker;
+    private ArrayList<BitmapDescriptor> lastCheckedBitmapDescriptorList;
+    private LatLonPoint endLocation;
+    private String endAddress;
+    private RouteSearch.DriveRouteQuery driveQuery;
+    private ArrayList<PoiItem> poiItems;
+    private LatLngBounds.Builder boundBuilder;
+    private ArrayList<BitmapDescriptor> bitmapDescriptorArrayList;
+    private LatLng mLatLng;
+
+    private List<Marker> mMarkerList = new ArrayList<>();
+    private List<NearbyBumpBean> mNearbyParkingMineBeen = new ArrayList<>();
+    private AMapLocation mAmapLocation;
+
     //控件
-    private Spinner mSpinner;
-    private RadioGroup mRadioGroup;
-    private Button btnFloodedPlace;
-    private TextView tvName;
-    private TextView tvAddress;
-    private Button btnDetails;
-    private Button btnDrive;
-    private Button btnBus;
-    private Button btnFoot;
-    //公众上报信息
-    private List<UploadInfo> mUploadInfoList = new ArrayList<>();
-    //记录当前所选的渍水点
-    private int nowPoint = 0;
-    private CardView mCvInfoTips;
-    private CardView mCvAcc;
+    private CardView ivSkip2CustomerService;
+    private CardView ivSkip2MyLocation;
 
 
     public static void start(Context context) {
@@ -78,143 +122,175 @@ public class MapRepairActivity extends AppCompatActivity implements LocationSour
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_repair_map);
 
-        mapView = (MapView) findViewById(R.id.map_main);
+        ivSkip2CustomerService = findViewById(R.id.ivSkip2CustomerService);
+        ivSkip2MyLocation = findViewById(R.id.ivSkip2MyLocation);
+        mapView = findViewById(R.id.map_main);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            //检查是否拥有定位权限
+            if (!HelperFromPermission.checkPermission(MapRepairActivity.this, Manifest.permission.ACCESS_COARSE_LOCATION)) {
+                String[] perms = new String[]{Manifest.permission.ACCESS_COARSE_LOCATION};
+                /***
+                 * 没有授权，尝试获取权限。
+                 * 1、第一次询问用户是否需要权限，弹出授权框。
+                 * 2、以前被拒绝过，系统将不理会此程序的授权申请，弹出提示由用户自行处理。
+                 */
+                if (ActivityCompat.shouldShowRequestPermissionRationale(MapRepairActivity.this, Manifest.permission.ACCESS_COARSE_LOCATION)) {
+                    ActivityCompat.requestPermissions(MapRepairActivity.this, perms, 100);
+                } else {
+                    HelperFromPermission.showPermissionDialog(MapRepairActivity.this, "定位权限");
+                }
+                return;
+            }
+        }
+        //检查定位权限
+        checkPermissions();
         mapView.onCreate(savedInstanceState);// 此方法必须重写
-        //初始化地图
-        initMap();
+
+        //初始化控件
+        initView();
 
         //从服务器获取点的信息并用sharedpreference存储到本地
         receivePointInfo();
-
-
     }
 
 
     private void initView() {
-        addMarkersToMap();// 往地图上添加marker
-
-        mRadioGroup = (RadioGroup) findViewById(R.id.rg_repair_map_model);
-        mCvAcc = (CardView) findViewById(R.id.cv_accuracy);
-        mRadioGroup.setOnCheckedChangeListener(this);
-
-//        mCvInfoTips = (CardView) findViewById(R.id.cv_info_tips);
-//        mCvInfoTips.setVisibility(View.GONE);//底部tip设置不可见
-//        RelativeLayout.LayoutParams lp = new RelativeLayout.LayoutParams(
-//                ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-//        lp.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM);//设置置底
-//        lp.setMargins(10, 0, 0, 10);//设置margin
-//        mCvAcc.setLayoutParams(lp);//动态改变布局
-
-        mSpinner = (Spinner) findViewById(R.id.sp_repair_map_point_choose);
-        btnFloodedPlace = (Button) findViewById(R.id.btn_repair_map_flooded_places);
-        tvName = (TextView) findViewById(R.id.tv_repair_map_name);
-        tvAddress = (TextView) findViewById(R.id.tv_repair_map_address);
-        btnDetails = (Button) findViewById(R.id.btn_repair_map_details);
-        btnDrive = (Button) findViewById(R.id.btn_repair_map_drive);
-        btnBus = (Button) findViewById(R.id.btn_repair_map_bus);
-        btnFoot = (Button) findViewById(R.id.btn_repair_map_foot);
-
-        btnFloodedPlace.setOnClickListener(this);
-        btnDetails.setOnClickListener(this);
-        btnDrive.setOnClickListener(this);
-        btnBus.setOnClickListener(this);
-        btnFoot.setOnClickListener(this);
-        setMySpinner();
-
+        initMapView();
+        initInfo();
     }
 
-    private void initMap() {
-        //获取地图并且设置一些属性
-        if (aMap == null) {
-            aMap = mapView.getMap();
-            aMap.setLocationSource(this);// 设置定位监听
-            aMap.getUiSettings().setMyLocationButtonEnabled(false);// 设置默认定位按钮是否显示
-            aMap.setMyLocationEnabled(true);// 设置为true表示显示定位层并可触发定位，false表示隐藏定位层并不可触发定位，默认是false
-            // 设置定位的类型为定位模式 ，可以由定位、跟随或地图根据面向方向旋转几种
-            aMap.setMyLocationType(AMap.LOCATION_TYPE_LOCATE);
+    private void initInfo() {
+        ivSkip2CustomerService.setOnClickListener(this);
+        ivSkip2MyLocation.setOnClickListener(this);
+    }
 
-            aMap.setOnMarkerClickListener(this);// 设置点击marker事件监听器
+    private void initMapView() {
+        if (aNavMap == null) {
+            aNavMap = mapView.getMap();
         }
+        //地图模式可选类型：MAP_TYPE_NORMAL,MAP_TYPE_SATELLITE,MAP_TYPE_NIGHT
+        aNavMap.setMapType(AMap.MAP_TYPE_NORMAL);
+
+        UiSettings settings = aNavMap.getUiSettings(); //设置显示定位按钮 并且可以点击
+        aNavMap.setLocationSource(this); //设置监听 这里实现LocationSource接口
+        settings.setMyLocationButtonEnabled(false); //是否显示定位按钮
+        settings.setZoomControlsEnabled(false); //是否显示缩放按钮 此处设置不显示
+        settings.setCompassEnabled(false); //显示指南针
+        aNavMap.setMyLocationEnabled(true); //显示定位层 并且可以出发定位 默认是false
+        aNavMap.setOnMarkerClickListener(this); //Marker点击事件
+
+        //获得当前定位信息
+        mNavLocationClient = new AMapLocationClient(this);
+        AMapLocationClientOption mLocationOption = new AMapLocationClientOption();
+        mNavLocationClient.setLocationListener(this);
+        mLocationOption.setLocationMode(AMapLocationClientOption.AMapLocationMode.Hight_Accuracy);
+        mLocationOption.setInterval(2000);
+        mNavLocationClient.setLocationOption(mLocationOption);
+        mNavLocationClient.startLocation();
     }
 
-    private void setMySpinner() {
-        ArrayList<String> nameList = new ArrayList<>();
-        for (UploadInfo i : mUploadInfoList) {
-            nameList.add(i.getUploadName());
-        }
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
-                android.R.layout.simple_list_item_1, nameList);
-        mSpinner.setAdapter(adapter);
-
-        //设置spinner点击事件
-        mSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                nowPoint = position;
-                //使用arrayMarkers的定位功能
-                ArrayList<MarkerOptions> arrayMarkers = new ArrayList<MarkerOptions>();
-                ArrayList<Marker> markers = new ArrayList<Marker>();
-
-                LatLng mLatLng = new LatLng(
-                        mUploadInfoList.get(position).getLatitude(),
-                        mUploadInfoList.get(position).getLongitude());
-                arrayMarkers.add(new MarkerOptions()
-                        .title(mUploadInfoList.get(position).getUploadName())
-                        .icon(BitmapDescriptorFactory
-                                .defaultMarker(BitmapDescriptorFactory.HUE_AZURE))
-                        .position(mLatLng));
-                markers = aMap.addMarkers(arrayMarkers, true);
-                markers.get(0).showInfoWindow();
-
-                //设置底部栏可见并且更新信息
-//                setInfoTipVisibile();
-                refreshTipInfo(position);
-
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-
-            }
-        });
-
-
-    }
-
-
-    // 往地图上添加marker
-    private void addMarkersToMap() {
-        for (int i = 0; i < mUploadInfoList.size(); i++) {
-            LatLng mLatLng = new LatLng(
-                    mUploadInfoList.get(i).getLatitude(),
-                    mUploadInfoList.get(i).getLongitude());
-
-            aMap.addMarker(new MarkerOptions()
-                    .title(mUploadInfoList.get(i).getUploadName())
-                    .icon(BitmapDescriptorFactory
-                            .defaultMarker(BitmapDescriptorFactory.HUE_AZURE))
-                    .position(mLatLng)
-            );
-        }
-
-    }
-
-    //设置RadioGroup的点击变换效果
     @Override
-    public void onCheckedChanged(RadioGroup group, int checkedId) {
-        switch (checkedId) {
-            case R.id.rbtn_repair_map_locate:
-                // 设置定位的类型为定位模式
-                aMap.setMyLocationType(AMap.LOCATION_TYPE_LOCATE);
-                break;
-            case R.id.rbtn_repair_map_rotate:
-                // 设置定位的类型为根据地图面向方向旋转
-                aMap.setMyLocationType(AMap.LOCATION_TYPE_MAP_ROTATE);
-                break;
-        }
+    public void onLocationChanged(final AMapLocation amapLocation) {
+        if (amapLocation != null) {
+            if (amapLocation.getErrorCode() == 0) {
+                //定位成功回调信息，设置相关消息
+                amapLocation.getLocationType();//获取当前定位结果来源，如网络定位结果，详见定位类型表
+                amapLocation.getLatitude(); //获取纬度
+                amapLocation.getLongitude();//获取经度
+                amapLocation.getAccuracy(); //获取精度信息
+                amapLocation.getCityCode(); //获得城市编码
+                @SuppressLint("SimpleDateFormat")
+                SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+                Date date = new Date(amapLocation.getTime());
+                df.format(date);//定位时间
 
+                // 如果不设置标志位，此时再拖动地图时，它会不断将地图移动到当前的位置
+                if (isFirstNavLoc) {
+                    //去除蓝色透明范围圈
+                    MyLocationStyle myLocationStyle = new MyLocationStyle();
+                    myLocationStyle.radiusFillColor(android.R.color.transparent);
+                    myLocationStyle.strokeColor(android.R.color.transparent);
+                    myLocationStyle.myLocationIcon(BitmapDescriptorFactory.fromResource(R.drawable.icon_parking_loc));
+                    aNavMap.setMyLocationStyle(myLocationStyle);
+//                    aNavMap.addMarker(getLocationMarkerOptions());
+
+                    //设置缩放级别
+                    aNavMap.moveCamera(CameraUpdateFactory.zoomTo(15));
+                    //将地图移动到定位点
+                    aNavMap.moveCamera(CameraUpdateFactory.changeLatLng(
+                            new LatLng(amapLocation.getLatitude(), amapLocation.getLongitude())));
+                    //点击定位按钮 能够将地图的中心移动到定位点
+                    mNavListener.onLocationChanged(amapLocation);
+                    mLatLng = new LatLng(amapLocation.getLatitude(), amapLocation.getLongitude());
+
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+//                            getNearbyByLatLng(amapLocation, mLatLng);
+                        }
+                    });
+
+                    isFirstNavLoc = false;
+                }
+            } else {
+                //显示错误信息ErrCode是错误码，errInfo是错误信息，详见错误码表。
+                Log.e("AmapError", "location Error, ErrCode:"
+                        + amapLocation.getErrorCode() + ", errInfo:"
+                        + amapLocation.getErrorInfo());
+            }
+        }
     }
 
+    private void getNearbyByLatLng(final AMapLocation amapLocation, LatLng latLng) {
+//        ApiManage.get(ApiHost.getInstance().loadByDistance() + latLng.longitude + "/" + latLng.latitude + "/" + "10")
+//                .tag(this)
+//                .cacheKey("cacheKey")
+//                .execute(new StringCallback() {
+//                    @Override
+//                    public void onSuccess(String s, Call call, Response response) {
+//                        if (response.code() == 200) {
+//                            try {
+//                                JSONObject json = new JSONObject(s);
+//                                mNearbyParkingMineBeen = com.alibaba.fastjson.JSONObject.parseArray(String.valueOf(json.get("data")), NearbyBumpBean.class);
+//                                if (mNearbyParkingMineBeen != null && mNearbyParkingMineBeen.size() > 0) {
+//                                    //根据指定经纬度 地图显示
+//                                    prepareSearchNearbyParking(amapLocation, mNearbyParkingMineBeen);
+//                                } else {
+//                                    Toast.makeText(MapRepairActivity.this, "附近暂无可用车位", Toast.LENGTH_LONG).show();
+//                                }
+//
+//                                //开始POI搜索
+////                                searchByPoi(amapLocation);
+//                            } catch (JSONException e) {
+//                                e.printStackTrace();
+//                            }
+//                        } else {
+//                            ToastUtils.show(response.message());
+//                        }
+//                    }
+//                });
+    }
+
+    private void prepareSearchNearbyParking(AMapLocation amapLocation, List<NearbyBumpBean> parkingMineBeanList) {
+        this.mAmapLocation = amapLocation;
+        boundBuilder = new LatLngBounds.Builder();
+        String iconName = "icon_poi_marker_parking";
+        int iconId = getResources().getIdentifier(iconName, "drawable", this.getPackageName());
+        for (int j = 0; j < parkingMineBeanList.size(); j++) {
+            MarkerOptions markerOptions = new MarkerOptions().icon(BitmapDescriptorFactory.fromResource(iconId));
+            markerOptions.position(new LatLng(parkingMineBeanList.get(j).getLatitude(), parkingMineBeanList.get(j).getLongitude()));
+            markerOptions.title(parkingMineBeanList.get(j).getCity()).snippet(parkingMineBeanList.get(j).getCity() + "：" + parkingMineBeanList.get(j).getLatitude() + "，" + parkingMineBeanList.get(j).getLongitude());
+            markerOptions.draggable(true);//设置Marker可拖动
+            Marker marker = aNavMap.addMarker(markerOptions);
+            marker.setObject(j);
+            //为了POI填充整个地图区域
+            boundBuilder.include(new LatLng(parkingMineBeanList.get(j).getLatitude(), parkingMineBeanList.get(j).getLongitude()));
+            mMarkerList.add(marker);
+        }
+        LatLngBounds bounds = boundBuilder.build();
+        // 移动地图，所有marker自适应显示。LatLngBounds与地图边缘10像素的填充区域
+        aNavMap.moveCamera(CameraUpdateFactory.newLatLngBounds(bounds, 10));
+    }
 
     @Override
     protected void onResume() {
@@ -241,53 +317,16 @@ public class MapRepairActivity extends AppCompatActivity implements LocationSour
     protected void onDestroy() {
         super.onDestroy();
         mapView.onDestroy();
-        if (null != mLocationClient) {
-            mLocationClient.onDestroy();
-        }
-    }
-
-    /**
-     * 定位成功后回调函数
-     */
-    @Override
-    public void onLocationChanged(AMapLocation amapLocation) {
-        if (mListener != null && amapLocation != null) {
-            if (amapLocation != null
-                    && amapLocation.getErrorCode() == 0) {
-                mListener.onLocationChanged(amapLocation);// 显示系统小蓝点
-                //将定位经纬度信息缓存到本地
-                SharedPreferences.Editor editor = getSharedPreferences("now_data", MODE_PRIVATE).edit();
-                editor.putString("my_latitude", amapLocation.getLatitude() + "");
-                editor.putString("my_longitude", amapLocation.getLongitude() + "");
-                editor.commit();
-            } else {
-                String errText = getString(R.string.location_wrong) + amapLocation.getErrorCode() + ": " + amapLocation.getErrorInfo();
-                MyToast.error(this, errText);
-            }
-        }
+        poiResult = null;
+        aNavMap.clear();
     }
 
     /**
      * 激活定位
      */
     @Override
-    public void activate(OnLocationChangedListener listener) {
-        mListener = listener;
-        if (mLocationClient == null) {
-            mLocationClient = new AMapLocationClient(this);
-            mLocationOption = new AMapLocationClientOption();
-            //设置定位监听
-            mLocationClient.setLocationListener(this);
-            //设置为高精度定位模式
-            mLocationOption.setLocationMode(AMapLocationMode.Hight_Accuracy);
-            //设置定位参数
-            mLocationClient.setLocationOption(mLocationOption);
-            // 此方法为每隔固定时间会发起一次定位请求，为了减少电量消耗或网络流量消耗，
-            // 注意设置合适的定位时间的间隔（最小间隔支持为2000ms），并且在合适时间调用stopLocation()方法来取消定位请求
-            // 在定位结束后，在合适的生命周期调用onDestroy()方法
-            // 在单次定位情况下，定位无论成功与否，都无需调用stopLocation()方法移除请求，定位sdk内部会移除
-            mLocationClient.startLocation();
-        }
+    public void activate(OnLocationChangedListener onLocationChangedListener) {
+        mNavListener = onLocationChangedListener;
     }
 
     /**
@@ -295,78 +334,160 @@ public class MapRepairActivity extends AppCompatActivity implements LocationSour
      */
     @Override
     public void deactivate() {
-        mListener = null;
-        if (mLocationClient != null) {
-            mLocationClient.stopLocation();
-            mLocationClient.onDestroy();
-        }
-        mLocationClient = null;
+        mNavListener = null;
     }
 
     @Override
     public void onClick(View v) {
-        Intent intent;
         switch (v.getId()) {
-            case R.id.btn_repair_map_flooded_places:
-                WetPointActivity.start(this);
+            case R.id.ivSkip2CustomerService:
+//                startActivity(new Intent(MapRepairActivity.this, CustomerServiceMineActivity.class));
                 break;
-            case R.id.btn_repair_map_details:
-                CheckDetailsActivity.start(this, mUploadInfoList.get(nowPoint));
-                break;
-            case R.id.btn_repair_map_foot:
-                intent = new Intent(MapRepairActivity.this, MapRouteActivity.class);
-                intent.putExtra("route_type", 0);
-                intent.putExtra("info", mUploadInfoList.get(nowPoint));
-                startActivity(intent);
-                break;
-            case R.id.btn_repair_map_bus:
-                intent = new Intent(MapRepairActivity.this, MapRouteActivity.class);
-                intent.putExtra("route_type", 1);
-                intent.putExtra("info", mUploadInfoList.get(nowPoint));
-                startActivity(intent);
-                break;
-            case R.id.btn_repair_map_drive:
-                intent = new Intent(MapRepairActivity.this, MapRouteActivity.class);
-                intent.putExtra("route_type", 2);
-                intent.putExtra("info", mUploadInfoList.get(nowPoint));
-                startActivity(intent);
+            case R.id.ivSkip2MyLocation:
+                location();
                 break;
         }
+    }
+
+    public void location() {
+        aNavMap.moveCamera(CameraUpdateFactory.changeLatLng(mLatLng));
     }
 
     @Override
     public boolean onMarkerClick(Marker marker) {
-        //底部tip设置可见
-//        setInfoTipVisibile();
-
-        //在mPointInfo查找选中的受灾点的信息，并显示在textview中
-        for (int i = 0; i < mUploadInfoList.size(); i++) {
-            if (marker.getTitle().equals(mUploadInfoList.get(i).getUploadName())) {
-                nowPoint = i;
-                mSpinner.setSelection(i);
-                refreshTipInfo(i);
+        for (int i = 0; i < mMarkerList.size(); i++) {
+            if (marker.equals(mMarkerList.get(i))) {
+                if (aNavMap != null) {
+                    final int finalI = i;
+//                    new BottomDialog(MapRepairActivity.this)
+//                            .layout(BottomDialog.GRID)
+//                            .orientation(BottomDialog.VERTICAL)
+//                            .nav(new BottomDialog.OnSkip2NavigationListener() {
+//                                @Override
+//                                public void nav() {
+//                                    NaviLatLng startNavi = new NaviLatLng(mAmapLocation.getLatitude(), mAmapLocation.getLongitude());
+//                                    NaviLatLng endNavi = new NaviLatLng(mNearbyParkingMineBeen.get(finalI).getLatitude(), mNearbyParkingMineBeen.get(finalI).getLongitude());
+//                                    startActivity(new Intent(MapRepairActivity.this, Navigation2DActivity.class)
+//                                            .putExtra("start_navi_point", startNavi)
+//                                            .putExtra("end_navi_point", endNavi));
+//                                }
+//                            })
+//                            .match(new BottomDialog.OnSkip2MatchListener() {
+//                                @Override
+//                                public void match() {
+//                                    startActivity(new Intent(MapRepairActivity.this, ParkingSpaceImmMatchingActivity.class).putExtra("destination_navi_info", mNearbyParkingMineBeen.get(finalI)));
+//                                }
+//                            })
+//                            .setData(mAmapLocation, mNearbyParkingMineBeen.get(finalI))
+//                            .show();
+                }
+                return true;
             }
         }
-
         return false;
     }
 
-    private void refreshTipInfo(int i) {
-        tvName.setText(mUploadInfoList.get(i).getUploadName());
-        tvAddress.setText(mUploadInfoList.get(i).getUploadAddress());
+    @Override
+    public void onPoiSearched(PoiResult result, int rCode) {
+        if (rCode == 1000) {
+            if (result != null && result.getQuery() != null) {
+                if (result.getQuery().equals(query)) { //是否是同一条
+                    poiResult = result;
+                    //取得搜索到的poiitem有多少页
+                    int resultPages = poiResult.getPageCount();
+                    //取得第一页的poiitem数据
+                    poiItems = poiResult.getPois();
+                    //当搜索不到poiitem数据时,会返回含有搜索关键字的城市信息
+                    List<SuggestionCity> suggestionCities = poiResult
+                            .getSearchSuggestionCitys();
+
+                    if (poiItems != null && poiItems.size() > 0) {
+                        boundBuilder = new LatLngBounds.Builder();
+                        for (int j = 0; j < Math.min(poiItems.size(), 10); j++) {
+                            String iconName = "icon_poi_marker_parking";
+                            int iconId = getResources().getIdentifier(iconName, "drawable", this.getPackageName());
+                            MarkerOptions markerOptions = new MarkerOptions().icon(BitmapDescriptorFactory.fromResource(iconId));
+                            markerOptions.position(new LatLng(poiItems.get(j).getLatLonPoint().getLatitude(), poiItems.get(j).getLatLonPoint().getLongitude()));
+                            Marker marker = aNavMap.addMarker(markerOptions);
+                            marker.setObject(j + 1);
+                            //为了POI填充整个地图区域
+                            boundBuilder.include(new LatLng(poiItems.get(j).getLatLonPoint().getLatitude(), poiItems.get(j).getLatLonPoint().getLongitude()));
+                            if (j == 0) {
+                                lastCheckedMarker = marker;
+                                lastCheckedBitmapDescriptorList = lastCheckedMarker.getIcons();
+                                ArrayList<BitmapDescriptor> bitmapDescriptorArrayList = new ArrayList<>();
+                                bitmapDescriptorArrayList.add(BitmapDescriptorFactory.fromResource(R.drawable.icon_poi_marker_parking));
+                                marker.setIcons(bitmapDescriptorArrayList);
+                                marker.setObject(1);
+//                                tvParkingLot.setText("1. " + poiItems.get(0).getTitle());
+//                                tvDestLocation.setText(poiItems.get(0).getSnippet());
+                                endLocation = poiResult.getPois().get(0).getLatLonPoint();
+                                endAddress = poiResult.getPois().get(0).getTitle();
+                            }
+
+                            mMarkerList.add(marker);
+                        }
+                        LatLngBounds bounds = boundBuilder.build();
+                        // 移动地图，所有marker自适应显示。LatLngBounds与地图边缘10像素的填充区域
+                        aNavMap.moveCamera(CameraUpdateFactory.newLatLngBounds(bounds, 10));
+                    } else if (suggestionCities != null && suggestionCities.size() > 0) {
+                        showSuggestCity(suggestionCities);
+                    } else {
+                        Toast.makeText(MapRepairActivity.this, "附近暂无搜索结果", Toast.LENGTH_LONG).show();
+                    }
+                }
+            } else {
+                Toast.makeText(MapRepairActivity.this, "附近暂无搜索结果", Toast.LENGTH_LONG).show();
+            }
+        } else {
+            MyToast.error(MapRepairActivity.this, rCode + "");
+        }
     }
 
-//    private void setInfoTipVisibile() {
-//        if (mCvInfoTips.getVisibility() == View.GONE) {
-//            mCvInfoTips.setVisibility(View.VISIBLE);
-//            RelativeLayout.LayoutParams lp = new RelativeLayout.LayoutParams(
-//                    ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-//            lp.setMargins(10, 0, 0, 10);//设置margin
-//            lp.addRule(RelativeLayout.ABOVE, R.id.rl_repair_map_info_tip);
-//            mCvAcc.setLayoutParams(lp);//动态改变布局
-//        }
-//    }
+    /**
+     * 含有搜索关键字的城市信息列表展示
+     */
+    private void showSuggestCity(List<SuggestionCity> suggestionCities) {
+    }
 
+    @Override
+    public void onPoiItemSearched(PoiItem poiItem, int i) {
+
+    }
+
+    @Override
+    public void onBusRouteSearched(BusRouteResult busRouteResult, int i) {
+
+    }
+
+    @Override
+    public void onDriveRouteSearched(DriveRouteResult result, int rCode) {
+        //解析result获取路径规划结果
+        if (rCode == 1000) {
+            if (result != null && result.getDriveQuery() != null) {
+                if (result.getDriveQuery().equals(driveQuery)) { //是否是同一条
+                    DrivePath drivePath = result.getPaths().get(0);
+                    DrivingRouteOverlay routeOverlay =
+                            new DrivingRouteOverlay(this, aNavMap,//第一个参数是context，2.是地图
+                                    drivePath, result.getStartPos(),//3.驾车线路，4.出发位置
+                                    result.getTargetPos(), null); //5.终点位置
+                    routeOverlay.removeFromMap(); //去掉DrivingRouteOverlay上所有的Marker
+                    routeOverlay.addToMap(); //添加驾车线路到地图
+                    routeOverlay.zoomToSpan(); //移动镜头当前视角
+                }
+            }
+        }
+    }
+
+    @Override
+    public void onWalkRouteSearched(WalkRouteResult walkRouteResult, int i) {
+
+    }
+
+    @Override
+    public void onRideRouteSearched(RideRouteResult rideRouteResult, int i) {
+
+    }
 
     //从数据库获取点的信息
     private void receivePointInfo() {
@@ -408,11 +529,17 @@ public class MapRepairActivity extends AppCompatActivity implements LocationSour
         List<UploadInfo> uploadInfoList = RequestHelper.stringToArray(responce, UploadInfo[].class);
         for (UploadInfo uploadInfo : uploadInfoList) {
             if (uploadInfo.getApprovalStatus() == 1) {
-                mUploadInfoList.add(uploadInfo);
+//                mUploadInfoList.add(uploadInfo);
             }
         }
-        //初始化控件
-        initView();
+    }
+
+    @Override
+    protected String[] getNeedPermissions() {
+        return new String[]{
+                Manifest.permission.ACCESS_COARSE_LOCATION,
+                Manifest.permission.ACCESS_FINE_LOCATION,
+        };
     }
 
 }
