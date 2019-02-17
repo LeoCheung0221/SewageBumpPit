@@ -29,7 +29,7 @@ public class WaterLeachingReportActivity extends BaseActivity {
 
     @Override
     protected void initView() {
-        initToolbar("水浸报告", true, true);
+        initToolbar("报警报告", true, true);
         mRecyclerView = findViewById(R.id.rv_water_leaching_view);
     }
 
