@@ -22,7 +22,7 @@ public class BranchViewBinder extends TreeViewBinder<BranchViewBinder.ViewHolder
 
     @Override
     public int getToggleId() {
-        return R.id.ivNode;
+        return R.id.llParent;
     }
 
     @Override

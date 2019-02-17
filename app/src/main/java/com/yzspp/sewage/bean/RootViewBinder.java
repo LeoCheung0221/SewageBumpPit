@@ -21,7 +21,7 @@ public class RootViewBinder extends TreeViewBinder<RootViewBinder.ViewHolder> {
 
     @Override
     public int getToggleId() {
-        return R.id.ivNode;
+        return R.id.llParent;
     }
 
     @Override
