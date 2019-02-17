@@ -394,11 +394,11 @@ public class MapRepairActivity extends CheckPermissionsActivity implements Locat
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.btn_repair_map_details:
-                if (!isClickBumpView) {
-                    isClickBumpView = true;
+                if (isClickBumpView) {
+                    isClickBumpView = false;
                     llBumpInfoView.setVisibility(View.VISIBLE);
                 } else {
-                    isClickBumpView = false;
+                    isClickBumpView = true;
                     llBumpInfoView.setVisibility(View.GONE);
                 }
                 break;

@@ -176,7 +176,7 @@
                 android:layout_below="@+id/tv_repair_map_address"
                 android:gravity="center_vertical"
                 android:orientation="horizontal"
-                android:visibility="gone">
+                android:visibility="visible">
 
                 <Button
                     android:id="@+id/btn_repair_map_drive"
