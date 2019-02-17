@@ -15,6 +15,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.RadioGroup;
 import android.widget.RadioGroup.OnCheckedChangeListener;
 import android.widget.Spinner;
@@ -110,7 +111,11 @@ public class MapRepairActivity extends CheckPermissionsActivity implements Locat
     private CardView ivSkip2CustomerService;
     private CardView ivSkip2MyLocation;
     private Spinner mSpinner;
+    private Button mBtnDetails;
+    private LinearLayout llBumpInfoView;
+
     private int nowPoint = 0;
+    private boolean isClickBumpView = false;
 
     public static void start(Context context) {
         Intent starter = new Intent(context, MapRepairActivity.class);
@@ -124,6 +129,8 @@ public class MapRepairActivity extends CheckPermissionsActivity implements Locat
         setContentView(R.layout.activity_repair_map);
 
         mSpinner = findViewById(R.id.sp_repair_map_point_choose);
+        mBtnDetails = findViewById(R.id.btn_repair_map_details);
+        llBumpInfoView = findViewById(R.id.llBumpInfoView);
         ivSkip2CustomerService = findViewById(R.id.ivSkip2CustomerService);
         ivSkip2MyLocation = findViewById(R.id.ivSkip2MyLocation);
         mapView = findViewById(R.id.map_main);
@@ -205,6 +212,7 @@ public class MapRepairActivity extends CheckPermissionsActivity implements Locat
     }
 
     private void initInfo() {
+        mBtnDetails.setOnClickListener(this);
         ivSkip2CustomerService.setOnClickListener(this);
         ivSkip2MyLocation.setOnClickListener(this);
     }
@@ -385,6 +393,15 @@ public class MapRepairActivity extends CheckPermissionsActivity implements Locat
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
+            case R.id.btn_repair_map_details:
+                if (!isClickBumpView) {
+                    isClickBumpView = true;
+                    llBumpInfoView.setVisibility(View.VISIBLE);
+                } else {
+                    isClickBumpView = false;
+                    llBumpInfoView.setVisibility(View.GONE);
+                }
+                break;
             case R.id.ivSkip2CustomerService:
 //                startActivity(new Intent(MapRepairActivity.this, CustomerServiceMineActivity.class));
                 break;

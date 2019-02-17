@@ -98,4 +98,10 @@
     <string name="string_value_rainfall_year">年降雨量分析</string>
     <string name="string_value_rainfall_search_data">历史降雨量查询</string>
     <string name="string_value_bump_default">#####\n#####</string>
+
+    <string name="string_value_bump_num">泵站运行数量： 23</string>
+    <string name="string_value_fault_num">故障数： 12</string>
+    <string name="string_value_ava_rain_num">平均降雨量： 34毫米</string>
+
+
 </resources>
