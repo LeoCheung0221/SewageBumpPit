@@ -85,7 +85,7 @@
     <string name="string_value_bump_info_manage">泵站信息管理</string>
     <string name="string_value_video_point">视频监控点</string>
     <string name="string_value_water_level_rainfall">重点水位/雨量</string>
-    <string name="string_value_img_water_report">图片/水浸报告</string>
+    <string name="string_value_img_water_report">泵站报告</string>
 
     <string name="string_value_bump_time_monitor">泵站地图</string>
     <string name="string_value_bump_day_info">泵站信息</string>
@@ -97,4 +97,5 @@
     <string name="string_value_rainfall_month">月降雨量分析</string>
     <string name="string_value_rainfall_year">年降雨量分析</string>
     <string name="string_value_rainfall_search_data">历史降雨量查询</string>
+    <string name="string_value_bump_default">#####\n#####</string>
 </resources>

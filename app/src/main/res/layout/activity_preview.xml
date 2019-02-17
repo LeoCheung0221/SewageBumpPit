@@ -8,9 +8,10 @@
     <RelativeLayout
         android:id="@+id/login_layout"
         android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:layout_marginLeft="50dp"
         android:layout_marginRight="50dp"
+        android:paddingBottom="80dp"
         android:gravity="center">
 
         <!--登录界面图像-->
@@ -36,7 +37,7 @@
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_below="@+id/user_icon"
-            android:layout_marginTop="5dp"
+            android:layout_marginTop="100dp"
             android:gravity="center">
 
             <!--泵站信息管理-->
@@ -71,7 +72,8 @@
             android:layout_height="wrap_content"
             android:layout_below="@id/manager_layout"
             android:layout_marginTop="0dp"
-            android:gravity="center">
+            android:gravity="center"
+            android:visibility="gone">
 
             <!--视频监控点-->
             <TextView
@@ -103,7 +105,8 @@
             android:layout_height="wrap_content"
             android:layout_below="@id/video_layout"
             android:layout_marginTop="0dp"
-            android:gravity="center">
+            android:gravity="center"
+            android:visibility="gone">
 
             <!--视频监控点-->
             <TextView
@@ -134,7 +137,8 @@
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_below="@id/rainfall_layout"
-            android:layout_marginTop="0dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="20dp"
             android:gravity="center">
 
             <!--视频监控点-->

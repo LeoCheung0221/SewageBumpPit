@@ -14,7 +14,7 @@
     <color name="bg_win">#f2f4f7</color>
     <color name="sub_text_color_light">#d6ffffff</color>
     <color name="result_ok">#46bf16</color>
-
+    <color name="green">#45C01A</color>
     <color name="black_overlay">#66000000</color>
 
     <color name="gray0">#464646</color>
@@ -27,5 +27,5 @@
     <color name="gray7">#999999</color>
     <color name="gray8">#D9D9D9</color>
     <color name="gray9">#DBDFE0</color>
-
+    <color name="gray">#AAAAAA</color>
 </resources>

@@ -8,7 +8,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/status_height"
-        android:background="@color/accent_white"
+        android:background="@color/white"
         android:gravity="center"
         android:padding="@dimen/card_spacing"
         android:text="请点击地图上的标识坐标"
@@ -27,5 +27,5 @@
         android:layout_height="wrap_content"
         android:background="?colorPrimary"
         android:text="@android:string/ok"
-        android:textColor="@color/accent_white" />
+        android:textColor="@color/white" />
 </LinearLayout>

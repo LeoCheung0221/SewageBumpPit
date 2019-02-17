@@ -186,7 +186,7 @@
             android:layout_weight="1"
             android:background="@android:color/holo_blue_light"
             android:text="通过"
-            android:textColor="@color/accent_white"
+            android:textColor="@color/white"
             android:textSize="@dimen/medium_text"/>
 
         <Button
@@ -194,7 +194,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:background="@color/accent_white"
+            android:background="@color/white"
             android:text="拒绝"
             android:textSize="@dimen/medium_text"/>
     </LinearLayout>

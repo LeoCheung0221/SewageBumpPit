@@ -20,7 +20,7 @@
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/accent_white"
+            android:background="@color/white"
             android:padding="@dimen/card_spacing">
 
             <TextView
@@ -83,7 +83,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/small_spacing"
-            android:background="@color/accent_white"
+            android:background="@color/white"
             android:padding="@dimen/card_spacing"
             android:stretchColumns="1">
 

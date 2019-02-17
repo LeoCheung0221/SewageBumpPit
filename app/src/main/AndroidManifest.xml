@@ -93,7 +93,14 @@
         <activity android:name=".Feature.VideoWaterActivity" />
         <activity android:name=".Feature.RainFallLevelActivity" />
         <activity android:name=".Feature.WaterLeachingReportActivity" />
-        <activity android:name=".Mine.SettingsActivity"></activity>
+        <activity android:name=".Mine.SettingsActivity" />
+        <activity android:name=".Discover.BumpListActivity" />
+        <activity
+            android:name=".Discover.BumpDetailActivity"
+            android:launchMode="singleTask"
+            android:screenOrientation="landscape">
+
+        </activity>
     </application>
 
 </manifest>
