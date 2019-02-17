@@ -53,7 +53,7 @@
     <string name="map">地图</string>
     <string name="weather">天气</string>
     <string name="pot">渍水点</string>
-    <string name="wet_point">渍水点</string>
+    <string name="wet_point">泵站点</string>
     <string name="accuracy">精确度  </string>
     <string name="normal">普通</string>
     <string name="accurate">精确</string>

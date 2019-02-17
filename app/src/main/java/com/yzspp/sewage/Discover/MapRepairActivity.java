@@ -109,7 +109,8 @@ public class MapRepairActivity extends CheckPermissionsActivity implements Locat
     //控件
     private CardView ivSkip2CustomerService;
     private CardView ivSkip2MyLocation;
-
+    private Spinner mSpinner;
+    private int nowPoint = 0;
 
     public static void start(Context context) {
         Intent starter = new Intent(context, MapRepairActivity.class);
@@ -122,6 +123,7 @@ public class MapRepairActivity extends CheckPermissionsActivity implements Locat
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_repair_map);
 
+        mSpinner = findViewById(R.id.sp_repair_map_point_choose);
         ivSkip2CustomerService = findViewById(R.id.ivSkip2CustomerService);
         ivSkip2MyLocation = findViewById(R.id.ivSkip2MyLocation);
         mapView = findViewById(R.id.map_main);
@@ -151,8 +153,51 @@ public class MapRepairActivity extends CheckPermissionsActivity implements Locat
 
         //从服务器获取点的信息并用sharedpreference存储到本地
         receivePointInfo();
+
+        setMySpinner();
     }
 
+    private void setMySpinner() {
+        ArrayList<String> nameList = new ArrayList<>();
+        nameList.add("江都城区污水泵站");
+        nameList.add("邗江区杨庙镇污水泵站");
+        nameList.add("经济开发区污水泵站");
+
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
+                android.R.layout.simple_list_item_1, nameList);
+        mSpinner.setAdapter(adapter);
+
+        //设置spinner点击事件
+        mSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                nowPoint = position;
+                //使用arrayMarkers的定位功能
+                ArrayList<MarkerOptions> arrayMarkers = new ArrayList<MarkerOptions>();
+                ArrayList<Marker> markers = new ArrayList<Marker>();
+
+//                LatLng mLatLng = new LatLng(
+//                        mUploadInfoList.get(position).getLatitude(),
+//                        mUploadInfoList.get(position).getLongitude());
+//                arrayMarkers.add(new MarkerOptions()
+//                        .title(mUploadInfoList.get(position).getUploadName())
+//                        .icon(BitmapDescriptorFactory
+//                                .defaultMarker(BitmapDescriptorFactory.HUE_AZURE))
+//                        .position(mLatLng));
+//                markers = aMap.addMarkers(arrayMarkers, true);
+//                markers.get(0).showInfoWindow();
+//
+//                //设置底部栏可见并且更新信息
+////                setInfoTipVisibile();
+//                refreshTipInfo(position);
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+    }
 
     private void initView() {
         initMapView();
