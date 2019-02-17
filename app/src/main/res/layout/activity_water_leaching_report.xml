@@ -40,6 +40,7 @@
                         android:textColor="@color/text_color" />
 
                     <TextView
+                        android:id="@+id/tvStartPick"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_centerVertical="true"
@@ -81,6 +82,7 @@
                         android:textColor="@color/text_color" />
 
                     <TextView
+                        android:id="@+id/tvEndPick"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_centerVertical="true"

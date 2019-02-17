@@ -1,23 +1,32 @@
 package com.yzspp.sewage.Feature;
 
+import android.app.DatePickerDialog;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
+import android.widget.DatePicker;
+import android.widget.TextView;
 
 import com.yzspp.sewage.R;
 import com.yzspp.sewage.base.BaseActivity;
 import com.yzspp.sewage.bean.ReportInfo;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 import frame.tool.MyToast;
 import frame.tool.SolidRVBaseAdapter;
 
-public class WaterLeachingReportActivity extends BaseActivity {
+public class WaterLeachingReportActivity extends BaseActivity implements View.OnClickListener {
 
+    private TextView tvStartPick;
+    private TextView tvEndPick;
     private RecyclerView mRecyclerView;
+
+    private String dateStr, mouth1, day1;
+    final Calendar calender = Calendar.getInstance();
 
     private List<ReportInfo> mUploadInfoList = new ArrayList<>();
     private SolidRVBaseAdapter mAdapter;
@@ -31,11 +40,14 @@ public class WaterLeachingReportActivity extends BaseActivity {
     protected void initView() {
         initToolbar("报警报告", true, true);
         mRecyclerView = findViewById(R.id.rv_water_leaching_view);
+        tvStartPick = findViewById(R.id.tvStartPick);
+        tvEndPick = findViewById(R.id.tvEndPick);
     }
 
     @Override
     protected void setListener() {
-
+        tvStartPick.setOnClickListener(this);
+        tvEndPick.setOnClickListener(this);
     }
 
     @Override
@@ -130,5 +142,67 @@ public class WaterLeachingReportActivity extends BaseActivity {
     @Override
     protected String[] getNeedPermissions() {
         return new String[0];
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.tvStartPick:
+                selectStartTimePick();
+                break;
+            case R.id.tvEndPick:
+                selectEndTimePick();
+                break;
+        }
+    }
+
+    private void selectEndTimePick() {
+        DatePickerDialog dialog = new
+                DatePickerDialog(WaterLeachingReportActivity.this, new DatePickerDialog.OnDateSetListener() {
+            @Override
+            public void onDateSet(DatePicker view, int year, int monthOfYear, int
+                    dayOfMonth) {
+
+                if (monthOfYear <= 9) {
+                    mouth1 = "0" + (monthOfYear + 1);
+                } else {
+                    mouth1 = String.valueOf(monthOfYear + 1);
+                }
+                if (dayOfMonth <= 9) {
+                    day1 = "0" + dayOfMonth;
+                } else {
+                    day1 = String.valueOf(dayOfMonth);
+                }
+                dateStr = String.valueOf(year) + "-" + mouth1 + "-" + day1;
+                tvEndPick.setText(dateStr);
+            }
+        }, calender.get(Calendar.YEAR), calender.get(Calendar.MONTH),
+                calender.get(Calendar.DAY_OF_MONTH));
+        dialog.show();
+    }
+
+    private void selectStartTimePick() {
+        DatePickerDialog dialog = new
+                DatePickerDialog(WaterLeachingReportActivity.this, new DatePickerDialog.OnDateSetListener() {
+            @Override
+            public void onDateSet(DatePicker view, int year, int monthOfYear, int
+                    dayOfMonth) {
+
+                if (monthOfYear <= 9) {
+                    mouth1 = "0" + (monthOfYear + 1);
+                } else {
+                    mouth1 = String.valueOf(monthOfYear + 1);
+                }
+                if (dayOfMonth <= 9) {
+                    day1 = "0" + dayOfMonth;
+                } else {
+                    day1 = String.valueOf(dayOfMonth);
+                }
+                dateStr = String.valueOf(year) + "-" + mouth1 + "-" + day1;
+                tvStartPick.setText(dateStr);
+            }
+        }, calender.get(Calendar.YEAR), calender.get(Calendar.MONTH),
+                calender.get(Calendar.DAY_OF_MONTH));
+        dialog.show();
     }
 }
