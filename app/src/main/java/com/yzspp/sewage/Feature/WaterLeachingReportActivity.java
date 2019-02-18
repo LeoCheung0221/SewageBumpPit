@@ -55,7 +55,7 @@ public class WaterLeachingReportActivity extends BaseActivity implements View.On
         mAdapter = new SolidRVBaseAdapter<ReportInfo>(WaterLeachingReportActivity.this, mUploadInfoList) {
             @Override
             protected void onBindDataToView(SolidCommonViewHolder holder, ReportInfo bean) {
-                holder.setText(R.id.tv_name, "水浸报告概述");
+                holder.setText(R.id.tv_name, "报警报告概述");
                 holder.setText(R.id.tv_start_name, "降雨开始时间");
                 holder.setText(R.id.tv_end_name, "降雨结束时间");
                 holder.setText(R.id.tv_report_name, "报告提交时间");
