@@ -450,8 +450,8 @@ public class MapRepairActivity extends CheckPermissionsActivity implements Locat
                             .nav(new BottomDialog.OnSkip2NavigationListener() {
                                 @Override
                                 public void nav() {
-                                    NaviLatLng startNavi = new NaviLatLng(mAmapLocation.getLatitude(), mAmapLocation.getLongitude());
-                                    NaviLatLng endNavi = new NaviLatLng(mNearbyParkingMineBeen.get(finalI).getLatitude(), mNearbyParkingMineBeen.get(finalI).getLongitude());
+//                                    NaviLatLng startNavi = new NaviLatLng(mAmapLocation.getLatitude(), mAmapLocation.getLongitude());
+//                                    NaviLatLng endNavi = new NaviLatLng(mNearbyParkingMineBeen.get(finalI).getLatitude(), mNearbyParkingMineBeen.get(finalI).getLongitude());
 //                                    startActivity(new Intent(MapRepairActivity.this, Navigation2DActivity.class)
 //                                            .putExtra("start_navi_point", startNavi)
 //                                            .putExtra("end_navi_point", endNavi));

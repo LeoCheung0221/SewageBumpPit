@@ -94,7 +94,12 @@
         <activity android:name=".Feature.RainFallLevelActivity" />
         <activity android:name=".Feature.WaterLeachingReportActivity" />
         <activity android:name=".Mine.SettingsActivity" />
-        <activity android:name=".Discover.BumpListActivity" />
+        <activity
+            android:name=".Discover.BumpListActivity"
+            android:configChanges="orientation|keyboardHidden"
+            android:screenOrientation="portrait">
+
+        </activity>
         <activity
             android:name=".Discover.BumpDetailActivity"
             android:launchMode="singleTask"

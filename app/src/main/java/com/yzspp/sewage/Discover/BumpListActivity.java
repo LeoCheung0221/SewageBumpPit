@@ -3,6 +3,7 @@ package com.yzspp.sewage.Discover;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.content.res.Configuration;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v7.widget.LinearLayoutManager;
@@ -40,6 +41,18 @@ public class BumpListActivity extends BaseActivity {
     @Override
     protected int getLayoutId() {
         return R.layout.activity_bump_list;
+    }
+
+    @Override
+    public void onConfigurationChanged(Configuration newConfig) {
+        super.onConfigurationChanged(newConfig);
+        // Checks the orientation of the screen
+        if (newConfig.orientation == Configuration.ORIENTATION_LANDSCAPE) {//横屏
+            //需要执行的操作，可以不写
+
+        } else if (newConfig.orientation == Configuration.ORIENTATION_PORTRAIT) {//竖屏
+            //需要执行的操作，可以不写
+        }
     }
 
     @Override
