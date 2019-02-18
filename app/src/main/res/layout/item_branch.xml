@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/llParent"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="36dp">
 
     <ImageView
         android:id="@+id/ivNode"
@@ -16,7 +16,7 @@
         android:id="@+id/ivCheck"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
         android:layout_centerVertical="true"
         android:visibility="gone"
         app:srcCompat="@drawable/ic_uncheck" />
@@ -24,11 +24,12 @@
     <TextView
         android:id="@+id/tvName"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="36dp"
         android:layout_centerVertical="true"
-        android:layout_toLeftOf="@id/ivCheck"
-        android:layout_toRightOf="@+id/ivNode"
+        android:layout_toEndOf="@+id/ivNode"
+        android:layout_toStartOf="@id/ivCheck"
         android:layout_weight="1"
+        android:gravity="center_vertical"
         android:padding="5dp"
-        android:textSize="18sp" />
+        android:textSize="15sp" />
 </RelativeLayout>
