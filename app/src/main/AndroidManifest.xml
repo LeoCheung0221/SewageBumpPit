@@ -44,7 +44,7 @@
         tools:targetApi="28">
         <meta-data
             android:name="com.amap.api.v2.apikey"
-            android:value="72820d217c3d0dbba3dfd87e498c76cf" />
+            android:value="712203d48ef2022c4d7f895410af1041" />
 
         <activity
             android:name=".Account.LoginActivity"

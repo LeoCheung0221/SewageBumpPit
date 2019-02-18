@@ -57,6 +57,7 @@ import com.yzspp.sewage.bean.NearbyBumpBean;
 import com.yzspp.sewage.bean.UploadInfo;
 import com.yzspp.sewage.net.RequestHelper;
 import com.yzspp.sewage.view.My2dMapView;
+import com.yzspp.sewage.view.bottomdialog.BottomDialog;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -279,7 +280,7 @@ public class MapRepairActivity extends CheckPermissionsActivity implements Locat
                     runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-//                            getNearbyByLatLng(amapLocation, mLatLng);
+                            getNearbyByLatLng(amapLocation, mLatLng);
                         }
                     });
 
@@ -305,12 +306,13 @@ public class MapRepairActivity extends CheckPermissionsActivity implements Locat
 //                            try {
 //                                JSONObject json = new JSONObject(s);
 //                                mNearbyParkingMineBeen = com.alibaba.fastjson.JSONObject.parseArray(String.valueOf(json.get("data")), NearbyBumpBean.class);
-//                                if (mNearbyParkingMineBeen != null && mNearbyParkingMineBeen.size() > 0) {
-//                                    //根据指定经纬度 地图显示
-//                                    prepareSearchNearbyParking(amapLocation, mNearbyParkingMineBeen);
-//                                } else {
-//                                    Toast.makeText(MapRepairActivity.this, "附近暂无可用车位", Toast.LENGTH_LONG).show();
-//                                }
+        if (mNearbyParkingMineBeen != null && mNearbyParkingMineBeen.size() > 0) {
+            //根据指定经纬度 地图显示
+            prepareSearchNearbyParking(amapLocation, mNearbyParkingMineBeen);
+        } else {
+            prepareSearchNearbyParking(amapLocation);
+//                                    Toast.makeText(MapRepairActivity.this, "附近暂未搜索到泵站点", Toast.LENGTH_LONG).show();
+        }
 //
 //                                //开始POI搜索
 ////                                searchByPoi(amapLocation);
@@ -345,6 +347,26 @@ public class MapRepairActivity extends CheckPermissionsActivity implements Locat
         aNavMap.moveCamera(CameraUpdateFactory.newLatLngBounds(bounds, 10));
     }
 
+    private void prepareSearchNearbyParking(AMapLocation amapLocation) {
+        this.mAmapLocation = amapLocation;
+        boundBuilder = new LatLngBounds.Builder();
+        String iconName = "icon_poi_marker_parking";
+        int iconId = getResources().getIdentifier(iconName, "drawable", this.getPackageName());
+        MarkerOptions markerOptions = new MarkerOptions().icon(BitmapDescriptorFactory.fromResource(iconId));
+        markerOptions.position(new LatLng(amapLocation.getLatitude(), amapLocation.getLongitude()));
+        markerOptions.title(amapLocation.getCity()).snippet(amapLocation.getCity() + "：" + amapLocation.getLatitude() + "，" + amapLocation.getLongitude());
+        markerOptions.draggable(true);//设置Marker可拖动
+        Marker marker = aNavMap.addMarker(markerOptions);
+        marker.setObject(0);
+        //为了POI填充整个地图区域
+        boundBuilder.include(new LatLng(amapLocation.getLatitude(), amapLocation.getLongitude()));
+        mMarkerList.add(marker);
+
+        LatLngBounds bounds = boundBuilder.build();
+        // 移动地图，所有marker自适应显示。LatLngBounds与地图边缘10像素的填充区域
+        aNavMap.moveCamera(CameraUpdateFactory.newLatLngBounds(bounds, 10));
+    }
+
     @Override
     protected void onResume() {
         super.onResume();
@@ -371,7 +393,8 @@ public class MapRepairActivity extends CheckPermissionsActivity implements Locat
         super.onDestroy();
         mapView.onDestroy();
         poiResult = null;
-        aNavMap.clear();
+        if (aNavMap != null)
+            aNavMap.clear();
     }
 
     /**
@@ -421,27 +444,27 @@ public class MapRepairActivity extends CheckPermissionsActivity implements Locat
             if (marker.equals(mMarkerList.get(i))) {
                 if (aNavMap != null) {
                     final int finalI = i;
-//                    new BottomDialog(MapRepairActivity.this)
-//                            .layout(BottomDialog.GRID)
-//                            .orientation(BottomDialog.VERTICAL)
-//                            .nav(new BottomDialog.OnSkip2NavigationListener() {
-//                                @Override
-//                                public void nav() {
-//                                    NaviLatLng startNavi = new NaviLatLng(mAmapLocation.getLatitude(), mAmapLocation.getLongitude());
-//                                    NaviLatLng endNavi = new NaviLatLng(mNearbyParkingMineBeen.get(finalI).getLatitude(), mNearbyParkingMineBeen.get(finalI).getLongitude());
+                    new BottomDialog(MapRepairActivity.this)
+                            .layout(BottomDialog.GRID)
+                            .orientation(BottomDialog.VERTICAL)
+                            .nav(new BottomDialog.OnSkip2NavigationListener() {
+                                @Override
+                                public void nav() {
+                                    NaviLatLng startNavi = new NaviLatLng(mAmapLocation.getLatitude(), mAmapLocation.getLongitude());
+                                    NaviLatLng endNavi = new NaviLatLng(mNearbyParkingMineBeen.get(finalI).getLatitude(), mNearbyParkingMineBeen.get(finalI).getLongitude());
 //                                    startActivity(new Intent(MapRepairActivity.this, Navigation2DActivity.class)
 //                                            .putExtra("start_navi_point", startNavi)
 //                                            .putExtra("end_navi_point", endNavi));
-//                                }
-//                            })
-//                            .match(new BottomDialog.OnSkip2MatchListener() {
-//                                @Override
-//                                public void match() {
+                                }
+                            })
+                            .match(new BottomDialog.OnSkip2MatchListener() {
+                                @Override
+                                public void match() {
 //                                    startActivity(new Intent(MapRepairActivity.this, ParkingSpaceImmMatchingActivity.class).putExtra("destination_navi_info", mNearbyParkingMineBeen.get(finalI)));
-//                                }
-//                            })
+                                }
+                            })
 //                            .setData(mAmapLocation, mNearbyParkingMineBeen.get(finalI))
-//                            .show();
+                            .show();
                 }
                 return true;
             }

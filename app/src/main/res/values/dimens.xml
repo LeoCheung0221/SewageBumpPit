@@ -79,4 +79,14 @@
     <dimen name="common_dimen_2px">1dp</dimen>
     <dimen name="common_dimen_1px">1px</dimen>
     <!--　－－－－－－－－－－－－－　ＡＵＴＯ　ＬＡＹＯＵＴ　－－－－－－－－－－－－－－－－ -->
+
+    <dimen name="app_normal_margin">10dp</dimen>
+    <dimen name="app_plus_margin">12dp</dimen>
+    <dimen name="app_tiny_margin">4dp</dimen>
+    <dimen name="bottom_dialog_top_icon">38dp</dimen>
+    <dimen name="bottom_dialog_left_icon">32dp</dimen>
+
+    <dimen name="font_larger">16sp</dimen>
+    <dimen name="font_normal">14sp</dimen>
+    <dimen name="font_small">10sp</dimen>
 </resources>
