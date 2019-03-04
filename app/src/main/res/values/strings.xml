@@ -82,6 +82,8 @@
     <string name="back">返回</string>
 
     <string name="string_app_title">扬中市XX区XX区\n排涝泵站远程监控调度中心</string>
+
+    <string name="string_value_bump_info_map">泵站地图</string>
     <string name="string_value_bump_info_manage">泵站信息管理</string>
     <string name="string_value_video_point">视频监控点</string>
     <string name="string_value_water_level_rainfall">重点水位/雨量</string>

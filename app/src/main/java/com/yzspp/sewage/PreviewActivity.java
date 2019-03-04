@@ -7,6 +7,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.yzspp.sewage.Account.LoginActivity;
+import com.yzspp.sewage.Discover.BumpListActivity;
+import com.yzspp.sewage.Discover.MapRepairActivity;
 import com.yzspp.sewage.Feature.BumpManagerActivity;
 import com.yzspp.sewage.Feature.RainFallLevelActivity;
 import com.yzspp.sewage.Feature.VideoWaterActivity;
@@ -17,6 +19,7 @@ import com.yzspp.sewage.base.BaseActivity;
 
 public class PreviewActivity extends BaseActivity implements View.OnClickListener {
 
+    private FrameLayout mMapInfoLayoutl;
     private FrameLayout mManagerLayout;
     private FrameLayout mVideoLayout;
     private FrameLayout mRainfallLayout;
@@ -30,12 +33,14 @@ public class PreviewActivity extends BaseActivity implements View.OnClickListene
 
     @Override
     protected void initView() {
+        mMapInfoLayoutl = findViewById(R.id.map_layout);
         mManagerLayout = findViewById(R.id.manager_layout);
         mVideoLayout = findViewById(R.id.video_layout);
         mRainfallLayout = findViewById(R.id.rainfall_layout);
         mReportLayout = findViewById(R.id.report_layout);
         mGoSetting = findViewById(R.id.iv_go_setting);
 
+        mMapInfoLayoutl.setOnClickListener(this);
         mManagerLayout.setOnClickListener(this);
         mVideoLayout.setOnClickListener(this);
         mRainfallLayout.setOnClickListener(this);
@@ -71,8 +76,11 @@ public class PreviewActivity extends BaseActivity implements View.OnClickListene
     @Override
     public void onClick(View view) {
         switch (view.getId()) {
+            case R.id.map_layout:
+                SSIntentTool.start(PreviewActivity.this, MapRepairActivity.class);
+                break;
             case R.id.manager_layout:
-                SSIntentTool.start(PreviewActivity.this, BumpManagerActivity.class);
+                SSIntentTool.start(PreviewActivity.this, BumpListActivity.class);
                 break;
             case R.id.video_layout:
                 SSIntentTool.start(PreviewActivity.this, VideoWaterActivity.class);
