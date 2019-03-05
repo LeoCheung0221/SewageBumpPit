@@ -11,7 +11,7 @@ import android.support.v4.app.FragmentTransaction;
 import android.view.MenuItem;
 
 
-import com.yzspp.sewage.Discover.DiscoverFragment;
+import com.yzspp.sewage.Bump.DiscoverFragment;
 import com.yzspp.sewage.Mine.MineFragment;
 import com.yzspp.sewage.Resource.ResourceFragment;
 import com.yzspp.sewage.Warn.WarnFragment;

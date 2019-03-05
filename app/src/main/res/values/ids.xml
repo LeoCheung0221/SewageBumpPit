@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <item name="default_fab_id" type="id"/>
+
+    <item name="fb_overview" type="id"/>
+    <item name="fb_directory" type="id"/>
+    <item name="fb_detail" type="id"/>
+    <item name="fb_me" type="id"/>
+</resources>

@@ -1,4 +1,4 @@
-package com.yzspp.sewage.Discover;
+package com.yzspp.sewage.Bump;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -18,14 +18,12 @@ import com.yzspp.sewage.Work.CheckDetailsActivity;
 import com.yzspp.sewage.base.BaseFragment;
 import com.yzspp.sewage.bean.UploadInfo;
 import com.yzspp.sewage.net.RequestHelper;
-import com.yzspp.sewage.net.RequestListener;
 import com.yzspp.sewage.view.DiscoverView;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-import frame.tool.MyToast;
 import frame.tool.SolidRVBaseAdapter;
 
 /**

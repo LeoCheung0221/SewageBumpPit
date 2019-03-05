@@ -72,22 +72,22 @@
             android:name=".Work.CheckDetailsActivity"
             android:theme="@style/AppTheme.NoActionbar.TranStatus" />
         <activity
-            android:name=".Discover.WeatherActivity"
+            android:name=".Bump.WeatherActivity"
             android:theme="@style/AppTheme.NoActionbar.TranStatus" />
         <activity android:name=".Work.CheckedWorkActivity" />
         <activity
-            android:name=".Discover.MapRouteActivity"
+            android:name=".Bump.MapRouteActivity"
             android:theme="@style/AppTheme.NoActionbar.TranStatus" />
         <activity
-            android:name=".Discover.MapRepairActivity"
+            android:name=".Bump.MapRepairActivity"
             android:theme="@style/AppTheme.NoActionbar.TranStatus" />
-        <activity android:name=".Discover.WetPointActivity" />
+        <activity android:name=".Bump.WetPointActivity" />
         <!-- 定位需要的服务 使用2.0的定位需要加上这个 -->
         <service android:name="com.amap.api.location.APSService" />
 
-        <activity android:name=".Discover.ReportSituationActivity" />
+        <activity android:name=".Bump.ReportSituationActivity" />
         <activity
-            android:name=".Discover.ReportAddressActivity"
+            android:name=".Bump.ReportAddressActivity"
             android:theme="@style/AppTheme.NoActionbar.TranStatus" />
         <activity android:name=".Feature.BumpManagerActivity" />
         <activity android:name=".Feature.VideoWaterActivity" />
@@ -95,17 +95,14 @@
         <activity android:name=".Feature.WaterLeachingReportActivity" />
         <activity android:name=".Mine.SettingsActivity" />
         <activity
-            android:name=".Discover.BumpListActivity"
+            android:name=".Bump.BumpListActivity"
             android:configChanges="orientation|keyboardHidden"
-            android:screenOrientation="portrait">
-
-        </activity>
+            android:screenOrientation="portrait"></activity>
         <activity
-            android:name=".Discover.BumpDetailActivity"
+            android:name=".Bump.BumpDetailActivity"
             android:launchMode="singleTask"
-            android:screenOrientation="landscape">
-
-        </activity>
+            android:screenOrientation="landscape"></activity>
+        <activity android:name=".Bump.BumpOverviewActivity"></activity>
     </application>
 
 </manifest>

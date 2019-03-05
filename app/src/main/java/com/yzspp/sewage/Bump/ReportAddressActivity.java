@@ -1,4 +1,4 @@
-package com.yzspp.sewage.Discover;
+package com.yzspp.sewage.Bump;
 
 import android.content.Intent;
 import android.graphics.BitmapFactory;

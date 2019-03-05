@@ -171,7 +171,6 @@
                 android:background="@color/div" />
 
             <LinearLayout
-                android:id="@+id/llBumpInfoView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/tv_repair_map_address"

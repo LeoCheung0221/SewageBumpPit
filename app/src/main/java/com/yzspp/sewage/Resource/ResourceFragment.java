@@ -11,7 +11,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.yzspp.sewage.Discover.WetPointActivity;
+import com.yzspp.sewage.Bump.WetPointActivity;
 import com.yzspp.sewage.R;
 import com.yzspp.sewage.base.BaseFragment;
 import com.yzspp.sewage.view.ResourceItem;

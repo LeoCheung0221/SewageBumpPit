@@ -43,4 +43,34 @@
         <attr name="metaButtonBarStyle" format="reference"/>
         <attr name="metaButtonBarButtonStyle" format="reference"/>
     </declare-styleable>
+
+    <declare-styleable name="SlidingView">
+        <attr name="ccg_iconsrc" format="reference"/>
+        <attr name="ccg_iconcolor" format="color"/>
+        <attr name="ccg_iconwidth" format="dimension"/>
+        <attr name="ccg_iconhight" format="dimension"/>
+        <attr name="ccg_tvsize" format="dimension"/>
+        <attr name="ccg_tvcolor" format="color"/>
+        <attr name="ccg_tvwidth" format="dimension"/>
+        <attr name="ccg_tvhight" format="dimension"/>
+        <attr name="ccg_tvtext" format="string"/>
+        <attr name="ccg_menu" format="enum">
+            <enum name="fb_overview" value="0" />
+            <enum name="fb_directory" value="1" />
+            <enum name="fb_detail" value="2" />
+            <enum name="fb_me" value="3" />
+        </attr>
+    </declare-styleable>
+
+    <declare-styleable name="a_zhon">
+        <!--两个按钮间的间距-->
+        <attr name="fab_spacing" format="dimension" />
+        <!--展开的方向-->
+        <attr name="fab_orientation" format="enum">
+            <enum name="top" value="1" />
+            <enum name="bottom" value="2" />
+            <enum name="left" value="3" />
+            <enum name="right" value="4" />
+        </attr>
+    </declare-styleable>
 </resources>

@@ -1,5 +1,6 @@
 package com.yzspp.sewage.base;
 
+import android.app.Activity;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.ActionBar;
@@ -37,6 +38,7 @@ public abstract class BaseActivity extends CheckPermissionsActivity {
     private TextView mRetryTv;
     private View mRootView;
 
+    private Activity mActivity;
 
     protected void onCreate(@Nullable Bundle paramBundle) {
         super.onCreate(paramBundle);
@@ -63,6 +65,7 @@ public abstract class BaseActivity extends CheckPermissionsActivity {
         } else {
             this.mRootView = localView.findViewById(R.id.view_root);
         }
+        mActivity = this;
         localView.setLayoutParams(new FrameLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
         this.mContentFl.addView(localView);
         initView();
@@ -182,5 +185,9 @@ public abstract class BaseActivity extends CheckPermissionsActivity {
     public boolean dispatchTouchEvent(MotionEvent ev) {
         InstabugTrackingDelegate.notifyActivityGotTouchEvent(ev, this);
         return super.dispatchTouchEvent(ev);
+    }
+
+    protected Activity getCurrentActivity(){
+        return mActivity;
     }
 }

@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.yzspp.sewage.view.NaviBottomView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="120dp"
+    android:background="@color/navi_bottom_blue_bg"
+    android:orientation="vertical">
+
+    <!-- 目录 -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="120dp"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingLeft="20dp"
+        android:paddingRight="20dp"
+        android:visibility="visible">
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center">
+
+            <TextView
+                android:id="@+id/navi_overview"
+                android:layout_width="64dp"
+                android:layout_height="64dp"
+                android:background="@drawable/navi_circle"
+                android:gravity="center"
+                android:text="总览"
+                android:textColor="@color/colorPrimaryDark"
+                android:textSize="14sp" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center">
+
+            <TextView
+                android:id="@+id/navi_directory"
+                android:layout_width="64dp"
+                android:layout_height="64dp"
+                android:background="@drawable/navi_circle"
+                android:gravity="center"
+                android:text="目录"
+                android:textColor="@color/colorPrimaryDark"
+                android:textSize="14sp" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center">
+
+            <TextView
+                android:id="@+id/navi_detail"
+                android:layout_width="64dp"
+                android:layout_height="64dp"
+                android:background="@drawable/navi_circle"
+                android:gravity="center"
+                android:text="详细"
+                android:textColor="@color/colorPrimaryDark"
+                android:textSize="14sp" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center">
+
+            <TextView
+                android:id="@+id/navi_me"
+                android:layout_width="64dp"
+                android:layout_height="64dp"
+                android:background="@drawable/navi_circle"
+                android:gravity="center"
+                android:text="我"
+                android:textColor="@color/colorPrimaryDark"
+                android:textSize="14sp" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</com.yzspp.sewage.view.NaviBottomView>

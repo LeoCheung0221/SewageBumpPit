@@ -4,12 +4,10 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
-import android.widget.TextView;
 
-import com.yzspp.sewage.Account.LoginActivity;
-import com.yzspp.sewage.Discover.BumpListActivity;
-import com.yzspp.sewage.Discover.MapRepairActivity;
-import com.yzspp.sewage.Feature.BumpManagerActivity;
+import com.yzspp.sewage.Bump.BumpListActivity;
+import com.yzspp.sewage.Bump.BumpOverviewActivity;
+import com.yzspp.sewage.Bump.MapRepairActivity;
 import com.yzspp.sewage.Feature.RainFallLevelActivity;
 import com.yzspp.sewage.Feature.VideoWaterActivity;
 import com.yzspp.sewage.Feature.WaterLeachingReportActivity;
@@ -80,7 +78,7 @@ public class PreviewActivity extends BaseActivity implements View.OnClickListene
                 SSIntentTool.start(PreviewActivity.this, MapRepairActivity.class);
                 break;
             case R.id.manager_layout:
-                SSIntentTool.start(PreviewActivity.this, BumpListActivity.class);
+                SSIntentTool.start(PreviewActivity.this, BumpOverviewActivity.class);
                 break;
             case R.id.video_layout:
                 SSIntentTool.start(PreviewActivity.this, VideoWaterActivity.class);

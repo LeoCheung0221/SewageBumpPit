@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:orientation="vertical">
+
+    <include layout="@layout/toolbar" />
+
+    <FrameLayout
+        android:id="@+id/flContainer"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/toolbar"
+        tools:ignore="UnknownIdInLayout" />
+
+    <!--<LinearLayout-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="320dp"-->
+    <!--android:layout_alignParentBottom="true"-->
+    <!--android:background="@color/white"-->
+    <!--android:paddingBottom="20dp"-->
+    <!--android:paddingEnd="20dp"-->
+    <!--tools:ignore="RtlSymmetry">-->
+
+    <com.yzspp.sewage.view.SlidingView
+        android:id="@+id/svMenuView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="center"
+        android:layout_marginBottom="20dp"
+        android:layout_marginRight="20dp">
+
+        <com.yzspp.sewage.view.FloatButton
+            android:id="@+id/navi_overview"
+            android:layout_width="150dp"
+            android:layout_height="100dp"
+            app:ccg_iconsrc="@mipmap/ic_menu_item"
+            app:ccg_menu="fb_overview"
+            app:ccg_tvsize="7dp"
+            app:ccg_tvtext="总览" />
+
+        <com.yzspp.sewage.view.FloatButton
+            android:id="@+id/navi_directory"
+            android:layout_width="150dp"
+            android:layout_height="100dp"
+            app:ccg_iconsrc="@mipmap/ic_menu_item"
+            app:ccg_menu="fb_directory"
+            app:ccg_tvsize="7dp"
+            app:ccg_tvtext="目录" />
+
+        <com.yzspp.sewage.view.FloatButton
+            android:id="@+id/navi_detail"
+            android:layout_width="150dp"
+            android:layout_height="100dp"
+            app:ccg_iconsrc="@mipmap/ic_menu_item"
+            app:ccg_menu="fb_detail"
+            app:ccg_tvsize="7dp"
+            app:ccg_tvtext="详细" />
+
+        <com.yzspp.sewage.view.FloatButton
+            android:id="@+id/navi_me"
+            android:layout_width="150dp"
+            android:layout_height="100dp"
+            app:ccg_iconsrc="@mipmap/ic_menu_item"
+            app:ccg_menu="fb_me"
+            app:ccg_tvsize="7dp"
+            app:ccg_tvtext="我" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@mipmap/ic_main_menu" />
+
+    </com.yzspp.sewage.view.SlidingView>
+
+    <!--</LinearLayout>-->
+
+</RelativeLayout>

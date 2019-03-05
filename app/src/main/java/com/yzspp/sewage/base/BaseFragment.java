@@ -1,14 +1,21 @@
 package com.yzspp.sewage.base;
 
+import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Objects;
 
 
 /**
@@ -41,7 +48,7 @@ import android.view.ViewGroup;
 public abstract class BaseFragment extends Fragment {
     private static final String TAG = "BaseFragment";
     private AppCompatActivity mAppCompatActivity;
-
+    private static final int PERMISSON_REQUESTCODE = 99;
 
 
     @Override
@@ -55,6 +62,41 @@ public abstract class BaseFragment extends Fragment {
         mAppCompatActivity= (AppCompatActivity) getActivity();
     }
 
+    protected void checkPermissions() {
+        List<String> needRequestPermissonList = findDeniedPermissions(getNeedPermissions());
+        if (null != needRequestPermissonList
+                && needRequestPermissonList.size() > 0) {
+            ActivityCompat.requestPermissions(Objects.requireNonNull(getActivity()),
+                    needRequestPermissonList.toArray(
+                            new String[needRequestPermissonList.size()]),
+                    PERMISSON_REQUESTCODE);
+        }
+    }
+
+    protected String[] getNeedPermissions(){
+        return new String[]{};
+    };
+
+    /**
+     * 获取权限集中需要申请权限的列表
+     *
+     * @param permissions
+     * @return
+     * @since 2.5.0
+     *
+     */
+    private List<String> findDeniedPermissions(String[] permissions) {
+        List<String> needRequestPermissonList = new ArrayList<String>();
+        for (String perm : permissions) {
+            if (ContextCompat.checkSelfPermission(Objects.requireNonNull(getContext()),
+                    perm) != PackageManager.PERMISSION_GRANTED
+                    || ActivityCompat.shouldShowRequestPermissionRationale(
+                    Objects.requireNonNull(getActivity()), perm)) {
+                needRequestPermissonList.add(perm);
+            }
+        }
+        return needRequestPermissonList;
+    }
 
     @Override
     @Nullable

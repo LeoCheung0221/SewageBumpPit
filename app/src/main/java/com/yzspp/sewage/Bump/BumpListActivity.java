@@ -1,4 +1,4 @@
-package com.yzspp.sewage.Discover;
+package com.yzspp.sewage.Bump;
 
 import android.app.ProgressDialog;
 import android.content.Context;
@@ -8,9 +8,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.View;
-import android.widget.Toast;
 
 import com.yzspp.sewage.R;
 import com.yzspp.sewage.Tools.SSIntentTool;
@@ -21,6 +19,7 @@ import com.yzspp.sewage.bean.LeafNode;
 import com.yzspp.sewage.bean.LeafViewBinder;
 import com.yzspp.sewage.bean.RootNode;
 import com.yzspp.sewage.bean.RootViewBinder;
+import com.yzspp.sewage.view.NaviBottomView;
 import com.yzspp.sewage.view.tree.TreeViewAdapter;
 import com.yzspp.sewage.view.tree.bean.LayoutItem;
 import com.yzspp.sewage.view.tree.bean.TreeNode;
@@ -61,7 +60,6 @@ public class BumpListActivity extends BaseActivity {
         rv = findViewById(R.id.rv_bump_position);
 
         list.clear();
-//        list.addAll(initRoot());
         initTree();
         adapter.notifyData(list);
     }
