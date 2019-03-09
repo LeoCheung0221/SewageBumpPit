@@ -26,10 +26,6 @@ import java.util.List;
 
 import frame.tool.SolidRVBaseAdapter;
 
-/**
- * 一句话功能描述
- * 功能详细描述
- */
 public class DiscoverFragment extends BaseFragment {
 
     private SliderLayout slider;

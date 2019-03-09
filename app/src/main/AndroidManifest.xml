@@ -95,10 +95,6 @@
         <activity android:name=".Feature.WaterLeachingReportActivity" />
         <activity android:name=".Mine.SettingsActivity" />
         <activity
-            android:name=".Bump.BumpListActivity"
-            android:configChanges="orientation|keyboardHidden"
-            android:screenOrientation="portrait"></activity>
-        <activity
             android:name=".Bump.BumpDetailActivity"
             android:launchMode="singleTask"
             android:screenOrientation="landscape"></activity>

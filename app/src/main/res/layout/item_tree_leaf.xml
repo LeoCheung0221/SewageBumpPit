@@ -3,12 +3,12 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/llParent"
     android:layout_width="match_parent"
-    android:layout_height="36dp">
+    android:layout_height="wrap_content">
 
     <ImageView
         android:id="@+id/ivNode"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
         android:layout_centerVertical="true"
         app:srcCompat="@drawable/ic_tree_node" />
 
@@ -16,7 +16,7 @@
         android:id="@+id/ivCheck"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
         android:layout_centerVertical="true"
         android:visibility="gone"
         app:srcCompat="@drawable/ic_uncheck" />
@@ -26,10 +26,11 @@
         android:layout_width="wrap_content"
         android:layout_height="36dp"
         android:layout_centerVertical="true"
-        android:layout_toEndOf="@+id/ivNode"
-        android:layout_toStartOf="@id/ivCheck"
+        android:layout_toLeftOf="@id/ivCheck"
+        android:layout_toRightOf="@+id/ivNode"
         android:layout_weight="1"
         android:gravity="center_vertical"
         android:padding="5dp"
-        android:textSize="15sp" />
+        android:textColor="@color/text_darkest_color"
+        android:textSize="14sp" />
 </RelativeLayout>

@@ -24,7 +24,7 @@ public class LeafNode implements LayoutItem {
 
     @Override
     public int getLayoutId() {
-        return R.layout.item_leaf;
+        return R.layout.item_tree_leaf;
     }
 
     @Override

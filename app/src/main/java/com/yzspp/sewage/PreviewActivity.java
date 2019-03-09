@@ -5,7 +5,6 @@ import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 
-import com.yzspp.sewage.Bump.BumpListActivity;
 import com.yzspp.sewage.Bump.BumpOverviewActivity;
 import com.yzspp.sewage.Bump.MapRepairActivity;
 import com.yzspp.sewage.Feature.RainFallLevelActivity;

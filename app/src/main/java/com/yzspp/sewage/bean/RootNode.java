@@ -24,7 +24,7 @@ public class RootNode implements LayoutItem {
 
     @Override
     public int getLayoutId() {
-        return R.layout.item_root;
+        return R.layout.item_tree_root;
     }
 
     @Override

@@ -16,7 +16,7 @@ import com.yzspp.sewage.view.tree.bean.TreeViewBinder;
 public class LeafViewBinder extends TreeViewBinder<LeafViewBinder.ViewHolder> {
     @Override
     public int getLayoutId() {
-        return R.layout.item_leaf;
+        return R.layout.item_tree_leaf;
     }
 
     @Override

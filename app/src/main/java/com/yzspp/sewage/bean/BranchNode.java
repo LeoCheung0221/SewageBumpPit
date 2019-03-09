@@ -24,7 +24,7 @@ public class BranchNode implements LayoutItem {
 
     @Override
     public int getLayoutId() {
-        return R.layout.item_branch;
+        return R.layout.item_tree_branch;
     }
 
     @Override

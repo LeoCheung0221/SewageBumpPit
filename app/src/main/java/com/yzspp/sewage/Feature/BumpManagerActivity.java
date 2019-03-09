@@ -9,7 +9,6 @@ import com.daimajia.slider.library.Animations.DescriptionAnimation;
 import com.daimajia.slider.library.SliderLayout;
 import com.daimajia.slider.library.SliderTypes.BaseSliderView;
 import com.daimajia.slider.library.SliderTypes.TextSliderView;
-import com.yzspp.sewage.Bump.BumpListActivity;
 import com.yzspp.sewage.Bump.MapRepairActivity;
 import com.yzspp.sewage.Bump.WetPointActivity;
 import com.yzspp.sewage.R;
@@ -95,14 +94,6 @@ public class BumpManagerActivity extends BaseActivity {
                 MapRepairActivity.start(BumpManagerActivity.this);
             }
         });
-
-        dvmap.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                BumpListActivity.start(BumpManagerActivity.this);
-            }
-        });
-
 
         dvweather.setOnClickListener(new View.OnClickListener() {
             @Override

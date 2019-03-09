@@ -16,7 +16,7 @@ import com.yzspp.sewage.view.tree.bean.TreeViewBinder;
 public class RootViewBinder extends TreeViewBinder<RootViewBinder.ViewHolder> {
     @Override
     public int getLayoutId() {
-        return R.layout.item_root;
+        return R.layout.item_tree_root;
     }
 
     @Override
@@ -44,7 +44,8 @@ public class RootViewBinder extends TreeViewBinder<RootViewBinder.ViewHolder> {
         ((TextView) holder.findViewById(R.id.tvName)).setText(((RootNode) treeNode.getValue()).getName());
         holder.findViewById(R.id.ivNode).setRotation(treeNode.isExpanded() ? 90 : 0);
         ((ImageView) holder.findViewById(R.id.ivCheck)).setImageResource(treeNode.isChecked() ? R.drawable.ic_checked : R.drawable.ic_uncheck);
-        holder.findViewById(R.id.llParent).setBackgroundColor(holder.itemView.getContext().getResources().getColor(treeNode.isChecked() ? R.color.gray : R.color.white));
+        holder.findViewById(R.id.llParent)
+                .setBackgroundColor(holder.itemView.getContext().getResources().getColor(treeNode.isChecked() ? R.color.gray : R.color.oldlace));
     }
 
     class ViewHolder extends TreeViewBinder.ViewHolder {
