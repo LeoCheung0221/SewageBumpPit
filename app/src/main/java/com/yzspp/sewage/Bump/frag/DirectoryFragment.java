@@ -20,10 +20,10 @@ import com.yzspp.sewage.bean.LeafNode;
 import com.yzspp.sewage.bean.LeafViewBinder;
 import com.yzspp.sewage.bean.RootNode;
 import com.yzspp.sewage.bean.RootViewBinder;
-import com.yzspp.sewage.view.tree.TreeViewAdapter;
-import com.yzspp.sewage.view.tree.bean.LayoutItem;
-import com.yzspp.sewage.view.tree.bean.TreeNode;
-import com.yzspp.sewage.view.tree.bean.TreeViewBinder;
+import com.yzspp.sewage.widget.tree.TreeViewAdapter;
+import com.yzspp.sewage.widget.tree.bean.LayoutItem;
+import com.yzspp.sewage.widget.tree.bean.TreeNode;
+import com.yzspp.sewage.widget.tree.bean.TreeViewBinder;
 
 import java.util.ArrayList;
 import java.util.Arrays;

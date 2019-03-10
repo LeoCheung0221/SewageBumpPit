@@ -12,7 +12,7 @@
         android:layout_height="wrap_content"
         android:layout_above="@+id/cv_info_tips">
 
-        <com.yzspp.sewage.view.My2dMapView
+        <com.yzspp.sewage.widget.My2dMapView
             android:id="@+id/map_main"
             android:layout_width="match_parent"
             android:layout_height="match_parent" />

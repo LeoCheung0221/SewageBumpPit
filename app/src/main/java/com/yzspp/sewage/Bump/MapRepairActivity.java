@@ -51,8 +51,7 @@ import com.yzspp.sewage.Tools.SSIntentTool;
 import com.yzspp.sewage.bean.NearbyBumpBean;
 import com.yzspp.sewage.bean.UploadInfo;
 import com.yzspp.sewage.net.RequestHelper;
-import com.yzspp.sewage.view.My2dMapView;
-import com.yzspp.sewage.view.bottomdialog.BottomDialog;
+import com.yzspp.sewage.widget.My2dMapView;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;

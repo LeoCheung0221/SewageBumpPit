@@ -75,7 +75,7 @@
                     android:layout_marginLeft="40dp"
                     android:background="@color/div" />
 
-                <com.yzspp.sewage.view.CardItem
+                <com.yzspp.sewage.widget.CardItem
                     android:id="@+id/ci_nick"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -85,7 +85,7 @@
                     app:showHint="true" />
 
 
-                <com.yzspp.sewage.view.CardItem
+                <com.yzspp.sewage.widget.CardItem
                     android:id="@+id/ci_sex"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -94,7 +94,7 @@
                     app:name="@string/sex"
                     app:showHint="true" />
 
-                <com.yzspp.sewage.view.CardItem
+                <com.yzspp.sewage.widget.CardItem
                     android:id="@+id/ci_birthday"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -103,7 +103,7 @@
                     app:name="@string/birthday"
                     app:showHint="true" />
 
-                <com.yzspp.sewage.view.CardItem
+                <com.yzspp.sewage.widget.CardItem
                     android:id="@+id/ci_account"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -112,7 +112,7 @@
                     app:name="@string/tel"
                     app:showHint="true" />
 
-                <com.yzspp.sewage.view.CardItem
+                <com.yzspp.sewage.widget.CardItem
                     android:id="@+id/ci_pwd"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"

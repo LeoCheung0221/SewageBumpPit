@@ -1,7 +1,7 @@
 package com.yzspp.sewage.bean;
 
 import com.yzspp.sewage.R;
-import com.yzspp.sewage.view.tree.bean.LayoutItem;
+import com.yzspp.sewage.widget.tree.bean.LayoutItem;
 
 /**
  * LeafNode

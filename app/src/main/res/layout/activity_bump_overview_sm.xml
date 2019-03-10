@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.yzspp.sewage.view.spinmenu.SpinMenu xmlns:android="http://schemas.android.com/apk/res/android"
+<com.yzspp.sewage.widget.spinmenu.SpinMenu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/spin_menu"
@@ -26,4 +26,4 @@
 
     <!--</RelativeLayout>-->
 
-</com.yzspp.sewage.view.spinmenu.SpinMenu>
+</com.yzspp.sewage.widget.spinmenu.SpinMenu>

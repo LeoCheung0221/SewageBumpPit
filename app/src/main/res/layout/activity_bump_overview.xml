@@ -16,7 +16,7 @@
         android:layout_below="@+id/toolbar"
         tools:ignore="UnknownIdInLayout" />
 
-    <com.yzspp.sewage.view.boommenu.BoomMenuButton
+    <com.yzspp.sewage.widget.boommenu.BoomMenuButton
         android:id="@+id/bmb"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

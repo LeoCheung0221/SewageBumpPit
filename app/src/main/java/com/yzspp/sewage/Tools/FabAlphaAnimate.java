@@ -5,9 +5,9 @@ import android.animation.ObjectAnimator;
 import android.support.design.widget.FloatingActionButton;
 import android.view.animation.DecelerateInterpolator;
 
-import com.yzspp.sewage.view.suspensionfab.ExpandOrientation;
-import com.yzspp.sewage.view.suspensionfab.SuspensionFab;
-import com.yzspp.sewage.view.suspensionfab.manager.AnimationManager;
+import com.yzspp.sewage.widget.suspensionfab.ExpandOrientation;
+import com.yzspp.sewage.widget.suspensionfab.SuspensionFab;
+import com.yzspp.sewage.widget.suspensionfab.manager.AnimationManager;
 
 
 /**

@@ -1,15 +1,9 @@
 package com.yzspp.sewage.Bump;
 
 import android.content.res.Configuration;
-import android.graphics.Color;
-import android.net.Uri;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.app.FragmentTransaction;
-import android.view.View;
-import android.widget.Toast;
 
 import com.yzspp.sewage.Bump.frag.BumpDetailFragment;
 import com.yzspp.sewage.Bump.frag.DirectoryFragment;
@@ -17,16 +11,13 @@ import com.yzspp.sewage.Bump.frag.MeFragment;
 import com.yzspp.sewage.Bump.frag.OverViewFragment;
 import com.yzspp.sewage.R;
 import com.yzspp.sewage.base.BaseActivity;
-import com.yzspp.sewage.view.FloatButton;
-import com.yzspp.sewage.view.boommenu.BoomButtons.BoomButton;
-import com.yzspp.sewage.view.boommenu.BoomButtons.ButtonPlaceEnum;
-import com.yzspp.sewage.view.boommenu.BoomMenuButton;
-import com.yzspp.sewage.view.boommenu.BuilderManager;
-import com.yzspp.sewage.view.boommenu.ButtonEnum;
-import com.yzspp.sewage.view.boommenu.OnBoomListener;
-import com.yzspp.sewage.view.boommenu.Piece.PiecePlaceEnum;
-
-import frame.tool.MyToast;
+import com.yzspp.sewage.widget.boommenu.BoomButtons.BoomButton;
+import com.yzspp.sewage.widget.boommenu.BoomButtons.ButtonPlaceEnum;
+import com.yzspp.sewage.widget.boommenu.BoomMenuButton;
+import com.yzspp.sewage.widget.boommenu.BuilderManager;
+import com.yzspp.sewage.widget.boommenu.ButtonEnum;
+import com.yzspp.sewage.widget.boommenu.OnBoomListener;
+import com.yzspp.sewage.widget.boommenu.Piece.PiecePlaceEnum;
 
 
 public class BumpOverviewActivity extends BaseActivity implements OnBoomListener {

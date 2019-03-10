@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <com.yzspp.sewage.view.My2dMapView
+    <com.yzspp.sewage.widget.My2dMapView
         android:id="@+id/map_main"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />

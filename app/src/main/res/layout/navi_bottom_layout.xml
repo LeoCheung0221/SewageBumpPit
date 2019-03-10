@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.yzspp.sewage.view.NaviBottomView xmlns:android="http://schemas.android.com/apk/res/android"
+<com.yzspp.sewage.widget.NaviBottomView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="120dp"
     android:background="@color/navi_bottom_blue_bg"
@@ -89,4 +89,4 @@
 
     </LinearLayout>
 
-</com.yzspp.sewage.view.NaviBottomView>
+</com.yzspp.sewage.widget.NaviBottomView>

@@ -14,7 +14,7 @@ import com.yalantis.ucrop.UCrop;
 import com.yzspp.sewage.BuildConfig;
 import com.yzspp.sewage.R;
 import com.yzspp.sewage.base.BaseActivity;
-import com.yzspp.sewage.view.CardItem;
+import com.yzspp.sewage.widget.CardItem;
 
 import java.io.File;
 

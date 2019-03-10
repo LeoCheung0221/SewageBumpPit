@@ -2,8 +2,6 @@ package com.yzspp.sewage.Bump.frag;
 
 import android.Manifest;
 import android.annotation.SuppressLint;
-import android.content.Context;
-import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -41,15 +39,12 @@ import com.amap.api.services.route.DriveRouteResult;
 import com.amap.api.services.route.RideRouteResult;
 import com.amap.api.services.route.RouteSearch;
 import com.amap.api.services.route.WalkRouteResult;
-import com.yzspp.sewage.Bump.MapRepairActivity;
 import com.yzspp.sewage.R;
 import com.yzspp.sewage.Tools.HelperFromPermission;
 import com.yzspp.sewage.base.BaseFragment;
 import com.yzspp.sewage.bean.NearbyBumpBean;
-import com.yzspp.sewage.bean.UploadInfo;
-import com.yzspp.sewage.net.RequestHelper;
-import com.yzspp.sewage.view.My2dMapView;
-import com.yzspp.sewage.view.bottomdialog.BottomDialog;
+import com.yzspp.sewage.widget.My2dMapView;
+import com.yzspp.sewage.widget.bottomdialog.BottomDialog;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;

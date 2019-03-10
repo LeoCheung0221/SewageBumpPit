@@ -36,7 +36,7 @@
                     android:layout_height="wrap_content"
                     android:orientation="horizontal">
 
-                    <com.yzspp.sewage.view.DiscoverView
+                    <com.yzspp.sewage.widget.DiscoverView
                         android:id="@+id/dv_upload"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
@@ -45,7 +45,7 @@
                         custom:icon="@mipmap/ic_map"
                         custom:name="@string/upload" />
 
-                    <com.yzspp.sewage.view.DiscoverView
+                    <com.yzspp.sewage.widget.DiscoverView
                         android:id="@+id/dv_map"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
@@ -54,7 +54,7 @@
                         custom:icon="@mipmap/map"
                         custom:name="@string/map" />
 
-                    <com.yzspp.sewage.view.DiscoverView
+                    <com.yzspp.sewage.widget.DiscoverView
                         android:id="@+id/dv_weather"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
@@ -63,7 +63,7 @@
                         custom:icon="@mipmap/weather"
                         custom:name="@string/weather" />
 
-                    <com.yzspp.sewage.view.DiscoverView
+                    <com.yzspp.sewage.widget.DiscoverView
                         android:id="@+id/dv_dot"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"

@@ -5,8 +5,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.yzspp.sewage.R;
-import com.yzspp.sewage.view.tree.bean.TreeNode;
-import com.yzspp.sewage.view.tree.bean.TreeViewBinder;
+import com.yzspp.sewage.widget.tree.bean.TreeNode;
+import com.yzspp.sewage.widget.tree.bean.TreeViewBinder;
 
 
 /**

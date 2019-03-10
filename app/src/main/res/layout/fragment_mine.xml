@@ -212,7 +212,7 @@
                     android:layout_height="wrap_content"
                     android:orientation="vertical">
 
-                    <com.yzspp.sewage.view.CardItem
+                    <com.yzspp.sewage.widget.CardItem
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         app:content="@string/no_message"
@@ -220,13 +220,13 @@
                         app:name="@string/message"
                         app:showContent="true" />
 
-                    <com.yzspp.sewage.view.CardItem
+                    <com.yzspp.sewage.widget.CardItem
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         app:icon="@drawable/ic_service"
                         app:name="@string/service" />
 
-                    <com.yzspp.sewage.view.CardItem
+                    <com.yzspp.sewage.widget.CardItem
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         app:icon="@drawable/ic_feedback"
@@ -246,7 +246,7 @@
                     android:layout_height="wrap_content"
                     android:orientation="vertical">
 
-                    <com.yzspp.sewage.view.CardItem
+                    <com.yzspp.sewage.widget.CardItem
                         android:id="@+id/ci_about"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -254,7 +254,7 @@
                         app:name="@string/about_app"
                         app:showHint="true" />
 
-                    <com.yzspp.sewage.view.CardItem
+                    <com.yzspp.sewage.widget.CardItem
                         android:id="@+id/ci_update"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -262,7 +262,7 @@
                         app:name="@string/check_update"
                         app:showHint="true" />
 
-                    <com.yzspp.sewage.view.CardItem
+                    <com.yzspp.sewage.widget.CardItem
                         android:id="@+id/ci_score"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -270,7 +270,7 @@
                         app:name="@string/score" />
 
 
-                    <com.yzspp.sewage.view.CardItem
+                    <com.yzspp.sewage.widget.CardItem
                         android:id="@+id/si_share_friend"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"

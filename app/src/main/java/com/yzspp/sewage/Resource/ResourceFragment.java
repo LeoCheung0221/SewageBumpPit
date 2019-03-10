@@ -14,8 +14,8 @@ import android.view.ViewGroup;
 import com.yzspp.sewage.Bump.WetPointActivity;
 import com.yzspp.sewage.R;
 import com.yzspp.sewage.base.BaseFragment;
-import com.yzspp.sewage.view.ResourceItem;
-import com.yzspp.sewage.view.ResourceView;
+import com.yzspp.sewage.widget.ResourceItem;
+import com.yzspp.sewage.widget.ResourceView;
 
 /**
  * 一句话功能描述

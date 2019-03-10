@@ -1,0 +1,80 @@
+package com.yzspp.sewage.widget;
+
+import android.content.Context;
+import android.content.res.TypedArray;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
+import android.util.AttributeSet;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.widget.FrameLayout;
+import android.widget.ImageView;
+import android.widget.TextView;
+
+import com.yzspp.sewage.R;
+
+
+/**
+ *
+ */
+public class CardItem extends FrameLayout {
+
+
+    private final View mLl;
+    private ImageView ivicon;
+    private TextView tvname;
+    private ImageView ivarrow;
+    private TextView tvhint;
+    private TextView tvcontent;
+
+    public CardItem(@NonNull Context context, @Nullable AttributeSet attrs) {
+        super(context, attrs);
+        View v= LayoutInflater.from(context)
+                .inflate(R.layout.item_card,this);
+        mLl = findViewById(R.id.ll);
+        this.tvcontent = findViewById(R.id.tv_content);
+        this.tvhint = findViewById(R.id.tv_hint);
+        this.ivarrow = findViewById(R.id.iv_arrow);
+        this.tvname = findViewById(R.id.tv_name);
+        this.ivicon = findViewById(R.id.iv_icon);
+
+
+        TypedArray a = context.getTheme().obtainStyledAttributes(
+                        attrs,
+                        R.styleable.CardItem,
+                        0, 0);
+        try {
+            String name=a.getString(R.styleable.CardItem_name);
+            tvname.setText(name);
+
+            if (a.getBoolean(R.styleable.CardItem_showInfo,false)) {
+                String content=a.getString(R.styleable.CardItem_info);
+                tvcontent.setText(content);
+            }
+
+            if (a.getBoolean(R.styleable.CardItem_showHint,false)) {
+                String hint=a.getString(R.styleable.CardItem_hint);
+                tvhint.setText(hint);
+            }
+
+            ivarrow.setVisibility(a.getBoolean(R.styleable.CardItem_showArrow,true)?VISIBLE:GONE);
+
+            int resId=a.getResourceId(R.styleable.CardItem_icon,R.mipmap.ic_launcher);
+            ivicon.setImageResource(resId);
+        } finally {
+            a.recycle();
+        }
+    }
+
+    public void setContent(String content){
+        tvcontent.setText(content);
+    }
+
+    public void setHint(String hint){
+        tvhint.setText(hint);
+    }
+
+    public void setClickListener(OnClickListener listener){
+        mLl.setOnClickListener(listener);
+    }
+}
