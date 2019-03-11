@@ -73,22 +73,22 @@ public class PreviewActivity extends BaseActivity implements View.OnClickListene
     @Override
     public void onClick(View view) {
         switch (view.getId()) {
-            case R.id.map_layout:
+            case R.id.map_layout: //泵站地图
                 SSIntentTool.start(PreviewActivity.this, MapHomePageActivity.class);
                 break;
-            case R.id.manager_layout:
+            case R.id.manager_layout: //泵站信息管理
                 SSIntentTool.start(PreviewActivity.this, BumpOverviewActivity.class);
                 break;
-            case R.id.video_layout:
+            case R.id.video_layout: //视频监控点
                 SSIntentTool.start(PreviewActivity.this, VideoWaterActivity.class);
                 break;
-            case R.id.rainfall_layout:
+            case R.id.rainfall_layout: //重点水位/雨量信息
                 SSIntentTool.start(PreviewActivity.this, RainFallLevelActivity.class);
                 break;
-            case R.id.report_layout:
+            case R.id.report_layout: //报警报告
                 SSIntentTool.start(PreviewActivity.this, WaterLeachingReportActivity.class);
                 break;
-            case R.id.iv_go_setting:
+            case R.id.iv_go_setting: //设置
                 SSIntentTool.start(PreviewActivity.this, SettingsActivity.class);
                 break;
         }

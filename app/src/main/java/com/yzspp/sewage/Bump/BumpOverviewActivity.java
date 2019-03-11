@@ -59,10 +59,6 @@ public class BumpOverviewActivity extends BaseActivity implements OnBoomListener
 
     @Override
     protected void setListener() {
-//        fb_overview.setNaviClickListener(this);
-//        fb_directory.setNaviClickListener(this);
-//        fb_detail.setNaviClickListener(this);
-//        fb_me.setNaviClickListener(this);
     }
 
     @Override
@@ -158,15 +154,4 @@ public class BumpOverviewActivity extends BaseActivity implements OnBoomListener
 
     }
 
-    @Override
-    public void onConfigurationChanged(Configuration newConfig) {
-        super.onConfigurationChanged(newConfig);
-        // Checks the orientation of the screen
-        if (newConfig.orientation == Configuration.ORIENTATION_LANDSCAPE) {//横屏
-            //需要执行的操作，可以不写
-
-        } else if (newConfig.orientation == Configuration.ORIENTATION_PORTRAIT) {//竖屏
-            //需要执行的操作，可以不写
-        }
-    }
 }

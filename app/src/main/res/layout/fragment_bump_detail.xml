@@ -6,460 +6,483 @@
     android:layout_height="match_parent"
     tools:context=".Bump.frag.BumpDetailFragment">
 
+    <android.support.v4.widget.NestedScrollView
+        android:id="@+id/elDataView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <ImageView
+                android:id="@+id/ivBigView"
+                android:layout_width="match_parent"
+                android:layout_height="180dp"
+                android:scaleType="fitXY"
+                android:src="@mipmap/test_bump_info" />
+
+            <com.yzspp.sewage.widget.ExcelLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/ivBigView"
+                android:layout_margin="10dp"
+                android:background="@color/white"
+                app:ELBorderColor="@color/text_common_hint">
+
+                <!-- 第一行 -->
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="32dp"
+                    android:background="@color/gray5"
+                    android:gravity="center"
+                    android:text="1#泵"
+                    app:ELSpanX="2"
+                    app:ELSpanY="1"
+                    app:ELStartX="0"
+                    app:ELStartY="0" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@color/gray5"
+                    android:gravity="center"
+                    android:text="2#泵"
+                    app:ELSpanX="2"
+                    app:ELSpanY="1"
+                    app:ELStartX="2"
+                    app:ELStartY="0" />
+
+                <!-- 第二行 -->
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@color/gray5"
+                    android:gravity="center"
+                    android:text="运行"
+                    app:ELSpanX="1"
+                    app:ELStartX="0"
+                    app:ELStartY="1" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@color/white"
+                    android:gravity="center"
+                    app:ELSpanX="1"
+                    app:ELStartX="1"
+                    app:ELStartY="1">
+
+                    <View
+                        android:layout_width="12dp"
+                        android:layout_height="12dp"
+                        android:layout_marginRight="8dp"
+                        android:background="@drawable/dot_run" />
+
+                </LinearLayout>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@color/gray5"
+                    android:gravity="center"
+                    android:text="运行"
+                    app:ELSpanX="1"
+                    app:ELStartX="2"
+                    app:ELStartY="1" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    app:ELSpanX="1"
+                    app:ELStartX="3"
+                    app:ELStartY="1">
+
+                    <View
+                        android:layout_width="12dp"
+                        android:layout_height="12dp"
+                        android:layout_marginRight="8dp"
+                        android:background="@drawable/dot_normal" />
+
+                </LinearLayout>
+
+                <!-- 第三行 -->
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@color/gray5"
+                    android:gravity="center"
+                    android:text="过载"
+                    app:ELSpanX="1"
+                    app:ELStartX="0"
+                    app:ELStartY="2" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    app:ELSpanX="1"
+                    app:ELStartX="1"
+                    app:ELStartY="2">
+
+                    <View
+                        android:layout_width="12dp"
+                        android:layout_height="12dp"
+                        android:layout_marginRight="8dp"
+                        android:background="@drawable/dot_normal" />
+
+                </LinearLayout>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@color/gray5"
+                    android:gravity="center"
+                    android:text="过载"
+                    app:ELSpanX="1"
+                    app:ELStartX="2"
+                    app:ELStartY="2" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    app:ELSpanX="1"
+                    app:ELStartX="3"
+                    app:ELStartY="2">
+
+                    <View
+                        android:layout_width="12dp"
+                        android:layout_height="12dp"
+                        android:layout_marginRight="8dp"
+                        android:background="@drawable/dot_error" />
+
+                </LinearLayout>
+
+                <!-- 第四行 -->
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@color/gray5"
+                    android:gravity="center"
+                    android:text="故障"
+                    app:ELSpanX="1"
+                    app:ELStartX="0"
+                    app:ELStartY="3" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    app:ELSpanX="1"
+                    app:ELStartX="1"
+                    app:ELStartY="3">
+
+                    <View
+                        android:layout_width="12dp"
+                        android:layout_height="12dp"
+                        android:layout_marginRight="8dp"
+                        android:background="@drawable/dot_normal" />
+
+                </LinearLayout>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@color/gray5"
+                    android:gravity="center"
+                    android:text="故障"
+                    app:ELSpanX="1"
+                    app:ELStartX="2"
+                    app:ELStartY="3" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    app:ELSpanX="1"
+                    app:ELStartX="3"
+                    app:ELStartY="3">
+
+                    <View
+                        android:layout_width="12dp"
+                        android:layout_height="12dp"
+                        android:layout_marginRight="8dp"
+                        android:background="@drawable/dot_error" />
+
+                </LinearLayout>
+
+                <!-- 第五行 -->
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="32dp"
+                    android:background="@color/gray5"
+                    android:gravity="center"
+                    android:text="启闭机"
+                    app:ELSpanX="2"
+                    app:ELSpanY="1"
+                    app:ELStartX="0"
+                    app:ELStartY="4" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:text="开启"
+                    app:ELSpanX="2"
+                    app:ELSpanY="1"
+                    app:ELStartX="2"
+                    app:ELStartY="4" />
+
+                <!-- 第六行 -->
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@color/gray5"
+                    android:gravity="center"
+                    android:text="A相电压"
+                    app:ELSpanX="1"
+                    app:ELStartX="0"
+                    app:ELStartY="5" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:text="382.1V"
+                    app:ELSpanX="1"
+                    app:ELStartX="1"
+                    app:ELStartY="5" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@color/gray5"
+                    android:gravity="center"
+                    android:text="三相功率因数"
+                    app:ELSpanX="1"
+                    app:ELStartX="2"
+                    app:ELStartY="5" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:text="0.95"
+                    app:ELSpanX="1"
+                    app:ELStartX="3"
+                    app:ELStartY="5" />
+
+                <!-- 第七行 -->
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@color/gray5"
+                    android:gravity="center"
+                    android:text="B相电压"
+                    app:ELSpanX="1"
+                    app:ELStartX="0"
+                    app:ELStartY="6" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:text="383.2V"
+                    app:ELSpanX="1"
+                    app:ELStartX="1"
+                    app:ELStartY="6" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@color/gray5"
+                    android:gravity="center"
+                    android:text="三相有功功率"
+                    app:ELSpanX="1"
+                    app:ELStartX="2"
+                    app:ELStartY="6" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:text="8.2KW"
+                    app:ELSpanX="1"
+                    app:ELStartX="3"
+                    app:ELStartY="6" />
+
+                <!-- 第八行 -->
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@color/gray5"
+                    android:gravity="center"
+                    android:text="C相电压"
+                    app:ELSpanX="1"
+                    app:ELStartX="0"
+                    app:ELStartY="7" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:text="384.2V"
+                    app:ELSpanX="1"
+                    app:ELStartX="1"
+                    app:ELStartY="7" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@color/gray5"
+                    android:gravity="center"
+                    android:text="电网频率"
+                    app:ELSpanX="1"
+                    app:ELStartX="2"
+                    app:ELStartY="7" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:text="50.1HZ"
+                    app:ELSpanX="1"
+                    app:ELStartX="3"
+                    app:ELStartY="7" />
+
+                <!-- 第九行 -->
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@color/gray5"
+                    android:gravity="center"
+                    android:text="A相电流"
+                    app:ELSpanX="1"
+                    app:ELStartX="0"
+                    app:ELStartY="8" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:text="12.0A"
+                    app:ELSpanX="1"
+                    app:ELStartX="1"
+                    app:ELStartY="8" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@color/gray5"
+                    android:gravity="center"
+                    android:text="当前液位"
+                    app:ELSpanX="1"
+                    app:ELStartX="2"
+                    app:ELStartY="8" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:text="1020mm"
+                    app:ELSpanX="1"
+                    app:ELStartX="3"
+                    app:ELStartY="8" />
+
+                <!-- 第十行 -->
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@color/gray5"
+                    android:gravity="center"
+                    android:text="B相电流"
+                    app:ELSpanX="1"
+                    app:ELStartX="0"
+                    app:ELStartY="9" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:text="12.1A"
+                    app:ELSpanX="1"
+                    app:ELStartX="1"
+                    app:ELStartY="9" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@color/gray5"
+                    android:gravity="center"
+                    android:text="当前流量"
+                    app:ELSpanX="1"
+                    app:ELStartX="2"
+                    app:ELStartY="9" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:text="12T/h"
+                    app:ELSpanX="1"
+                    app:ELStartX="3"
+                    app:ELStartY="9" />
+
+                <!-- 第十一行 -->
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@color/gray5"
+                    android:gravity="center"
+                    android:text="C相电流"
+                    app:ELSpanX="1"
+                    app:ELStartX="0"
+                    app:ELStartY="10" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:text="12.2A"
+                    app:ELSpanX="1"
+                    app:ELStartX="1"
+                    app:ELStartY="10" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@color/gray5"
+                    android:gravity="center"
+                    android:text="当前雨量"
+                    app:ELSpanX="1"
+                    app:ELStartX="2"
+                    app:ELStartY="10" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:text="8mm"
+                    app:ELSpanX="1"
+                    app:ELStartX="3"
+                    app:ELStartY="10" />
+
+            </com.yzspp.sewage.widget.ExcelLayout>
+
+        </LinearLayout>
+
+    </android.support.v4.widget.NestedScrollView>
+
     <ImageView
-        android:id="@+id/ivBigView"
+        android:id="@+id/ivBigLandScapeView"
         android:layout_width="match_parent"
-        android:layout_height="180dp"
+        android:layout_height="match_parent"
+        android:contentDescription="@string/app_name"
         android:scaleType="fitXY"
-        android:src="@mipmap/test_bump_info"/>
-
-    <com.yzspp.sewage.widget.ExcelLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/ivBigView"
-        android:layout_margin="10dp"
-        android:background="@color/white"
-        app:ELBorderColor="@color/text_common_hint">
-
-        <!-- 第一行 -->
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="32dp"
-            android:background="@color/gray5"
-            android:gravity="center"
-            android:text="1#泵"
-            app:ELSpanX="2"
-            app:ELSpanY="1"
-            app:ELStartX="0"
-            app:ELStartY="0" />
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="@color/gray5"
-            android:gravity="center"
-            android:text="2#泵"
-            app:ELSpanX="2"
-            app:ELSpanY="1"
-            app:ELStartX="2"
-            app:ELStartY="0" />
-
-        <!-- 第二行 -->
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="@color/gray5"
-            android:gravity="center"
-            android:text="运行"
-            app:ELSpanX="1"
-            app:ELStartX="0"
-            app:ELStartY="1" />
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="@color/white"
-            android:gravity="center"
-            app:ELSpanX="1"
-            app:ELStartX="1"
-            app:ELStartY="1">
-
-            <View
-                android:layout_width="12dp"
-                android:layout_height="12dp"
-                android:layout_marginRight="8dp"
-                android:background="@drawable/dot_run" />
-
-        </LinearLayout>
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="@color/gray5"
-            android:gravity="center"
-            android:text="运行"
-            app:ELSpanX="1"
-            app:ELStartX="2"
-            app:ELStartY="1" />
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:gravity="center"
-            app:ELSpanX="1"
-            app:ELStartX="3"
-            app:ELStartY="1">
-
-            <View
-                android:layout_width="12dp"
-                android:layout_height="12dp"
-                android:layout_marginRight="8dp"
-                android:background="@drawable/dot_normal" />
-
-        </LinearLayout>
-
-        <!-- 第三行 -->
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="@color/gray5"
-            android:gravity="center"
-            android:text="过载"
-            app:ELSpanX="1"
-            app:ELStartX="0"
-            app:ELStartY="2" />
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:gravity="center"
-            app:ELSpanX="1"
-            app:ELStartX="1"
-            app:ELStartY="2">
-
-            <View
-                android:layout_width="12dp"
-                android:layout_height="12dp"
-                android:layout_marginRight="8dp"
-                android:background="@drawable/dot_normal" />
-
-        </LinearLayout>
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="@color/gray5"
-            android:gravity="center"
-            android:text="过载"
-            app:ELSpanX="1"
-            app:ELStartX="2"
-            app:ELStartY="2" />
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:gravity="center"
-            app:ELSpanX="1"
-            app:ELStartX="3"
-            app:ELStartY="2">
-
-            <View
-                android:layout_width="12dp"
-                android:layout_height="12dp"
-                android:layout_marginRight="8dp"
-                android:background="@drawable/dot_error" />
-
-        </LinearLayout>
-
-        <!-- 第四行 -->
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="@color/gray5"
-            android:gravity="center"
-            android:text="故障"
-            app:ELSpanX="1"
-            app:ELStartX="0"
-            app:ELStartY="3" />
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:gravity="center"
-            app:ELSpanX="1"
-            app:ELStartX="1"
-            app:ELStartY="3">
-
-            <View
-                android:layout_width="12dp"
-                android:layout_height="12dp"
-                android:layout_marginRight="8dp"
-                android:background="@drawable/dot_normal" />
-
-        </LinearLayout>
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="@color/gray5"
-            android:gravity="center"
-            android:text="故障"
-            app:ELSpanX="1"
-            app:ELStartX="2"
-            app:ELStartY="3" />
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:gravity="center"
-            app:ELSpanX="1"
-            app:ELStartX="3"
-            app:ELStartY="3">
-
-            <View
-                android:layout_width="12dp"
-                android:layout_height="12dp"
-                android:layout_marginRight="8dp"
-                android:background="@drawable/dot_error" />
-
-        </LinearLayout>
-
-        <!-- 第五行 -->
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="32dp"
-            android:background="@color/gray5"
-            android:gravity="center"
-            android:text="启闭机"
-            app:ELSpanX="2"
-            app:ELSpanY="1"
-            app:ELStartX="0"
-            app:ELStartY="4" />
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:gravity="center"
-            android:text="开启"
-            app:ELSpanX="2"
-            app:ELSpanY="1"
-            app:ELStartX="2"
-            app:ELStartY="4" />
-
-        <!-- 第六行 -->
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="@color/gray5"
-            android:gravity="center"
-            android:text="A相电压"
-            app:ELSpanX="1"
-            app:ELStartX="0"
-            app:ELStartY="5" />
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:gravity="center"
-            android:text="382.1V"
-            app:ELSpanX="1"
-            app:ELStartX="1"
-            app:ELStartY="5" />
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="@color/gray5"
-            android:gravity="center"
-            android:text="三相功率因数"
-            app:ELSpanX="1"
-            app:ELStartX="2"
-            app:ELStartY="5" />
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:gravity="center"
-            android:text="0.95"
-            app:ELSpanX="1"
-            app:ELStartX="3"
-            app:ELStartY="5" />
-
-        <!-- 第七行 -->
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="@color/gray5"
-            android:gravity="center"
-            android:text="B相电压"
-            app:ELSpanX="1"
-            app:ELStartX="0"
-            app:ELStartY="6" />
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:gravity="center"
-            android:text="383.2V"
-            app:ELSpanX="1"
-            app:ELStartX="1"
-            app:ELStartY="6" />
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="@color/gray5"
-            android:gravity="center"
-            android:text="三相有功功率"
-            app:ELSpanX="1"
-            app:ELStartX="2"
-            app:ELStartY="6" />
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:gravity="center"
-            android:text="8.2KW"
-            app:ELSpanX="1"
-            app:ELStartX="3"
-            app:ELStartY="6" />
-
-        <!-- 第八行 -->
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="@color/gray5"
-            android:gravity="center"
-            android:text="C相电压"
-            app:ELSpanX="1"
-            app:ELStartX="0"
-            app:ELStartY="7" />
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:gravity="center"
-            android:text="384.2V"
-            app:ELSpanX="1"
-            app:ELStartX="1"
-            app:ELStartY="7" />
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="@color/gray5"
-            android:gravity="center"
-            android:text="电网频率"
-            app:ELSpanX="1"
-            app:ELStartX="2"
-            app:ELStartY="7" />
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:gravity="center"
-            android:text="50.1HZ"
-            app:ELSpanX="1"
-            app:ELStartX="3"
-            app:ELStartY="7" />
-
-        <!-- 第九行 -->
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="@color/gray5"
-            android:gravity="center"
-            android:text="A相电流"
-            app:ELSpanX="1"
-            app:ELStartX="0"
-            app:ELStartY="8" />
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:gravity="center"
-            android:text="12.0A"
-            app:ELSpanX="1"
-            app:ELStartX="1"
-            app:ELStartY="8" />
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="@color/gray5"
-            android:gravity="center"
-            android:text="当前液位"
-            app:ELSpanX="1"
-            app:ELStartX="2"
-            app:ELStartY="8" />
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:gravity="center"
-            android:text="1020mm"
-            app:ELSpanX="1"
-            app:ELStartX="3"
-            app:ELStartY="8" />
-
-        <!-- 第十行 -->
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="@color/gray5"
-            android:gravity="center"
-            android:text="B相电流"
-            app:ELSpanX="1"
-            app:ELStartX="0"
-            app:ELStartY="9" />
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:gravity="center"
-            android:text="12.1A"
-            app:ELSpanX="1"
-            app:ELStartX="1"
-            app:ELStartY="9" />
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="@color/gray5"
-            android:gravity="center"
-            android:text="当前流量"
-            app:ELSpanX="1"
-            app:ELStartX="2"
-            app:ELStartY="9" />
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:gravity="center"
-            android:text="12T/h"
-            app:ELSpanX="1"
-            app:ELStartX="3"
-            app:ELStartY="9" />
-
-        <!-- 第十一行 -->
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="@color/gray5"
-            android:gravity="center"
-            android:text="C相电流"
-            app:ELSpanX="1"
-            app:ELStartX="0"
-            app:ELStartY="10" />
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:gravity="center"
-            android:text="12.2A"
-            app:ELSpanX="1"
-            app:ELStartX="1"
-            app:ELStartY="10" />
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="@color/gray5"
-            android:gravity="center"
-            android:text="当前雨量"
-            app:ELSpanX="1"
-            app:ELStartX="2"
-            app:ELStartY="10" />
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:gravity="center"
-            android:text="8mm"
-            app:ELSpanX="1"
-            app:ELStartX="3"
-            app:ELStartY="10" />
-
-    </com.yzspp.sewage.widget.ExcelLayout>
+        android:src="@mipmap/test_bump_info"
+        android:visibility="gone" />
 
 </RelativeLayout>

@@ -96,9 +96,14 @@
         <activity android:name=".Mine.SettingsActivity" />
         <activity
             android:name=".Bump.BumpDetailActivity"
-            android:launchMode="singleTask"
-            android:screenOrientation="landscape"></activity>
-        <activity android:name=".Bump.BumpOverviewActivity"></activity>
+            android:configChanges="orientation|screenSize">
+
+        </activity>
+        <activity
+            android:name=".Bump.BumpOverviewActivity"
+            android:configChanges="orientation|keyboardHidden">
+
+        </activity>
     </application>
 
 </manifest>

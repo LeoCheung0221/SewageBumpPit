@@ -114,7 +114,6 @@ public class DirectoryFragment extends BaseFragment {
                     name = ((LeafNode) item).getName();
                     SSIntentTool.start(getContext(), BumpDetailActivity.class);
                 }
-//                Toast.makeText(BumpListActivity.this, name, Toast.LENGTH_SHORT).show();
             }
         };
         rv.setLayoutManager(new LinearLayoutManager(getContext()));
