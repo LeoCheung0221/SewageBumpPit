@@ -11,11 +11,11 @@ import android.support.v4.app.FragmentTransaction;
 import android.view.MenuItem;
 
 
-import com.yzspp.sewage.Bump.DiscoverFragment;
+import com.yzspp.sewage.todo.DiscoverFragment;
 import com.yzspp.sewage.Mine.MineFragment;
-import com.yzspp.sewage.Resource.ResourceFragment;
-import com.yzspp.sewage.Warn.WarnFragment;
-import com.yzspp.sewage.Work.WorkFragment;
+import com.yzspp.sewage.todo.Resource.ResourceFragment;
+import com.yzspp.sewage.todo.Warn.WarnFragment;
+import com.yzspp.sewage.todo.Work.WorkFragment;
 import com.yzspp.sewage.base.BaseActivity;
 
 import java.util.ArrayList;

@@ -28,7 +28,7 @@ import android.widget.TextView;
 
 import com.amap.api.location.AMapLocation;
 import com.yzspp.sewage.R;
-import com.yzspp.sewage.Tools.TimeUtils;
+import com.yzspp.sewage.utils.TimeUtils;
 import com.yzspp.sewage.bean.NearbyBumpBean;
 import com.yzspp.sewage.widget.ForbidQuickClickListener;
 

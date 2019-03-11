@@ -9,10 +9,10 @@ import com.daimajia.slider.library.Animations.DescriptionAnimation;
 import com.daimajia.slider.library.SliderLayout;
 import com.daimajia.slider.library.SliderTypes.BaseSliderView;
 import com.daimajia.slider.library.SliderTypes.TextSliderView;
-import com.yzspp.sewage.Bump.MapRepairActivity;
-import com.yzspp.sewage.Bump.WetPointActivity;
+import com.yzspp.sewage.Bump.MapHomePageActivity;
+import com.yzspp.sewage.todo.WetPointActivity;
 import com.yzspp.sewage.R;
-import com.yzspp.sewage.Work.CheckDetailsActivity;
+import com.yzspp.sewage.todo.Work.CheckDetailsActivity;
 import com.yzspp.sewage.base.BaseActivity;
 import com.yzspp.sewage.bean.UploadInfo;
 import com.yzspp.sewage.widget.DiscoverView;
@@ -91,7 +91,7 @@ public class BumpManagerActivity extends BaseActivity {
         dvupload.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                MapRepairActivity.start(BumpManagerActivity.this);
+                MapHomePageActivity.start(BumpManagerActivity.this);
             }
         });
 

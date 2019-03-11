@@ -1,20 +1,25 @@
-package com.yzspp.sewage.Feature;
+package com.yzspp.sewage.todo;
 
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 
 import com.daimajia.slider.library.Animations.DescriptionAnimation;
 import com.daimajia.slider.library.SliderLayout;
 import com.daimajia.slider.library.SliderTypes.BaseSliderView;
 import com.daimajia.slider.library.SliderTypes.TextSliderView;
 import com.yzspp.sewage.Bump.MapHomePageActivity;
-import com.yzspp.sewage.todo.WetPointActivity;
+import com.yzspp.sewage.Bump.ReportSituationActivity;
 import com.yzspp.sewage.R;
 import com.yzspp.sewage.todo.Work.CheckDetailsActivity;
-import com.yzspp.sewage.base.BaseActivity;
+import com.yzspp.sewage.base.BaseFragment;
 import com.yzspp.sewage.bean.UploadInfo;
+import com.yzspp.sewage.net.RequestHelper;
 import com.yzspp.sewage.widget.DiscoverView;
 
 import java.util.ArrayList;
@@ -23,35 +28,42 @@ import java.util.List;
 
 import frame.tool.SolidRVBaseAdapter;
 
-public class RainFallLevelActivity extends BaseActivity {
+public class DiscoverFragment extends BaseFragment {
 
     private SliderLayout slider;
+    private DiscoverView dvupload;
     private DiscoverView dvmap;
     private DiscoverView dvweather;
     private DiscoverView dvdot;
-    private DiscoverView dvdotyear;
-    private DiscoverView dvsearchdata;
     private RecyclerView mRecyclerView;
     private List<UploadInfo> mUploadInfoList = new ArrayList<>();
     private SolidRVBaseAdapter mAdapter;
 
-    @Override
-    protected int getLayoutId() {
-        return R.layout.activity_rain_fall_level;
+    public static DiscoverFragment newInstance() {
+
+        Bundle args = new Bundle();
+
+        DiscoverFragment fragment = new DiscoverFragment();
+        fragment.setArguments(args);
+        return fragment;
     }
 
     @Override
-    protected void initView() {
-        initToolbar("重点水位/雨量信息", true);
-        this.slider = (SliderLayout) findViewById(R.id.slider);
-        initSlider();
-        this.dvdot = (DiscoverView) findViewById(R.id.dv_dot);
-        this.dvdotyear = (DiscoverView) findViewById(R.id.dv_dot_year);
-        this.dvweather = (DiscoverView) findViewById(R.id.dv_weather);
-        this.dvmap = (DiscoverView) findViewById(R.id.dv_map);
-        this.dvsearchdata = (DiscoverView) findViewById(R.id.dv_search_data);
+    protected View initContentView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        View view = inflater.inflate(R.layout.fragment_discover, container, false);
+        return view;
+    }
 
-        mRecyclerView = (RecyclerView) findViewById(R.id.rv_wet_point);
+    @Override
+    protected void initView(View view) {
+        initToolbar((Toolbar) view.findViewById(R.id.toolbar), getString(R.string.discover), false);
+        this.slider = (SliderLayout) view.findViewById(R.id.slider);
+        initSlider();
+        this.dvdot = (DiscoverView) view.findViewById(R.id.dv_dot);
+        this.dvweather = (DiscoverView) view.findViewById(R.id.dv_weather);
+        this.dvmap = (DiscoverView) view.findViewById(R.id.dv_map);
+        this.dvupload = (DiscoverView) view.findViewById(R.id.dv_upload);
+        mRecyclerView = (RecyclerView) view.findViewById(R.id.rv_wet_point);
     }
 
     private void initSlider() {
@@ -64,7 +76,7 @@ public class RainFallLevelActivity extends BaseActivity {
 
 
         for (String name : file_maps.keySet()) {
-            TextSliderView textSliderView = new TextSliderView(this);
+            TextSliderView textSliderView = new TextSliderView(getActivity());
             // initialize a SliderLayout
             textSliderView
                     .description(name)
@@ -86,10 +98,17 @@ public class RainFallLevelActivity extends BaseActivity {
 
     @Override
     protected void setListener() {
+        dvupload.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ReportSituationActivity.start(getActivity());
+            }
+        });
+
         dvmap.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                MapHomePageActivity.start(RainFallLevelActivity.this);
+                MapHomePageActivity.start(getActivity());
             }
         });
 
@@ -97,36 +116,21 @@ public class RainFallLevelActivity extends BaseActivity {
         dvweather.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                WeatherActivity.start(BumpManagerActivity.this);
-                WetPointActivity.start(RainFallLevelActivity.this);
+                WeatherActivity.start(getActivity());
             }
         });
 
         dvdot.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                WetPointActivity.start(RainFallLevelActivity.this);
-            }
-        });
-
-        dvdotyear.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                WetPointActivity.start(RainFallLevelActivity.this);
-            }
-        });
-
-        dvsearchdata.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                WetPointActivity.start(RainFallLevelActivity.this);
+                WetPointActivity.start(getActivity());
             }
         });
     }
 
     @Override
     protected void initData() {
-        mAdapter = new SolidRVBaseAdapter<UploadInfo>(RainFallLevelActivity.this, mUploadInfoList) {
+        mAdapter = new SolidRVBaseAdapter<UploadInfo>(getActivity(), mUploadInfoList) {
             @Override
             protected void onBindDataToView(SolidCommonViewHolder holder, UploadInfo bean) {
                 holder.setImageFromInternet(R.id.iv_img, bean.getUploadResource());
@@ -142,7 +146,7 @@ public class RainFallLevelActivity extends BaseActivity {
             @Override
             protected void onItemClick(int position, UploadInfo bean) {
                 super.onItemClick(position, bean);
-                CheckDetailsActivity.start(RainFallLevelActivity.this, bean);
+                CheckDetailsActivity.start(getActivity(), bean);
             }
         };
         loadWetPoints();
@@ -151,7 +155,7 @@ public class RainFallLevelActivity extends BaseActivity {
     @Override
     protected void setData() {
         mRecyclerView.setAdapter(mAdapter);
-        mRecyclerView.setLayoutManager(new LinearLayoutManager(RainFallLevelActivity.this) {
+        mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()) {
             @Override
             public boolean canScrollVertically() {
                 return false;
@@ -159,8 +163,13 @@ public class RainFallLevelActivity extends BaseActivity {
         });
     }
 
+    @Override
+    protected void getBundleExtras(Bundle bundle) {
+
+    }
+
     private void loadWetPoints() {
-//        mockData();
+        mockData();
 //        RequestHelper.getUploadInfos(new RequestListener() {
 //            @Override
 //            public void onResponce(String responce) {
@@ -176,26 +185,30 @@ public class RainFallLevelActivity extends BaseActivity {
 //
 //            @Override
 //            public void onError(Throwable throwable) {
-//                MyToast.error(BumpManagerActivity.this, R.string.load_error);
+//                MyToast.error(getActivity(), R.string.load_error);
 //            }
 //        });
     }
 
     private void mockData() {
+        String responce = "[{\n" +
+                "\t\"id\": 76,\n" +
+                "\t\"upload_name\": \"扬州西路\",\n" +
+                "\t\"upload_type\": \"公众\",\n" +
+                "\t\"upload_resource\": \"https://ss0.bdstatic.com/94oJfD_bAAcT8t7mm9GUKT-xh_/timg?image&quality=100&size=b4000_4000&sec=1549938533&di=f77c8dc91053424e9767bf37e785e90a&src=http://www.lnwater.gov.cn/zxpd/dfss/fs/201704/W020170414316310554199.jpg\",\n" +
+                "\t\"longitude\": 0,\n" +
+                "\t\"latitude\": 0,\n" +
+                "\t\"upload_address\": \"地点显示\",\n" +
+                "\t\"upload_time\": 1507796319770,\n" +
+                "\t\"upload_description\": \"test\",\n" +
+                "\t\"approval_status\": 2\n" +
+                "}]";
         mUploadInfoList.clear();
-        List<UploadInfo> uploadInfoList = new ArrayList<>();
-        UploadInfo uplInfoBean1 = new UploadInfo();
-        uplInfoBean1.setUploadName("泵站实时监测");
-        uplInfoBean1.setUpload_resource("https://ss0.bdstatic.com/94oJfD_bAAcT8t7mm9GUKT-xh_/timg?image&quality=100&size=b4000_4000&sec=1549938533&di=f77c8dc91053424e9767bf37e785e90a&src=http://www.lnwater.gov.cn/zxpd/dfss/fs/201704/W020170414316310554199.jpg");
-        uploadInfoList.add(uplInfoBean1);
-
-        UploadInfo uplInfoBean2 = new UploadInfo();
-        uplInfoBean2.setUploadName("每日泵站信息");
-        uplInfoBean2.setUpload_resource("https://ss0.bdstatic.com/94oJfD_bAAcT8t7mm9GUKT-xh_/timg?image&quality=100&size=b4000_4000&sec=1549938533&di=f77c8dc91053424e9767bf37e785e90a&src=http://www.lnwater.gov.cn/zxpd/dfss/fs/201704/W020170414316310554199.jpg");
-        uploadInfoList.add(uplInfoBean2);
-
+        List<UploadInfo> uploadInfoList = RequestHelper.stringToArray(responce, UploadInfo[].class);
         for (UploadInfo uploadInfo : uploadInfoList) {
-            mUploadInfoList.add(uploadInfo);
+            if (uploadInfo.getApprovalStatus() == 1) {
+                mUploadInfoList.add(uploadInfo);
+            }
         }
         mAdapter.notifyDataSetChanged();
     }
@@ -213,13 +226,5 @@ public class RainFallLevelActivity extends BaseActivity {
         slider.stopAutoCycle();
     }
 
-    @Override
-    protected void getBundleExtras(Bundle bundle) {
 
-    }
-
-    @Override
-    protected String[] getNeedPermissions() {
-        return new String[0];
-    }
 }

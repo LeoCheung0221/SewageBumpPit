@@ -1,15 +1,21 @@
-package com.yzspp.sewage.Bump.frag;
+package com.yzspp.sewage.Bump;
+
 
 import android.Manifest;
 import android.annotation.SuppressLint;
+import android.content.Context;
+import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
+import android.support.v7.widget.CardView;
 import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.LinearLayout;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.amap.api.location.AMapLocation;
@@ -41,25 +47,24 @@ import com.amap.api.services.route.RouteSearch;
 import com.amap.api.services.route.WalkRouteResult;
 import com.yzspp.sewage.R;
 import com.yzspp.sewage.utils.HelperFromPermission;
-import com.yzspp.sewage.base.BaseFragment;
+import com.yzspp.sewage.utils.SSIntentTool;
 import com.yzspp.sewage.bean.NearbyBumpBean;
+import com.yzspp.sewage.bean.UploadInfo;
+import com.yzspp.sewage.net.RequestHelper;
 import com.yzspp.sewage.widget.My2dMapView;
-import com.yzspp.sewage.widget.bottomdialog.BottomDialog;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import java.util.Objects;
 
+import frame.permission.CheckPermissionsActivity;
 import frame.tool.MyToast;
 
-/**
- * 总览碎片
- */
-public class OverViewFragment extends BaseFragment implements LocationSource,
-        AMapLocationListener, PoiSearch.OnPoiSearchListener, AMap.OnMarkerClickListener, RouteSearch.OnRouteSearchListener {
 
+public class MapHomePageActivity extends CheckPermissionsActivity implements LocationSource,
+        AMapLocationListener, PoiSearch.OnPoiSearchListener, View.OnClickListener,
+        AMap.OnMarkerClickListener, RouteSearch.OnRouteSearchListener {
 
     //高德地图
     private My2dMapView mapView;
@@ -92,56 +97,114 @@ public class OverViewFragment extends BaseFragment implements LocationSource,
     private List<NearbyBumpBean> mNearbyParkingMineBeen = new ArrayList<>();
     private AMapLocation mAmapLocation;
 
+    //控件
+    private CardView ivSkip2CustomerService;
+    private CardView ivSkip2MyLocation;
+    private Spinner mSpinner;
+    private Button mBtnDetails;
+    private LinearLayout llBumpInfoView;
 
-    public OverViewFragment() {
-    }
+    private int nowPoint = 0;
+    private boolean isClickBumpView = false;
 
-    public static OverViewFragment newInstance() {
-        OverViewFragment fragment = new OverViewFragment();
-        Bundle args = new Bundle();
-        fragment.setArguments(args);
-        return fragment;
+    public static void start(Context context) {
+        Intent starter = new Intent(context, MapHomePageActivity.class);
+//        starter.putExtra();
+        context.startActivity(starter);
     }
 
     @Override
-    public void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_repair_map);
 
+        mSpinner = findViewById(R.id.sp_repair_map_point_choose);
+        mBtnDetails = findViewById(R.id.btn_repair_map_details);
+        llBumpInfoView = findViewById(R.id.llBumpInfoView);
+        ivSkip2CustomerService = findViewById(R.id.ivSkip2CustomerService);
+        ivSkip2MyLocation = findViewById(R.id.ivSkip2MyLocation);
+        mapView = findViewById(R.id.map_main);
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             //检查是否拥有定位权限
-            if (!HelperFromPermission.checkPermission(getContext(), Manifest.permission.ACCESS_COARSE_LOCATION)) {
+            if (!HelperFromPermission.checkPermission(MapHomePageActivity.this, Manifest.permission.ACCESS_COARSE_LOCATION)) {
                 String[] perms = new String[]{Manifest.permission.ACCESS_COARSE_LOCATION};
                 /***
                  * 没有授权，尝试获取权限。
                  * 1、第一次询问用户是否需要权限，弹出授权框。
                  * 2、以前被拒绝过，系统将不理会此程序的授权申请，弹出提示由用户自行处理。
                  */
-                if (ActivityCompat.shouldShowRequestPermissionRationale(Objects.requireNonNull(getActivity()), Manifest.permission.ACCESS_COARSE_LOCATION)) {
-                    ActivityCompat.requestPermissions(Objects.requireNonNull(getActivity()), perms, 100);
+                if (ActivityCompat.shouldShowRequestPermissionRationale(MapHomePageActivity.this, Manifest.permission.ACCESS_COARSE_LOCATION)) {
+                    ActivityCompat.requestPermissions(MapHomePageActivity.this, perms, 100);
                 } else {
-                    HelperFromPermission.showPermissionDialog(getActivity(), "定位权限");
+                    HelperFromPermission.showPermissionDialog(MapHomePageActivity.this, "定位权限");
                 }
                 return;
             }
         }
         //检查定位权限
         checkPermissions();
+        mapView.onCreate(savedInstanceState);// 此方法必须重写
+
+        //初始化控件
+        initView();
 
         //从服务器获取点的信息并用sharedpreference存储到本地
         receivePointInfo();
+
+        setMySpinner();
     }
 
-    @Override
-    protected View initContentView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_over_view, container, false);
-        mapView = view.findViewById(R.id.map_main);
-        mapView.onCreate(savedInstanceState);// 此方法必须重写
-        return view;
+    private void setMySpinner() {
+        ArrayList<String> nameList = new ArrayList<>();
+        nameList.add("江都城区污水泵站");
+        nameList.add("邗江区杨庙镇污水泵站");
+        nameList.add("经济开发区污水泵站");
+
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
+                android.R.layout.simple_list_item_1, nameList);
+        mSpinner.setAdapter(adapter);
+
+        //设置spinner点击事件
+        mSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                nowPoint = position;
+                //使用arrayMarkers的定位功能
+                ArrayList<MarkerOptions> arrayMarkers = new ArrayList<MarkerOptions>();
+                ArrayList<Marker> markers = new ArrayList<Marker>();
+
+//                LatLng mLatLng = new LatLng(
+//                        mUploadInfoList.get(position).getLatitude(),
+//                        mUploadInfoList.get(position).getLongitude());
+//                arrayMarkers.add(new MarkerOptions()
+//                        .title(mUploadInfoList.get(position).getUploadName())
+//                        .icon(BitmapDescriptorFactory
+//                                .defaultMarker(BitmapDescriptorFactory.HUE_AZURE))
+//                        .position(mLatLng));
+//                markers = aMap.addMarkers(arrayMarkers, true);
+//                markers.get(0).showInfoWindow();
+//
+//                //设置底部栏可见并且更新信息
+////                setInfoTipVisibile();
+//                refreshTipInfo(position);
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
     }
 
-    @Override
-    protected void initView(View view) {
+    private void initView() {
         initMapView();
+        initInfo();
+    }
+
+    private void initInfo() {
+        mBtnDetails.setOnClickListener(this);
+        ivSkip2CustomerService.setOnClickListener(this);
+        ivSkip2MyLocation.setOnClickListener(this);
     }
 
     private void initMapView() {
@@ -160,7 +223,7 @@ public class OverViewFragment extends BaseFragment implements LocationSource,
         aNavMap.setOnMarkerClickListener(this); //Marker点击事件
 
         //获得当前定位信息
-        mNavLocationClient = new AMapLocationClient(getContext());
+        mNavLocationClient = new AMapLocationClient(this);
         AMapLocationClientOption mLocationOption = new AMapLocationClientOption();
         mNavLocationClient.setLocationListener(this);
         mLocationOption.setLocationMode(AMapLocationClientOption.AMapLocationMode.Hight_Accuracy);
@@ -203,7 +266,7 @@ public class OverViewFragment extends BaseFragment implements LocationSource,
                     mNavListener.onLocationChanged(amapLocation);
                     mLatLng = new LatLng(amapLocation.getLatitude(), amapLocation.getLongitude());
 
-                    Objects.requireNonNull(getActivity()).runOnUiThread(new Runnable() {
+                    runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
                             getNearbyByLatLng(amapLocation, mLatLng);
@@ -256,7 +319,7 @@ public class OverViewFragment extends BaseFragment implements LocationSource,
         this.mAmapLocation = amapLocation;
         boundBuilder = new LatLngBounds.Builder();
         String iconName = "icon_poi_marker_parking";
-        int iconId = getResources().getIdentifier(iconName, "drawable", Objects.requireNonNull(getContext()).getPackageName());
+        int iconId = getResources().getIdentifier(iconName, "drawable", this.getPackageName());
         for (int j = 0; j < parkingMineBeanList.size(); j++) {
             MarkerOptions markerOptions = new MarkerOptions().icon(BitmapDescriptorFactory.fromResource(iconId));
             markerOptions.position(new LatLng(parkingMineBeanList.get(j).getLatitude(), parkingMineBeanList.get(j).getLongitude()));
@@ -277,7 +340,7 @@ public class OverViewFragment extends BaseFragment implements LocationSource,
         this.mAmapLocation = amapLocation;
         boundBuilder = new LatLngBounds.Builder();
         String iconName = "icon_poi_marker_parking";
-        int iconId = getResources().getIdentifier(iconName, "drawable", Objects.requireNonNull(getContext()).getPackageName());
+        int iconId = getResources().getIdentifier(iconName, "drawable", this.getPackageName());
         MarkerOptions markerOptions = new MarkerOptions().icon(BitmapDescriptorFactory.fromResource(iconId));
         markerOptions.position(new LatLng(amapLocation.getLatitude(), amapLocation.getLongitude()));
         markerOptions.title(amapLocation.getCity()).snippet(amapLocation.getCity() + "：" + amapLocation.getLatitude() + "，" + amapLocation.getLongitude());
@@ -294,27 +357,28 @@ public class OverViewFragment extends BaseFragment implements LocationSource,
     }
 
     @Override
-    public void onResume() {
+    protected void onResume() {
         super.onResume();
         mapView.onResume();
     }
 
     @Override
-    public void onPause() {
+    protected void onPause() {
         super.onPause();
         mapView.onPause();
         deactivate();
     }
 
+
     @Override
-    public void onSaveInstanceState(Bundle outState) {
+    protected void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
         mapView.onSaveInstanceState(outState);
     }
 
 
     @Override
-    public void onDestroy() {
+    protected void onDestroy() {
         super.onDestroy();
         mapView.onDestroy();
         poiResult = null;
@@ -338,6 +402,27 @@ public class OverViewFragment extends BaseFragment implements LocationSource,
         mNavListener = null;
     }
 
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.btn_repair_map_details:
+                if (isClickBumpView) {
+                    isClickBumpView = false;
+                    llBumpInfoView.setVisibility(View.VISIBLE);
+                } else {
+                    isClickBumpView = true;
+                    llBumpInfoView.setVisibility(View.GONE);
+                }
+                break;
+            case R.id.ivSkip2CustomerService:
+//                startActivity(new Intent(MapHomePageActivity.this, CustomerServiceMineActivity.class));
+                break;
+            case R.id.ivSkip2MyLocation:
+                location();
+                break;
+        }
+    }
+
     public void location() {
         aNavMap.moveCamera(CameraUpdateFactory.changeLatLng(mLatLng));
     }
@@ -347,21 +432,29 @@ public class OverViewFragment extends BaseFragment implements LocationSource,
         for (int i = 0; i < mMarkerList.size(); i++) {
             if (marker.equals(mMarkerList.get(i))) {
                 if (aNavMap != null) {
-                    final int finalI = i;
-                    new BottomDialog(getContext())
-                            .layout(BottomDialog.GRID)
-                            .orientation(BottomDialog.VERTICAL)
-                            .nav(new BottomDialog.OnSkip2NavigationListener() {
-                                @Override
-                                public void nav() {
-//                                    NaviLatLng startNavi = new NaviLatLng(mAmapLocation.getLatitude(), mAmapLocation.getLongitude());
-//                                    NaviLatLng endNavi = new NaviLatLng(mNearbyParkingMineBeen.get(finalI).getLatitude(), mNearbyParkingMineBeen.get(finalI).getLongitude());
-//                                    startActivity(new Intent(MapHomePageActivity.this, Navigation2DActivity.class)
-//                                            .putExtra("start_navi_point", startNavi)
-//                                            .putExtra("end_navi_point", endNavi));
-                                }
-                            })
-                            .show();
+                    SSIntentTool.start(MapHomePageActivity.this, BumpOverviewActivity.class);
+//                    final int finalI = i;
+//                    new BottomDialog(MapHomePageActivity.this)
+//                            .layout(BottomDialog.GRID)
+//                            .orientation(BottomDialog.VERTICAL)
+//                            .nav(new BottomDialog.OnSkip2NavigationListener() {
+//                                @Override
+//                                public void nav() {
+////                                    NaviLatLng startNavi = new NaviLatLng(mAmapLocation.getLatitude(), mAmapLocation.getLongitude());
+////                                    NaviLatLng endNavi = new NaviLatLng(mNearbyParkingMineBeen.get(finalI).getLatitude(), mNearbyParkingMineBeen.get(finalI).getLongitude());
+////                                    startActivity(new Intent(MapHomePageActivity.this, Navigation2DActivity.class)
+////                                            .putExtra("start_navi_point", startNavi)
+////                                            .putExtra("end_navi_point", endNavi));
+//                                }
+//                            })
+//                            .match(new BottomDialog.OnSkip2MatchListener() {
+//                                @Override
+//                                public void match() {
+////                                    startActivity(new Intent(MapHomePageActivity.this, ParkingSpaceImmMatchingActivity.class).putExtra("destination_navi_info", mNearbyParkingMineBeen.get(finalI)));
+//                                }
+//                            })
+////                            .setData(mAmapLocation, mNearbyParkingMineBeen.get(finalI))
+//                            .show();
                 }
                 return true;
             }
@@ -387,7 +480,7 @@ public class OverViewFragment extends BaseFragment implements LocationSource,
                         boundBuilder = new LatLngBounds.Builder();
                         for (int j = 0; j < Math.min(poiItems.size(), 10); j++) {
                             String iconName = "icon_poi_marker_parking";
-                            int iconId = getResources().getIdentifier(iconName, "drawable", Objects.requireNonNull(getContext()).getPackageName());
+                            int iconId = getResources().getIdentifier(iconName, "drawable", this.getPackageName());
                             MarkerOptions markerOptions = new MarkerOptions().icon(BitmapDescriptorFactory.fromResource(iconId));
                             markerOptions.position(new LatLng(poiItems.get(j).getLatLonPoint().getLatitude(), poiItems.get(j).getLatLonPoint().getLongitude()));
                             Marker marker = aNavMap.addMarker(markerOptions);
@@ -415,14 +508,14 @@ public class OverViewFragment extends BaseFragment implements LocationSource,
                     } else if (suggestionCities != null && suggestionCities.size() > 0) {
                         showSuggestCity(suggestionCities);
                     } else {
-                        Toast.makeText(getContext(), "附近暂无搜索结果", Toast.LENGTH_LONG).show();
+                        Toast.makeText(MapHomePageActivity.this, "附近暂无搜索结果", Toast.LENGTH_LONG).show();
                     }
                 }
             } else {
-                Toast.makeText(getContext(), "附近暂无搜索结果", Toast.LENGTH_LONG).show();
+                Toast.makeText(MapHomePageActivity.this, "附近暂无搜索结果", Toast.LENGTH_LONG).show();
             }
         } else {
-            MyToast.error(getContext(), rCode + "");
+            MyToast.error(MapHomePageActivity.this, rCode + "");
         }
     }
 
@@ -450,7 +543,7 @@ public class OverViewFragment extends BaseFragment implements LocationSource,
                 if (result.getDriveQuery().equals(driveQuery)) { //是否是同一条
                     DrivePath drivePath = result.getPaths().get(0);
                     DrivingRouteOverlay routeOverlay =
-                            new DrivingRouteOverlay(getContext(), aNavMap,//第一个参数是context，2.是地图
+                            new DrivingRouteOverlay(this, aNavMap,//第一个参数是context，2.是地图
                                     drivePath, result.getStartPos(),//3.驾车线路，4.出发位置
                                     result.getTargetPos(), null); //5.终点位置
                     routeOverlay.removeFromMap(); //去掉DrivingRouteOverlay上所有的Marker
@@ -473,6 +566,47 @@ public class OverViewFragment extends BaseFragment implements LocationSource,
 
     //从数据库获取点的信息
     private void receivePointInfo() {
+        mockData();
+//        RequestHelper.getUploadInfos(new RequestListener() {
+//            @Override
+//            public void onResponce(String responce) {
+//                List<UploadInfo> uploadInfoList=RequestHelper.stringToArray(responce, UploadInfo[].class);
+//                for (UploadInfo uploadInfo : uploadInfoList) {
+//                    if (uploadInfo.getApprovalStatus()==1) {
+//                        mUploadInfoList.add(uploadInfo);
+//                    }
+//                }
+//                //初始化控件
+//                initView();
+//            }
+//
+//            @Override
+//            public void onError(Throwable throwable) {
+//                MyToast.error(MapHomePageActivity.this, R.string.load_error);
+//            }
+//        });
+
+    }
+
+    private void mockData() {
+        String responce = "[{\n" +
+                "\t\"id\": 76,\n" +
+                "\t\"upload_name\": \"扬州西路\",\n" +
+                "\t\"upload_type\": \"公众\",\n" +
+                "\t\"upload_resource\": \"https://ss0.bdstatic.com/94oJfD_bAAcT8t7mm9GUKT-xh_/timg?image&quality=100&size=b4000_4000&sec=1549938533&di=f77c8dc91053424e9767bf37e785e90a&src=http://www.lnwater.gov.cn/zxpd/dfss/fs/201704/W020170414316310554199.jpg\",\n" +
+                "\t\"longitude\": 0,\n" +
+                "\t\"latitude\": 0,\n" +
+                "\t\"upload_address\": \"地点显示\",\n" +
+                "\t\"upload_time\": 1507796319770,\n" +
+                "\t\"upload_description\": \"test\",\n" +
+                "\t\"approval_status\": 2\n" +
+                "}]";
+        List<UploadInfo> uploadInfoList = RequestHelper.stringToArray(responce, UploadInfo[].class);
+        for (UploadInfo uploadInfo : uploadInfoList) {
+            if (uploadInfo.getApprovalStatus() == 1) {
+//                mUploadInfoList.add(uploadInfo);
+            }
+        }
     }
 
     @Override
@@ -481,31 +615,6 @@ public class OverViewFragment extends BaseFragment implements LocationSource,
                 Manifest.permission.ACCESS_COARSE_LOCATION,
                 Manifest.permission.ACCESS_FINE_LOCATION,
         };
-    }
-
-    @Override
-    protected void setListener() {
-
-    }
-
-    @Override
-    protected void initData() {
-
-    }
-
-    @Override
-    protected void setData() {
-
-    }
-
-    @Override
-    protected void getBundleExtras(Bundle bundle) {
-
-    }
-
-    @Override
-    public void onDetach() {
-        super.onDetach();
     }
 
 }

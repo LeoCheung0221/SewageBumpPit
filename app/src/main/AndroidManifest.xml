@@ -47,7 +47,7 @@
             android:value="712203d48ef2022c4d7f895410af1041" />
 
         <activity
-            android:name=".Account.LoginActivity"
+            android:name=".LoginActivity"
             android:label="@string/app_name"
             android:theme="@style/AppTheme.NoActionbar.TranStatus">
             <intent-filter>
@@ -66,28 +66,28 @@
             android:name="com.yalantis.ucrop.UCropActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionbar" />
-        <activity android:name=".Warn.Chart.ChartActivity" />
-        <activity android:name=".Warn.DeviceMapActivity" />
+        <activity android:name=".todo.Warn.Chart.ChartActivity" />
+        <activity android:name=".todo.Warn.DeviceMapActivity" />
         <activity
-            android:name=".Work.CheckDetailsActivity"
+            android:name=".todo.Work.CheckDetailsActivity"
             android:theme="@style/AppTheme.NoActionbar.TranStatus" />
         <activity
-            android:name=".Bump.WeatherActivity"
+            android:name=".todo.WeatherActivity"
             android:theme="@style/AppTheme.NoActionbar.TranStatus" />
-        <activity android:name=".Work.CheckedWorkActivity" />
+        <activity android:name=".todo.Work.CheckedWorkActivity" />
         <activity
-            android:name=".Bump.MapRouteActivity"
+            android:name=".todo.MapRouteActivity"
             android:theme="@style/AppTheme.NoActionbar.TranStatus" />
         <activity
-            android:name=".Bump.MapRepairActivity"
+            android:name=".Bump.MapHomePageActivity"
             android:theme="@style/AppTheme.NoActionbar.TranStatus" />
-        <activity android:name=".Bump.WetPointActivity" />
+        <activity android:name=".todo.WetPointActivity" />
         <!-- 定位需要的服务 使用2.0的定位需要加上这个 -->
         <service android:name="com.amap.api.location.APSService" />
 
         <activity android:name=".Bump.ReportSituationActivity" />
         <activity
-            android:name=".Bump.ReportAddressActivity"
+            android:name=".todo.ReportAddressActivity"
             android:theme="@style/AppTheme.NoActionbar.TranStatus" />
         <activity android:name=".Feature.BumpManagerActivity" />
         <activity android:name=".Feature.VideoWaterActivity" />

@@ -38,7 +38,7 @@ public class WaterLeachingReportActivity extends BaseActivity implements View.On
 
     @Override
     protected void initView() {
-        initToolbar("报警报告", true, true);
+        initToolbar("报警报告", true, false);
         mRecyclerView = findViewById(R.id.rv_water_leaching_view);
         tvStartPick = findViewById(R.id.tvStartPick);
         tvEndPick = findViewById(R.id.tvEndPick);

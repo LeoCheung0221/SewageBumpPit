@@ -6,12 +6,12 @@ import android.widget.FrameLayout;
 import android.widget.ImageView;
 
 import com.yzspp.sewage.Bump.BumpOverviewActivity;
-import com.yzspp.sewage.Bump.MapRepairActivity;
+import com.yzspp.sewage.Bump.MapHomePageActivity;
 import com.yzspp.sewage.Feature.RainFallLevelActivity;
 import com.yzspp.sewage.Feature.VideoWaterActivity;
 import com.yzspp.sewage.Feature.WaterLeachingReportActivity;
 import com.yzspp.sewage.Mine.SettingsActivity;
-import com.yzspp.sewage.Tools.SSIntentTool;
+import com.yzspp.sewage.utils.SSIntentTool;
 import com.yzspp.sewage.base.BaseActivity;
 
 public class PreviewActivity extends BaseActivity implements View.OnClickListener {
@@ -74,7 +74,7 @@ public class PreviewActivity extends BaseActivity implements View.OnClickListene
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.map_layout:
-                SSIntentTool.start(PreviewActivity.this, MapRepairActivity.class);
+                SSIntentTool.start(PreviewActivity.this, MapHomePageActivity.class);
                 break;
             case R.id.manager_layout:
                 SSIntentTool.start(PreviewActivity.this, BumpOverviewActivity.class);

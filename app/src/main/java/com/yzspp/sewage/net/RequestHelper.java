@@ -4,7 +4,7 @@ import android.util.Log;
 
 import com.google.gson.Gson;
 import com.yzspp.sewage.BuildConfig;
-import com.yzspp.sewage.Tools.MyOkHttp;
+import com.yzspp.sewage.utils.MyOkHttp;
 
 import java.io.IOException;
 import java.util.Arrays;

@@ -12,7 +12,7 @@ import android.view.ViewGroup;
 
 import com.yzspp.sewage.Bump.BumpDetailActivity;
 import com.yzspp.sewage.R;
-import com.yzspp.sewage.Tools.SSIntentTool;
+import com.yzspp.sewage.utils.SSIntentTool;
 import com.yzspp.sewage.base.BaseFragment;
 import com.yzspp.sewage.bean.BranchNode;
 import com.yzspp.sewage.bean.BranchViewBinder;
