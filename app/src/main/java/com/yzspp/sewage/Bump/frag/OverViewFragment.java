@@ -10,6 +10,8 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.amap.api.location.AMapLocation;
@@ -39,12 +41,16 @@ import com.amap.api.services.route.DriveRouteResult;
 import com.amap.api.services.route.RideRouteResult;
 import com.amap.api.services.route.RouteSearch;
 import com.amap.api.services.route.WalkRouteResult;
+import com.yzspp.sewage.Bump.BumpDetailActivity;
 import com.yzspp.sewage.R;
 import com.yzspp.sewage.utils.HelperFromPermission;
 import com.yzspp.sewage.base.BaseFragment;
 import com.yzspp.sewage.bean.NearbyBumpBean;
+import com.yzspp.sewage.utils.SSIntentTool;
 import com.yzspp.sewage.widget.My2dMapView;
 import com.yzspp.sewage.widget.bottomdialog.BottomDialog;
+import com.yzspp.sewage.widget.dialog.BumpSelectListDialog;
+import com.yzspp.sewage.widget.dialog.listener.OnBtnClickL;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -52,13 +58,14 @@ import java.util.Date;
 import java.util.List;
 import java.util.Objects;
 
+import frame.tool.GsonConvert;
 import frame.tool.MyToast;
 
 /**
  * 总览碎片
  */
 public class OverViewFragment extends BaseFragment implements LocationSource,
-        AMapLocationListener, PoiSearch.OnPoiSearchListener, AMap.OnMarkerClickListener, RouteSearch.OnRouteSearchListener {
+        AMapLocationListener, PoiSearch.OnPoiSearchListener, AMap.OnMarkerClickListener, RouteSearch.OnRouteSearchListener, View.OnClickListener {
 
 
     //高德地图
@@ -91,6 +98,9 @@ public class OverViewFragment extends BaseFragment implements LocationSource,
     private List<Marker> mMarkerList = new ArrayList<>();
     private List<NearbyBumpBean> mNearbyParkingMineBeen = new ArrayList<>();
     private AMapLocation mAmapLocation;
+
+    private LinearLayout llSelectBumpList;
+    private TextView tvNavStartAddr;
 
 
     public OverViewFragment() {
@@ -135,6 +145,8 @@ public class OverViewFragment extends BaseFragment implements LocationSource,
     protected View initContentView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_over_view, container, false);
         mapView = view.findViewById(R.id.map_main);
+        llSelectBumpList = view.findViewById(R.id.llSelectBumpList);
+        tvNavStartAddr = view.findViewById(R.id.tvNavStartAddr);
         mapView.onCreate(savedInstanceState);// 此方法必须重写
         return view;
     }
@@ -142,6 +154,11 @@ public class OverViewFragment extends BaseFragment implements LocationSource,
     @Override
     protected void initView(View view) {
         initMapView();
+        initEvents();
+    }
+
+    private void initEvents() {
+        llSelectBumpList.setOnClickListener(this);
     }
 
     private void initMapView() {
@@ -190,7 +207,7 @@ public class OverViewFragment extends BaseFragment implements LocationSource,
                     MyLocationStyle myLocationStyle = new MyLocationStyle();
                     myLocationStyle.radiusFillColor(android.R.color.transparent);
                     myLocationStyle.strokeColor(android.R.color.transparent);
-                    myLocationStyle.myLocationIcon(BitmapDescriptorFactory.fromResource(R.drawable.icon_parking_loc));
+                    myLocationStyle.myLocationIcon(BitmapDescriptorFactory.fromResource(R.drawable.transparent_bg)); //icon_parking_loc
                     aNavMap.setMyLocationStyle(myLocationStyle);
 //                    aNavMap.addMarker(getLocationMarkerOptions());
 
@@ -232,10 +249,42 @@ public class OverViewFragment extends BaseFragment implements LocationSource,
 //                            try {
 //                                JSONObject json = new JSONObject(s);
 //                                mNearbyParkingMineBeen = com.alibaba.fastjson.JSONObject.parseArray(String.valueOf(json.get("data")), NearbyBumpBean.class);
+        NearbyBumpBean bumpBean1 = new NearbyBumpBean();
+        bumpBean1.setLatitude(32.1947891398);
+        bumpBean1.setLongitude(119.8388589732);
+        bumpBean1.setCity("镇江市扬中市");
+        mNearbyParkingMineBeen.add(bumpBean1);
+
+        NearbyBumpBean bumpBean2 = new NearbyBumpBean();
+        bumpBean2.setLatitude(32.2371252770);
+        bumpBean2.setLongitude(119.8069382133);
+        bumpBean2.setCity("镇江市扬中市");
+        mNearbyParkingMineBeen.add(bumpBean2);
+
+        NearbyBumpBean bumpBean3 = new NearbyBumpBean();
+        bumpBean3.setLatitude(32.2141808785);
+        bumpBean3.setLongitude(119.7728634300);
+        bumpBean3.setCity("镇江市扬中市");
+        mNearbyParkingMineBeen.add(bumpBean3);
+
+        NearbyBumpBean bumpBean4 = new NearbyBumpBean();
+        bumpBean4.setLatitude(32.2220958981);
+        bumpBean4.setLongitude(119.8027325096);
+        bumpBean4.setCity("镇江市扬中市");
+        mNearbyParkingMineBeen.add(bumpBean4);
+
+//        NearbyBumpBean bumpBean5 = new NearbyBumpBean();
+//        bumpBean5.setLatitude(32.0529018276);
+//        bumpBean5.setLongitude(119.9181704479);
+//        bumpBean5.setCity("镇江市扬中市");
+//        mNearbyParkingMineBeen.add(bumpBean5);
+
         if (mNearbyParkingMineBeen != null && mNearbyParkingMineBeen.size() > 0) {
             //根据指定经纬度 地图显示
             prepareSearchNearbyParking(amapLocation, mNearbyParkingMineBeen);
         } else {
+            Log.e("getNearbyByLatLng: ",
+                    "  getLatitude: "+amapLocation.getLatitude() + "     getLongitude: "+ amapLocation.getLongitude());
             prepareSearchNearbyParking(amapLocation);
 //                                    Toast.makeText(MapHomePageActivity.this, "附近暂未搜索到泵站点", Toast.LENGTH_LONG).show();
         }
@@ -347,21 +396,7 @@ public class OverViewFragment extends BaseFragment implements LocationSource,
         for (int i = 0; i < mMarkerList.size(); i++) {
             if (marker.equals(mMarkerList.get(i))) {
                 if (aNavMap != null) {
-                    final int finalI = i;
-                    new BottomDialog(getContext())
-                            .layout(BottomDialog.GRID)
-                            .orientation(BottomDialog.VERTICAL)
-                            .nav(new BottomDialog.OnSkip2NavigationListener() {
-                                @Override
-                                public void nav() {
-//                                    NaviLatLng startNavi = new NaviLatLng(mAmapLocation.getLatitude(), mAmapLocation.getLongitude());
-//                                    NaviLatLng endNavi = new NaviLatLng(mNearbyParkingMineBeen.get(finalI).getLatitude(), mNearbyParkingMineBeen.get(finalI).getLongitude());
-//                                    startActivity(new Intent(MapHomePageActivity.this, Navigation2DActivity.class)
-//                                            .putExtra("start_navi_point", startNavi)
-//                                            .putExtra("end_navi_point", endNavi));
-                                }
-                            })
-                            .show();
+                    SSIntentTool.start(getContext(), BumpDetailActivity.class);
                 }
                 return true;
             }
@@ -508,4 +543,49 @@ public class OverViewFragment extends BaseFragment implements LocationSource,
         super.onDetach();
     }
 
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.llSelectBumpList:
+                toastDialog();
+                break;
+        }
+    }
+
+    private void toastDialog() {
+        List<String> bumpList = new ArrayList<>();
+        bumpList.add("江东城区污水泵站A");
+        bumpList.add("江东城区污水泵站B");
+        bumpList.add("江东城区污水泵站C");
+        bumpList.add("江东城区污水泵站D");
+        bumpList.add("江东城区污水泵站E");
+        bumpList.add("江东城区污水泵站F");
+        bumpList.add("江东城区污水泵站G");
+        bumpList.add("江东城区污水泵站H");
+        final BumpSelectListDialog dialog = new BumpSelectListDialog(getContext(), bumpList);
+        dialog.show();
+        dialog.setOnSelectedItemListener(new BumpSelectListDialog.OnSelectedItemListener() {
+            @Override
+            public void click(String name) {
+                dialog.dismiss();
+//                tvNavStartAddr.setText(name);
+//                MyToast.success(getContext(), "即将同步泵站信息\n\n修改泵站地图定位");
+                SSIntentTool.start(getContext(), BumpDetailActivity.class);
+            }
+        });
+        dialog.setOnBtnClickL(
+                new OnBtnClickL() {
+                    @Override
+                    public void onBtnClick() {
+                        dialog.dismiss();
+                    }
+                },
+                new OnBtnClickL() {
+                    @Override
+                    public void onBtnClick() {
+                        SSIntentTool.start(getContext(), BumpDetailActivity.class);
+                        dialog.dismiss();
+                    }
+                });
+    }
 }

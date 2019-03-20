@@ -295,6 +295,36 @@ public class MapHomePageActivity extends CheckPermissionsActivity implements Loc
 //                            try {
 //                                JSONObject json = new JSONObject(s);
 //                                mNearbyParkingMineBeen = com.alibaba.fastjson.JSONObject.parseArray(String.valueOf(json.get("data")), NearbyBumpBean.class);
+        NearbyBumpBean bumpBean1 = new NearbyBumpBean();
+        bumpBean1.setLatitude(32.1947891398);
+        bumpBean1.setLongitude(119.8388589732);
+        bumpBean1.setCity("镇江市扬中市");
+        mNearbyParkingMineBeen.add(bumpBean1);
+
+        NearbyBumpBean bumpBean2 = new NearbyBumpBean();
+        bumpBean2.setLatitude(32.2371252770);
+        bumpBean2.setLongitude(119.8069382133);
+        bumpBean2.setCity("镇江市扬中市");
+        mNearbyParkingMineBeen.add(bumpBean2);
+
+        NearbyBumpBean bumpBean3 = new NearbyBumpBean();
+        bumpBean3.setLatitude(32.2141808785);
+        bumpBean3.setLongitude(119.7728634300);
+        bumpBean3.setCity("镇江市扬中市");
+        mNearbyParkingMineBeen.add(bumpBean3);
+
+        NearbyBumpBean bumpBean4 = new NearbyBumpBean();
+        bumpBean4.setLatitude(32.2220958981);
+        bumpBean4.setLongitude(119.8027325096);
+        bumpBean4.setCity("镇江市扬中市");
+        mNearbyParkingMineBeen.add(bumpBean4);
+
+//        NearbyBumpBean bumpBean5 = new NearbyBumpBean();
+//        bumpBean5.setLatitude(32.0529018276);
+//        bumpBean5.setLongitude(119.9181704479);
+//        bumpBean5.setCity("镇江市扬中市");
+//        mNearbyParkingMineBeen.add(bumpBean5);
+
         if (mNearbyParkingMineBeen != null && mNearbyParkingMineBeen.size() > 0) {
             //根据指定经纬度 地图显示
             prepareSearchNearbyParking(amapLocation, mNearbyParkingMineBeen);
@@ -432,7 +462,8 @@ public class MapHomePageActivity extends CheckPermissionsActivity implements Loc
         for (int i = 0; i < mMarkerList.size(); i++) {
             if (marker.equals(mMarkerList.get(i))) {
                 if (aNavMap != null) {
-                    SSIntentTool.start(MapHomePageActivity.this, BumpOverviewActivity.class);
+//                    SSIntentTool.start(MapHomePageActivity.this, BumpOverviewActivity.class);
+                    SSIntentTool.start(MapHomePageActivity.this, BumpDetailActivity.class);
 //                    final int finalI = i;
 //                    new BottomDialog(MapHomePageActivity.this)
 //                            .layout(BottomDialog.GRID)
