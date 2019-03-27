@@ -104,7 +104,7 @@
     <string name="string_value_bump_num">泵站运行数量</string>
     <string name="string_value_bump_only_num">泵站数量</string>
     <string name="string_value_bump_start_num">运行数量</string>
-    <string name="string_value_fault_num">故障数</string>
+    <string name="string_value_fault_num">泵站故障数量</string>
     <string name="string_value_ava_rain_num">平均降雨量</string>
 
     <!-- TODO: Remove or change this placeholder text -->

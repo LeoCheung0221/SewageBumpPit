@@ -215,37 +215,146 @@
                 </LinearLayout>
 
                 <!-- 第五行 -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    app:ELSpanX="1"
+                    app:ELStartX="0"
+                    app:ELStartY="4">
+
+                    <TextView
+                        android:layout_width="50dp"
+                        android:layout_height="20dp"
+                        android:background="@drawable/bg_border_text_grey"
+                        android:gravity="center"
+                        android:text="启动"
+                        android:textColor="@color/text_common_hint" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    app:ELSpanX="1"
+                    app:ELStartX="1"
+                    app:ELStartY="4">
+
+                    <TextView
+                        android:layout_width="50dp"
+                        android:layout_height="20dp"
+                        android:background="@drawable/bg_border_text_grey"
+                        android:gravity="center"
+                        android:text="停止"
+                        android:textColor="@color/text_common_hint" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    app:ELSpanX="1"
+                    app:ELStartX="2"
+                    app:ELStartY="4">
+
+                    <TextView
+                        android:layout_width="50dp"
+                        android:layout_height="20dp"
+                        android:background="@drawable/bg_border_text_grey"
+                        android:gravity="center"
+                        android:text="启动"
+                        android:textColor="@color/text_common_hint" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    app:ELSpanX="1"
+                    app:ELStartX="3"
+                    app:ELStartY="4">
+
+                    <TextView
+                        android:layout_width="50dp"
+                        android:layout_height="20dp"
+                        android:background="@drawable/bg_border_text_grey"
+                        android:gravity="center"
+                        android:text="停止"
+                        android:textColor="@color/text_common_hint" />
+
+                </LinearLayout>
+
+                <!-- 第六行 -->
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="32dp"
                     android:background="@color/gray5"
                     android:gravity="center"
                     android:text="启闭机"
-                    app:ELSpanX="2"
+                    app:ELSpanX="1"
                     app:ELSpanY="1"
                     app:ELStartX="0"
-                    app:ELStartY="4" />
+                    app:ELStartY="5" />
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:gravity="center"
-                    android:text="开启"
-                    app:ELSpanX="2"
+                    android:text="关闭"
+                    app:ELSpanX="1"
                     app:ELSpanY="1"
-                    app:ELStartX="2"
-                    app:ELStartY="4" />
+                    app:ELStartX="1"
+                    app:ELStartY="5" />
 
-                <!-- 第六行 -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    app:ELSpanX="1"
+                    app:ELStartX="2"
+                    app:ELStartY="5">
+
+                    <TextView
+                        android:layout_width="50dp"
+                        android:layout_height="20dp"
+                        android:background="@drawable/bg_border_text_grey"
+                        android:gravity="center"
+                        android:text="开启"
+                        android:textColor="@color/text_common_hint" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    app:ELSpanX="1"
+                    app:ELStartX="3"
+                    app:ELStartY="5">
+
+                    <TextView
+                        android:layout_width="50dp"
+                        android:layout_height="20dp"
+                        android:background="@drawable/bg_border_text_grey"
+                        android:gravity="center"
+                        android:text="关闭"
+                        android:textColor="@color/text_common_hint" />
+
+                </LinearLayout>
+
+                <!-- 第七行 -->
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:background="@color/gray5"
                     android:gravity="center"
-                    android:text="A相电压"
+                    android:text="电压"
                     app:ELSpanX="1"
                     app:ELStartX="0"
-                    app:ELStartY="5" />
+                    app:ELStartY="6" />
 
                 <TextView
                     android:layout_width="match_parent"
@@ -254,45 +363,6 @@
                     android:text="382.1V"
                     app:ELSpanX="1"
                     app:ELStartX="1"
-                    app:ELStartY="5" />
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:background="@color/gray5"
-                    android:gravity="center"
-                    android:text="三相功率因数"
-                    app:ELSpanX="1"
-                    app:ELStartX="2"
-                    app:ELStartY="5" />
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:gravity="center"
-                    android:text="0.95"
-                    app:ELSpanX="1"
-                    app:ELStartX="3"
-                    app:ELStartY="5" />
-
-                <!-- 第七行 -->
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:background="@color/gray5"
-                    android:gravity="center"
-                    android:text="B相电压"
-                    app:ELSpanX="1"
-                    app:ELStartX="0"
-                    app:ELStartY="6" />
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:gravity="center"
-                    android:text="383.2V"
-                    app:ELSpanX="1"
-                    app:ELStartX="1"
                     app:ELStartY="6" />
 
                 <TextView
@@ -300,7 +370,7 @@
                     android:layout_height="match_parent"
                     android:background="@color/gray5"
                     android:gravity="center"
-                    android:text="三相有功功率"
+                    android:text="电流"
                     app:ELSpanX="1"
                     app:ELStartX="2"
                     app:ELStartY="6" />
@@ -309,7 +379,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:gravity="center"
-                    android:text="8.2KW"
+                    android:text="12.1A"
                     app:ELSpanX="1"
                     app:ELStartX="3"
                     app:ELStartY="6" />
@@ -320,7 +390,7 @@
                     android:layout_height="match_parent"
                     android:background="@color/gray5"
                     android:gravity="center"
-                    android:text="C相电压"
+                    android:text="当前液位"
                     app:ELSpanX="1"
                     app:ELStartX="0"
                     app:ELStartY="7" />
@@ -329,7 +399,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:gravity="center"
-                    android:text="384.2V"
+                    android:text="1020mm"
                     app:ELSpanX="1"
                     app:ELStartX="1"
                     app:ELStartY="7" />
@@ -339,7 +409,7 @@
                     android:layout_height="match_parent"
                     android:background="@color/gray5"
                     android:gravity="center"
-                    android:text="电网频率"
+                    android:text="当前流量"
                     app:ELSpanX="1"
                     app:ELStartX="2"
                     app:ELStartY="7" />
@@ -348,7 +418,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:gravity="center"
-                    android:text="50.1HZ"
+                    android:text="12T/h"
                     app:ELSpanX="1"
                     app:ELStartX="3"
                     app:ELStartY="7" />
@@ -359,107 +429,10 @@
                     android:layout_height="match_parent"
                     android:background="@color/gray5"
                     android:gravity="center"
-                    android:text="A相电流"
-                    app:ELSpanX="1"
-                    app:ELStartX="0"
-                    app:ELStartY="8" />
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:gravity="center"
-                    android:text="12.0A"
-                    app:ELSpanX="1"
-                    app:ELStartX="1"
-                    app:ELStartY="8" />
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:background="@color/gray5"
-                    android:gravity="center"
-                    android:text="当前液位"
-                    app:ELSpanX="1"
-                    app:ELStartX="2"
-                    app:ELStartY="8" />
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:gravity="center"
-                    android:text="1020mm"
-                    app:ELSpanX="1"
-                    app:ELStartX="3"
-                    app:ELStartY="8" />
-
-                <!-- 第十行 -->
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:background="@color/gray5"
-                    android:gravity="center"
-                    android:text="B相电流"
-                    app:ELSpanX="1"
-                    app:ELStartX="0"
-                    app:ELStartY="9" />
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:gravity="center"
-                    android:text="12.1A"
-                    app:ELSpanX="1"
-                    app:ELStartX="1"
-                    app:ELStartY="9" />
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:background="@color/gray5"
-                    android:gravity="center"
-                    android:text="当前流量"
-                    app:ELSpanX="1"
-                    app:ELStartX="2"
-                    app:ELStartY="9" />
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:gravity="center"
-                    android:text="12T/h"
-                    app:ELSpanX="1"
-                    app:ELStartX="3"
-                    app:ELStartY="9" />
-
-                <!-- 第十一行 -->
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:background="@color/gray5"
-                    android:gravity="center"
-                    android:text="C相电流"
-                    app:ELSpanX="1"
-                    app:ELStartX="0"
-                    app:ELStartY="10" />
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:gravity="center"
-                    android:text="12.2A"
-                    app:ELSpanX="1"
-                    app:ELStartX="1"
-                    app:ELStartY="10" />
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:background="@color/gray5"
-                    android:gravity="center"
                     android:text="当前雨量"
                     app:ELSpanX="1"
-                    app:ELStartX="2"
-                    app:ELStartY="10" />
+                    app:ELStartX="0"
+                    app:ELStartY="8" />
 
                 <TextView
                     android:layout_width="match_parent"
@@ -467,8 +440,25 @@
                     android:gravity="center"
                     android:text="8mm"
                     app:ELSpanX="1"
+                    app:ELStartX="1"
+                    app:ELStartY="8" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@color/gray5"
+                    android:gravity="center"
+                    app:ELSpanX="1"
+                    app:ELStartX="2"
+                    app:ELStartY="8" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    app:ELSpanX="1"
                     app:ELStartX="3"
-                    app:ELStartY="10" />
+                    app:ELStartY="8" />
 
             </com.yzspp.sewage.widget.ExcelLayout>
 

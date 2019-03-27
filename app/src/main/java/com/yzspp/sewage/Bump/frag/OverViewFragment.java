@@ -100,6 +100,7 @@ public class OverViewFragment extends BaseFragment implements LocationSource,
     private AMapLocation mAmapLocation;
 
     private LinearLayout llSelectBumpList;
+    private LinearLayout llSelectBumpFaultList;
     private TextView tvNavStartAddr;
 
 
@@ -146,6 +147,7 @@ public class OverViewFragment extends BaseFragment implements LocationSource,
         View view = inflater.inflate(R.layout.fragment_over_view, container, false);
         mapView = view.findViewById(R.id.map_main);
         llSelectBumpList = view.findViewById(R.id.llSelectBumpList);
+        llSelectBumpFaultList = view.findViewById(R.id.llSelectBumpFaultList);
         tvNavStartAddr = view.findViewById(R.id.tvNavStartAddr);
         mapView.onCreate(savedInstanceState);// 此方法必须重写
         return view;
@@ -159,6 +161,7 @@ public class OverViewFragment extends BaseFragment implements LocationSource,
 
     private void initEvents() {
         llSelectBumpList.setOnClickListener(this);
+        llSelectBumpFaultList.setOnClickListener(this);
     }
 
     private void initMapView() {
@@ -547,6 +550,9 @@ public class OverViewFragment extends BaseFragment implements LocationSource,
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.llSelectBumpList:
+                toastDialog();
+                break;
+            case R.id.llSelectBumpFaultList:
                 toastDialog();
                 break;
         }
