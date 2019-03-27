@@ -9,7 +9,8 @@
     <android.support.v4.widget.NestedScrollView
         android:id="@+id/elDataView"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:layout_below="@+id/ivBigLandScapeView">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -26,7 +27,6 @@
             <com.yzspp.sewage.widget.ExcelLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/ivBigView"
                 android:layout_margin="10dp"
                 android:background="@color/white"
                 app:ELBorderColor="@color/text_common_hint">
@@ -287,6 +287,16 @@
 
                 </LinearLayout>
 
+            </com.yzspp.sewage.widget.ExcelLayout>
+
+            <com.yzspp.sewage.widget.ExcelLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:background="@color/white"
+                app:ELBorderColor="@color/text_common_hint">
+
                 <!-- 第六行 -->
                 <TextView
                     android:layout_width="match_parent"
@@ -297,7 +307,7 @@
                     app:ELSpanX="1"
                     app:ELSpanY="1"
                     app:ELStartX="0"
-                    app:ELStartY="5" />
+                    app:ELStartY="0" />
 
                 <TextView
                     android:layout_width="match_parent"
@@ -307,7 +317,7 @@
                     app:ELSpanX="1"
                     app:ELSpanY="1"
                     app:ELStartX="1"
-                    app:ELStartY="5" />
+                    app:ELStartY="0" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -315,7 +325,7 @@
                     android:gravity="center"
                     app:ELSpanX="1"
                     app:ELStartX="2"
-                    app:ELStartY="5">
+                    app:ELStartY="0">
 
                     <TextView
                         android:layout_width="50dp"
@@ -333,7 +343,7 @@
                     android:gravity="center"
                     app:ELSpanX="1"
                     app:ELStartX="3"
-                    app:ELStartY="5">
+                    app:ELStartY="0">
 
                     <TextView
                         android:layout_width="50dp"
@@ -345,16 +355,25 @@
 
                 </LinearLayout>
 
+            </com.yzspp.sewage.widget.ExcelLayout>
+
+            <com.yzspp.sewage.widget.ExcelLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:background="@color/white"
+                app:ELBorderColor="@color/text_common_hint">
+
                 <!-- 第七行 -->
                 <TextView
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
+                    android:layout_height="32dp"
                     android:background="@color/gray5"
                     android:gravity="center"
                     android:text="电压"
                     app:ELSpanX="1"
                     app:ELStartX="0"
-                    app:ELStartY="6" />
+                    app:ELStartY="0" />
 
                 <TextView
                     android:layout_width="match_parent"
@@ -363,7 +382,7 @@
                     android:text="382.1V"
                     app:ELSpanX="1"
                     app:ELStartX="1"
-                    app:ELStartY="6" />
+                    app:ELStartY="0" />
 
                 <TextView
                     android:layout_width="match_parent"
@@ -373,7 +392,7 @@
                     android:text="电流"
                     app:ELSpanX="1"
                     app:ELStartX="2"
-                    app:ELStartY="6" />
+                    app:ELStartY="0" />
 
                 <TextView
                     android:layout_width="match_parent"
@@ -382,18 +401,18 @@
                     android:text="12.1A"
                     app:ELSpanX="1"
                     app:ELStartX="3"
-                    app:ELStartY="6" />
+                    app:ELStartY="0" />
 
                 <!-- 第八行 -->
                 <TextView
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
+                    android:layout_height="32dp"
                     android:background="@color/gray5"
                     android:gravity="center"
                     android:text="当前液位"
                     app:ELSpanX="1"
                     app:ELStartX="0"
-                    app:ELStartY="7" />
+                    app:ELStartY="1" />
 
                 <TextView
                     android:layout_width="match_parent"
@@ -402,7 +421,7 @@
                     android:text="1020mm"
                     app:ELSpanX="1"
                     app:ELStartX="1"
-                    app:ELStartY="7" />
+                    app:ELStartY="1" />
 
                 <TextView
                     android:layout_width="match_parent"
@@ -412,7 +431,7 @@
                     android:text="当前流量"
                     app:ELSpanX="1"
                     app:ELStartX="2"
-                    app:ELStartY="7" />
+                    app:ELStartY="1" />
 
                 <TextView
                     android:layout_width="match_parent"
@@ -421,18 +440,18 @@
                     android:text="12T/h"
                     app:ELSpanX="1"
                     app:ELStartX="3"
-                    app:ELStartY="7" />
+                    app:ELStartY="1" />
 
                 <!-- 第九行 -->
                 <TextView
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
+                    android:layout_height="32dp"
                     android:background="@color/gray5"
                     android:gravity="center"
                     android:text="当前雨量"
                     app:ELSpanX="1"
                     app:ELStartX="0"
-                    app:ELStartY="8" />
+                    app:ELStartY="2" />
 
                 <TextView
                     android:layout_width="match_parent"
@@ -441,7 +460,7 @@
                     android:text="8mm"
                     app:ELSpanX="1"
                     app:ELStartX="1"
-                    app:ELStartY="8" />
+                    app:ELStartY="2" />
 
                 <TextView
                     android:layout_width="match_parent"
@@ -450,7 +469,7 @@
                     android:gravity="center"
                     app:ELSpanX="1"
                     app:ELStartX="2"
-                    app:ELStartY="8" />
+                    app:ELStartY="2" />
 
                 <TextView
                     android:layout_width="match_parent"
@@ -458,7 +477,7 @@
                     android:gravity="center"
                     app:ELSpanX="1"
                     app:ELStartX="3"
-                    app:ELStartY="8" />
+                    app:ELStartY="2" />
 
             </com.yzspp.sewage.widget.ExcelLayout>
 
