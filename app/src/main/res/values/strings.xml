@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">扬中污水泵坑</string>
+    <string name="app_name">水务综合管理平台</string>
     <string name="title_home">Home</string>
     <string name="title_dashboard">Dashboard</string>
     <string name="title_notifications">Notifications</string>
@@ -81,7 +81,7 @@
     <string name="try_again">重新加载</string>
     <string name="back">返回</string>
 
-    <string name="string_app_title">扬中市XX区XX区\n排涝泵站远程监控调度中心</string>
+    <string name="string_app_title">扬中水务集团\n\n排涝泵站远程监控调度中心</string>
 
     <string name="string_value_bump_info_map">泵站地图</string>
     <string name="string_value_bump_info_manage">泵站信息管理</string>

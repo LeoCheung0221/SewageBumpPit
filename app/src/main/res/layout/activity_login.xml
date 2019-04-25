@@ -5,11 +5,6 @@
     android:background="@mipmap/sea"
     android:fitsSystemWindows="true">
 
-    <!-- 控件在靠左边：水平布局+
-        android:gravity="center_vertical"
-        android:orientation="horizontal" > -->
-    <!--控件靠右边：垂直布局+right
-        控件靠左边：垂直布局+left -->
     <!--菜单-->
     <LinearLayout
         android:id="@+id/title_layout"
@@ -61,13 +56,13 @@
             android:layout_alignParentTop="true"
             android:layout_centerHorizontal="true"
             android:layout_centerVertical="true"
-            android:layout_marginBottom="20dp"
-            android:layout_marginTop="40dp"
+            android:layout_marginBottom="10dp"
+            android:layout_marginTop="30dp"
             android:gravity="center"
             android:padding="5dp"
-            android:text="扬中市污水泵坑综合管理平台"
+            android:text="扬中水务集团综合管理平台"
             android:textColor="@color/accent_black"
-            android:textSize="18sp"
+            android:textSize="19sp"
             android:visibility="visible" />
 
         <!--用户名行布局-->
@@ -217,7 +212,6 @@
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
             android:layout_marginTop="60dp"
-
             android:background="@drawable/button_selector"
             android:gravity="center"
             android:text="登录"
@@ -226,4 +220,33 @@
             android:textSize="22sp" />
 
     </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/login_layout"
+        android:paddingLeft="16dp"
+        android:paddingRight="16dp">
+
+        <ImageView
+            android:layout_width="72dp"
+            android:layout_height="20dp"
+            android:layout_centerVertical="true"
+            android:layout_marginEnd="10dp"
+            android:layout_toStartOf="@+id/tvCompanyName"
+            android:contentDescription="@string/app_name"
+            android:src="@mipmap/ic_logo" />
+
+        <TextView
+            android:id="@+id/tvCompanyName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="江苏海格环保"
+            android:textColor="@color/white"
+            android:textSize="20sp"
+            android:textStyle="bold" />
+
+    </RelativeLayout>
+
 </RelativeLayout>

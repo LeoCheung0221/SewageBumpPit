@@ -1,6 +1,9 @@
 package com.yzspp.sewage.utils;
 
+import com.google.gson.Gson;
+
 import java.io.IOException;
+import java.util.HashMap;
 
 import okhttp3.MediaType;
 import okhttp3.OkHttpClient;
@@ -39,7 +42,9 @@ public class MyOkHttp {
     }
 
 
-    public String post(String url, String json) throws IOException {
+    public String post(String url, HashMap<String, Object> paramMap) throws IOException {
+        //设置请求参数
+        String json = new Gson().toJson(paramMap);
         RequestBody body = RequestBody.create(JSON, json);
         Request request = new Request.Builder()
                 .url(url)

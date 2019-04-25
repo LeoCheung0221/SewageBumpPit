@@ -50,7 +50,6 @@ import com.yzspp.sewage.utils.HelperFromPermission;
 import com.yzspp.sewage.utils.SSIntentTool;
 import com.yzspp.sewage.bean.NearbyBumpBean;
 import com.yzspp.sewage.bean.UploadInfo;
-import com.yzspp.sewage.net.RequestHelper;
 import com.yzspp.sewage.widget.My2dMapView;
 
 import java.text.SimpleDateFormat;
@@ -597,47 +596,6 @@ public class MapHomePageActivity extends CheckPermissionsActivity implements Loc
 
     //从数据库获取点的信息
     private void receivePointInfo() {
-        mockData();
-//        RequestHelper.getUploadInfos(new RequestListener() {
-//            @Override
-//            public void onResponce(String responce) {
-//                List<UploadInfo> uploadInfoList=RequestHelper.stringToArray(responce, UploadInfo[].class);
-//                for (UploadInfo uploadInfo : uploadInfoList) {
-//                    if (uploadInfo.getApprovalStatus()==1) {
-//                        mUploadInfoList.add(uploadInfo);
-//                    }
-//                }
-//                //初始化控件
-//                initView();
-//            }
-//
-//            @Override
-//            public void onError(Throwable throwable) {
-//                MyToast.error(MapHomePageActivity.this, R.string.load_error);
-//            }
-//        });
-
-    }
-
-    private void mockData() {
-        String responce = "[{\n" +
-                "\t\"id\": 76,\n" +
-                "\t\"upload_name\": \"扬州西路\",\n" +
-                "\t\"upload_type\": \"公众\",\n" +
-                "\t\"upload_resource\": \"https://ss0.bdstatic.com/94oJfD_bAAcT8t7mm9GUKT-xh_/timg?image&quality=100&size=b4000_4000&sec=1549938533&di=f77c8dc91053424e9767bf37e785e90a&src=http://www.lnwater.gov.cn/zxpd/dfss/fs/201704/W020170414316310554199.jpg\",\n" +
-                "\t\"longitude\": 0,\n" +
-                "\t\"latitude\": 0,\n" +
-                "\t\"upload_address\": \"地点显示\",\n" +
-                "\t\"upload_time\": 1507796319770,\n" +
-                "\t\"upload_description\": \"test\",\n" +
-                "\t\"approval_status\": 2\n" +
-                "}]";
-        List<UploadInfo> uploadInfoList = RequestHelper.stringToArray(responce, UploadInfo[].class);
-        for (UploadInfo uploadInfo : uploadInfoList) {
-            if (uploadInfo.getApprovalStatus() == 1) {
-//                mUploadInfoList.add(uploadInfo);
-            }
-        }
     }
 
     @Override

@@ -18,7 +18,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 
-import com.instabug.library.InstabugTrackingDelegate;
 import com.wang.avi.AVLoadingIndicatorView;
 import com.yzspp.sewage.R;
 
@@ -183,7 +182,6 @@ public abstract class BaseActivity extends CheckPermissionsActivity {
 
     @Override
     public boolean dispatchTouchEvent(MotionEvent ev) {
-        InstabugTrackingDelegate.notifyActivityGotTouchEvent(ev, this);
         return super.dispatchTouchEvent(ev);
     }
 

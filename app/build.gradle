@@ -61,6 +61,8 @@ android {
     }
     buildTypes {
         debug {
+            minifyEnabled false
+            shrinkResources false
             signingConfig signingConfigs.debug
 
             manifestPlaceholders = [UMENG_CHANNEL_VALUE: "_Debug"]
@@ -115,38 +117,20 @@ dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
     implementation 'com.android.support:appcompat-v7:28.+'
     implementation 'com.android.support.constraint:constraint-layout:1.0.2'
-
-    implementation('com.instabug.library:instabug:4.3.0') {
-        exclude module: 'rxandroid'
-        exclude module: 'rxjava'
-        exclude module: 'support-v4'
-        exclude module: 'okio'
-
-    }
     implementation('com.github.yalantis:ucrop:2.2.1') {
         exclude module: 'rxandroid'
         exclude module: 'rxjava'
         exclude module: 'support-v4'
         exclude module: 'okio'
     }
-//    implementation 'com.jakewharton:butterknife:10.0.0'
-//    annotationProcessor 'com.jakewharton:butterknife-compiler:10.0.0'
     implementation 'com.android.support:design:28.+'
     implementation 'com.android.support:support-vector-drawable:28.+'
     implementation 'com.android.support:cardview-v7:28.0.0-alpha1'
     implementation 'de.hdodenhof:circleimageview:2.1.0'
-    implementation 'io.reactivex:rxandroid:1.2.1'
-    implementation 'io.reactivex:rxjava:1.2.3'
     implementation 'com.github.Idtk:SmallChart:v0.1.1'
-    implementation 'eu.the4thfloor.volley:com.android.volley:2015.05.28'
-
-//    implementation 'com.amap.api:3dmap:latest.integration'
-//    implementation 'com.amap.api:search:latest.integration'
-//    implementation 'com.amap.api:location:latest.integration'
     implementation files('libs/Amap_2DMap_V4.2.0_20170209.jar')
     implementation files('libs/AMap_Location_V3.3.0_20170118.jar')
     implementation files('libs/AMap3DMap_6.2.0_AMapNavi_6.1.0_20180427.jar')
-
     implementation 'com.squareup.picasso:picasso:2.3.2'
     implementation 'com.nineoldandroids:library:2.4.0'
     implementation 'com.daimajia.slider:library:1.1.5@aar'
@@ -154,14 +138,13 @@ dependencies {
     implementation 'com.github.XunMengWinter:CircularAnim:0.3.4'
     implementation 'cn.pedant.sweetalert:library:1.3'
     implementation 'com.android.support:multidex:1.0.1'
-
-//    implementation 'com.nightonke:boommenu:2.1.1'
+    implementation 'com.tbruyelle.rxpermissions2:rxpermissions:0.9.4@aar'
 
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'com.android.support.test:runner:1.0.1'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.1'
     implementation project(':myframe')
-
+    implementation project(':nicevideoplayer')
 }
 
 static def releaseTime() {

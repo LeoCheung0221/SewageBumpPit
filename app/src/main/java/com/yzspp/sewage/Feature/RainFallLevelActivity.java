@@ -10,9 +10,7 @@ import com.daimajia.slider.library.SliderLayout;
 import com.daimajia.slider.library.SliderTypes.BaseSliderView;
 import com.daimajia.slider.library.SliderTypes.TextSliderView;
 import com.yzspp.sewage.Bump.MapHomePageActivity;
-import com.yzspp.sewage.todo.WetPointActivity;
 import com.yzspp.sewage.R;
-import com.yzspp.sewage.todo.Work.CheckDetailsActivity;
 import com.yzspp.sewage.base.BaseActivity;
 import com.yzspp.sewage.bean.UploadInfo;
 import com.yzspp.sewage.widget.DiscoverView;
@@ -98,28 +96,24 @@ public class RainFallLevelActivity extends BaseActivity {
             @Override
             public void onClick(View v) {
 //                WeatherActivity.start(BumpManagerActivity.this);
-                WetPointActivity.start(RainFallLevelActivity.this);
             }
         });
 
         dvdot.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                WetPointActivity.start(RainFallLevelActivity.this);
             }
         });
 
         dvdotyear.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                WetPointActivity.start(RainFallLevelActivity.this);
             }
         });
 
         dvsearchdata.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                WetPointActivity.start(RainFallLevelActivity.this);
             }
         });
     }
@@ -142,7 +136,6 @@ public class RainFallLevelActivity extends BaseActivity {
             @Override
             protected void onItemClick(int position, UploadInfo bean) {
                 super.onItemClick(position, bean);
-                CheckDetailsActivity.start(RainFallLevelActivity.this, bean);
             }
         };
         loadWetPoints();
@@ -163,7 +156,7 @@ public class RainFallLevelActivity extends BaseActivity {
 //        mockData();
 //        RequestHelper.getUploadInfos(new RequestListener() {
 //            @Override
-//            public void onResponce(String responce) {
+//            public void onResponse(String responce) {
 //                mUploadInfoList.clear();
 //                List<UploadInfo> uploadInfoList= RequestHelper.stringToArray(responce, UploadInfo[].class);
 //                for (UploadInfo uploadInfo : uploadInfoList) {
