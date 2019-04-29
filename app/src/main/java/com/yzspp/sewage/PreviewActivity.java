@@ -2,10 +2,12 @@ package com.yzspp.sewage;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.view.KeyEvent;
 import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 
+import com.vondear.rxtool.RxSPTool;
 import com.vondear.rxtool.view.RxToast;
 import com.yzspp.sewage.Bump.BumpOverviewActivity;
 import com.yzspp.sewage.Bump.MapHomePageActivity;
@@ -13,6 +15,7 @@ import com.yzspp.sewage.Feature.RainFallLevelActivity;
 import com.yzspp.sewage.Feature.VideoWaterActivity;
 import com.yzspp.sewage.Feature.WaterLeachingReportActivity;
 import com.yzspp.sewage.Mine.SettingsActivity;
+import com.yzspp.sewage.base.Core;
 import com.yzspp.sewage.net.ApiRetrofit;
 import com.yzspp.sewage.net.base.WrapObserver;
 import com.yzspp.sewage.net.entity.LoginResp;
@@ -33,6 +36,8 @@ public class PreviewActivity extends BaseActivity implements View.OnClickListene
 
     private String mUserName;
     private String mUserPwd;
+
+    private long exitTime = 0;
 
     @Override
     protected int getLayoutId() {
@@ -126,18 +131,33 @@ public class PreviewActivity extends BaseActivity implements View.OnClickListene
             case R.id.manager_layout: //泵站信息管理
                 SSIntentTool.start(PreviewActivity.this, BumpOverviewActivity.class);
                 break;
-            case R.id.video_layout: //视频监控点
+            case R.id.video_layout: //视频监控点 -----todo
                 SSIntentTool.start(PreviewActivity.this, VideoWaterActivity.class);
                 break;
-            case R.id.rainfall_layout: //重点水位/雨量信息
+            case R.id.rainfall_layout: //重点水位/雨量信息 -----todo
                 SSIntentTool.start(PreviewActivity.this, RainFallLevelActivity.class);
                 break;
-            case R.id.report_layout: //报警报告
+            case R.id.report_layout: //泵站报告
                 SSIntentTool.start(PreviewActivity.this, WaterLeachingReportActivity.class);
                 break;
             case R.id.iv_go_setting: //设置
                 SSIntentTool.start(PreviewActivity.this, SettingsActivity.class);
                 break;
         }
+    }
+
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if (keyCode == KeyEvent.KEYCODE_BACK && event.getAction() == KeyEvent.ACTION_DOWN) {
+            if ((System.currentTimeMillis() - exitTime) > 1000) {
+                RxToast.showToast("再按一次退出");
+                exitTime = System.currentTimeMillis();
+            } else {
+                RxSPTool.putLong(this, "last_launch", System.currentTimeMillis());
+                Core.appExit();
+            }
+            return true;
+        }
+        return super.onKeyDown(keyCode, event);
     }
 }
