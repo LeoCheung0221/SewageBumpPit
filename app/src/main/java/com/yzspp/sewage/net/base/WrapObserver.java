@@ -3,9 +3,11 @@ package com.yzspp.sewage.net.base;
 import android.text.TextUtils;
 import android.util.Log;
 
+import com.orhanobut.logger.Logger;
 import com.vondear.rxtool.view.RxToast;
 import com.yzspp.sewage.net.base.convert.ApiException;
 import com.yzspp.sewage.net.base.disposable.SubscriptionManager;
+import com.yzspp.sewage.utils.GsonConvertUtils;
 
 
 import java.io.IOException;
@@ -13,6 +15,7 @@ import java.io.IOException;
 import io.reactivex.Observer;
 import io.reactivex.disposables.Disposable;
 import retrofit2.HttpException;
+import timber.log.Timber;
 
 /**
  * Created by LeoCheung4ever on 2018/7/23.
@@ -40,8 +43,8 @@ public abstract class WrapObserver<T> implements Observer<T> {
 
     @Override
     public void onNext(T t) {
+        Logger.e("WrapObserver---> :  " + GsonConvertUtils.toJSONString(t));
         OnSuccess(t);
-//        Timber.e("onNext:  " + GsonConvertUtils.toJSONString(t));
     }
 
     @Override

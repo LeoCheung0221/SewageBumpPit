@@ -4,6 +4,7 @@ import android.text.TextUtils;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.orhanobut.logger.Logger;
 import com.yzspp.sewage.net.api.Api_Biz;
 import com.yzspp.sewage.net.base.AppConst;
 import com.yzspp.sewage.net.base.BaseApiRetrofit;
@@ -67,6 +68,7 @@ public class ApiRetrofit extends BaseApiRetrofit {
         if (hashMap == null)
             hashMap = new HashMap<>();
         String route = new Gson().toJson(hashMap);
+        Logger.e("请求参数: " + route);
         return RequestBody.create(okhttp3.MediaType.parse("application/json; charset=utf-8"), route);
     }
 
@@ -75,7 +77,7 @@ public class ApiRetrofit extends BaseApiRetrofit {
     /**
      * 登录获取验证码
      */
-    public void login(HashMap<String, Object> hashMap,WrapObserver<LoginResp> observer) {
+    public void login(HashMap<String, Object> hashMap, WrapObserver<LoginResp> observer) {
         mBizApi.login(getRequestBody(hashMap))
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())

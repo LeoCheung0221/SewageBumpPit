@@ -10,10 +10,8 @@ import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.EditText;
 
-import com.orhanobut.logger.Logger;
 import com.vondear.rxtool.view.RxToast;
 import com.yzspp.sewage.net.ApiRetrofit;
-import com.yzspp.sewage.net.base.ResponseBean;
 import com.yzspp.sewage.net.base.WrapObserver;
 import com.yzspp.sewage.net.entity.LoginResp;
 import com.yzspp.sewage.utils.SSIntentTool;
@@ -146,22 +144,28 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
                     RxToast.showToast("密码不能为空");
                     return;
                 }
-                HashMap<String, Object> param = new HashMap<>();
-                param.put("username", mUserName);
-                param.put("pwd", mUserPwd);
-                ApiRetrofit.getInstance().login(param, new WrapObserver<LoginResp>() {
-                    @Override
-                    public void OnSuccess(LoginResp response) {
-                        SharedPreUtils.getInstance().setLoginInfo(response);
-                        if (response.getResult()) {
-                            SSIntentTool.start(LoginActivity.this, PreviewActivity.class);
-                        } else {
-                            SharedPreUtils.getInstance().setUserName(mUserName);
-                            RxToast.showToast("接口返回异常");
-                        }
-                    }
-                });
+                login();
                 break;
         }
+    }
+
+    private void login() {
+        HashMap<String, Object> param = new HashMap<>();
+        param.put("userName", mUserName);
+        param.put("userPassword", mUserPwd);
+        ApiRetrofit.getInstance().login(param, new WrapObserver<LoginResp>() {
+            @Override
+            public void OnSuccess(LoginResp response) {
+                SharedPreUtils.getInstance().setLoginInfo(response);
+                if (response.getResult()) {
+                    SharedPreUtils.getInstance().setUserPwd(mUserPwd);
+                    SSIntentTool.start(LoginActivity.this, PreviewActivity.class);
+                    finish();
+                } else {
+                    SharedPreUtils.getInstance().setUserName(mUserName);
+                    RxToast.showToast("接口返回异常");
+                }
+            }
+        });
     }
 }
